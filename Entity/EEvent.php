@@ -33,6 +33,90 @@ class EEvent {
         $this->candidateRequirements = $candidateRequirements;
         $this->applications = array();
     }
+
+    // 'set' and 'get' methods
+
+    public function setEventId(int $eventId) {
+        $this->eventId = $eventId;
+    }
+
+    public function getEventId() : int {
+        return $this->eventId;
+    }
+
+    public function setTitle(string $title) {
+        $this->title = $title;
+    }
+
+    public function getTitle() : string {
+        return $this->title;
+    }
+
+    public function setDateAndTime(string $dateAndTime) {
+        $this->dateAndTime = new DateTime($dateAndTime);
+    }
+
+    public function getDateAndTime() : DateTime {
+        return $this->dateAndTime;
+    }
+
+    public function setPlace(string $place) {
+        $this->place = $place;
+    }
+
+    public function getPlace() : string {
+        return $this->place;
+    }
+
+    public function setCoordinator(string $coordinator) {
+        $this->coordinator = $coordinator;
+    }
+
+    public function getCoordinator() : string {
+        return $this->coordinator;
+    }
+
+    public function setRequestedVolunteerNumber(int $requestedVolunteerNumber) {
+        $this->requestedVolunteerNumber = $requestedVolunteerNumber;
+    }
+
+    public function getRequestedVolunteerNumber() : int {
+        return $this->requestedVolunteerNumber;
+    }
+
+    public function setMaxVolunteerNumber(int $maxVolunteerNumber) {
+        $this->maxVolunteerNumber = $maxVolunteerNumber;
+    }
+
+    public function getMaxVolunteerNumber() : int {
+        return $this->maxVolunteerNumber;
+    }
+
+    public function setFieldOfAction(EFieldOfAction $fieldOfAction) {
+        $this->fieldOfAction = $fieldOfAction;
+    }
+
+    public function getFieldOfAction() : EFieldOfAction {
+        return $this->fieldOfAction;
+    }
+
+    public function setCandidateRequirements(?string $candidateRequirements) {
+        $this->candidateRequirements = $candidateRequirements;
+    }
+
+    public function getCandidateRequirements() : ?string {
+        return $this->candidateRequirements;
+    }
+
+    // methods for managing event's applications
+
+    public function getApplications() {
+        return $this->applications;
+    }
+
+    public function addApplication(EApplication $application) {
+        $this->applications[] = $application;
+    }
 }
 
 ?>
