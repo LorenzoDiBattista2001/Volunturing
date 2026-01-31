@@ -20,6 +20,24 @@ class FConnectionDB {
         }
         return self::$instance;
     }
+
+    public function handleQuery(string $query, ?array $params = null) {
+        $sth = $this->dbh->prepare($query);
+        $sth->execute($params);
+        return $sth;
+    } 
+
+    public function beginTransaction() {
+        $this->dbh->beginTransaction();
+    }
+
+    public function commit() {
+        $this->dbh->commit();
+    }
+
+    public function rollBack() {
+        $this->dbh->rollBack();
+    }
 }
 
 ?>
