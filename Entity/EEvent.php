@@ -110,6 +110,10 @@ class EEvent {
 
     // methods for managing event's applications
 
+    public function setApplications(array $applications) {
+        $this->applications = $applications;
+    }
+
     public function getApplications() {
         return $this->applications;
     }

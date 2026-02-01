@@ -22,10 +22,14 @@ class FConnectionDB {
     }
 
     public function handleQuery(string $query, ?array $params = null) {
-        $sth = $this->dbh->prepare($query);
-        $sth->execute($params);
-        return $sth;
+        $stmt = $this->dbh->prepare($query);
+        $stmt->execute($params);
+        return $stmt;
     } 
+
+    public function getLastInsertId(?string $name = null) {
+        $this->dbh->lastInsertId($name);
+    }
 
     public function beginTransaction() {
         $this->dbh->beginTransaction();

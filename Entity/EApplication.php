@@ -2,6 +2,8 @@
 
 class EApplication {
 
+    private int $userId;
+    private int $eventId;
     private DateTime $submittedDateTime;
     private EApplicationState $state;
     private ?string $message;
@@ -13,15 +15,11 @@ class EApplication {
     public function __construct(
         string $submittedDateTime,
         EApplicationState $state,
-        ?string $message,
-        EVolunteer $candidate,
-        EEvent $event) 
+        ?string $message) 
     {
         $this->submittedDateTime = new DateTime($submittedDateTime);
         $this->state = $state;
         $this->message = $message;
-        $this->candidate = $candidate;
-        $this->event = $event;
     }
 
     // 'set' and 'get' methods
@@ -80,6 +78,22 @@ class EApplication {
 
     public function getEvent() : EEvent {
         return $this->event;
+    }
+
+    public function setUserId(int $userId) {
+        $this->userId = $userId;
+    }
+
+    public function getUserId() : int {
+        return $this->userId;
+    }
+
+    public function setEventId(int $eventId) {
+        $this->eventId = $eventId;
+    }
+
+    public function getEventId() : int {
+        return $this->eventId;
     }
 }
 
