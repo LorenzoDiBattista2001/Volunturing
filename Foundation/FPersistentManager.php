@@ -15,6 +15,19 @@ class FPersistentManager {
         return self::$instance;
     }
 
+    public function storeObject(object $obj) : bool {
+
+        $class = get_class($obj);
+
+        if($class === 'EVolunteer' || $class === 'EAdmin') {
+            $fclass = 'FUser';
+        } else {
+            $fclass = 'F' . substr($class, 1);
+        }
+        
+        return $fclass::store($obj);
+    }
+
     public function loadEventById(int $eventId) : EEvent {
         $event = FEvent::load($eventId);
         $event->setApplications($this->retrieveApplicationsByEvent($event));

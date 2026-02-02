@@ -18,9 +18,14 @@ class FEvent {
                 ':maxVolunteerNumber' => $event->getMaxVolunteerNumber(),
                 ':fieldOfAction' => $event->getFieldOfAction()->value,
                 ':candidateRequirements' => $event->getCandidateRequirements());
-        
-        $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
-        return true;
+            
+        try {
+            $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+            return true;
+        } catch (Exception $e) {
+            print("STORE OPERATION FAILED: " . $e->getMessage());
+            return false;
+        }
     }
 
     public static function load(int $eventId) : EEvent {

@@ -6,6 +6,26 @@ class FApplication {
                     :reasonForRejection, :wasAccepted)';
     const TABLE = 'application';
 
+    public static function store(EApplication $application) : bool {
+        $query = 'INSERT INTO ' . self::TABLE . ' VALUES' . self::VALUES;
+        $params = array(':user_id' => $application->getUserId(),
+                    ':event_id' => $application->getEventId(),
+                    ':submittedDate' => $application->getSubmittedDateTime()->format('Y-m-d'),
+                    ':submittedTime' => $application->getSubmittedDateTime()->format('H:i:s'),
+                    ':state' => $application->getState()->value,
+                    ':message' => $application->getMessage(),
+                    ':reasonForRejection' => $application->getReasonForRejection(),
+                    ':wasAccepted' => $application->wasAccepted());
+                    
+        try {
+            $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+            return true;
+        } catch (Exception $e) {
+            print("STORE OPERATION FAILED: " . $e->getMessage());
+            return false;
+        }
+    }
+
     public static function loadByEvent(int $eventId) {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE event_id = :eventId';
         $params = array(':eventId' => $eventId);
