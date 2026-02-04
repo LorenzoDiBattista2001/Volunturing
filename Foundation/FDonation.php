@@ -20,6 +20,23 @@ class FDonation {
             return false;
         }
     }
+
+    public static function loadByUser(int $userId) {
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE user_id = :user_id';
+        $params = array(':user_id' => $userId);
+
+        $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+
+        $donations = array();
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $donation = new EDonation($row['amount'], $row['reason'], $row['date']);
+            $donation->setDonationId($row['donation_id']);
+            $donation->setUserId($row['user_id']);
+            $donations[] = $donation;
+        }
+
+        return $donations;
+    }
     
 }
 

@@ -20,6 +20,23 @@ class FReview {
             return false;
         }
     }
+
+    public static function loadByUser(int $userId) {
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE user_id = :user_id';
+        $params = array(':user_id' => $userId);
+
+        $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+
+        $reviews = array();
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $review = new EReview($row['text'], $row['rating'], $row['date']);
+            $review->setReviewId($row['review_id']);
+            $review->setUserId($row['user_id']);
+            $reviews[] = $review;
+        }
+
+        return $reviews;
+    }
     
 }
 

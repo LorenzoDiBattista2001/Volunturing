@@ -28,10 +28,23 @@ class FPersistentManager {
         return $fclass::store($obj);
     }
 
-    public function loadEventById(int $eventId) : EEvent {
+    public function loadEvent(int $eventId) : EEvent {
         $event = FEvent::load($eventId);
         $event->setApplications($this->retrieveApplicationsByEvent($event));
         return $event;
+    }
+
+    public function loadUserById(int $userId) : EUser {
+        $user = FUser::loadById($userId);
+        if($user::class === 'EAdmin') return $user;
+        return $this->loadVolunteer($user);
+    }
+
+    private function loadVolunteer(EVolunteer $volunteer) : EVolunteer {
+        $volunteer->setApplications($this->retrieveApplicationsByUser($volunteer));
+        $volunteer->setReviews($this->retrieveReviewsByUser($volunteer));
+        $volunteer->setDonations($this->retrieveDonationsByUser($volunteer));
+        return $volunteer;
     }
 
     public function retrieveApplicationsByEvent(EEvent $event) {
@@ -44,6 +57,40 @@ class FPersistentManager {
         }
 
         return $applications;
+    }
+
+    public function retrieveApplicationsByUser(EVolunteer $candidate) {
+
+        $applications = FApplication::loadByUser($candidate->getUserId());
+        
+        foreach($applications as $application) {
+            $application->setEvent(FEvent::load($application->getEventId()));
+            $application->setCandidate($candidate);
+        }
+
+        return $applications;
+    }
+
+    public function retrieveReviewsByUser(EVolunteer $author) {
+
+        $reviews = FReview::loadByUser($author->getUserId());
+
+        foreach($reviews as $review) {
+            $review->setAuthor($author);
+        }
+
+        return $reviews;
+    }
+
+    public function retrieveDonationsByUser(EVolunteer $donator) {
+
+        $donations = FDonation::loadByUser($donator->getUserId());
+
+        foreach($donations as $donation) {
+            $donation->setDonator($donator);
+        }
+
+        return $donations;
     }
 
 }

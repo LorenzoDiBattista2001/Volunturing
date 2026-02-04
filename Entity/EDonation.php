@@ -3,6 +3,7 @@
 class EDonation {
 
     private int $donationId;
+    private int $userId;
     private int $amount;
     private ?string $reason;
     private DateTime $date;
@@ -11,13 +12,11 @@ class EDonation {
     public function __construct(
         int $amount,
         ?string $reason,
-        string $date,
-        EVolunteer $donator)
+        string $date)
     {
         $this->amount = $amount;
         $this->reason = $reason;
         $this->date = new DateTime($date);
-        $this->donator = $donator;
     }
 
     // 'set' and 'get' methods
@@ -28,6 +27,14 @@ class EDonation {
 
     public function getDonationId() : int {
         return $this->donationId;
+    }
+
+    public function setUserId(int $userId) {
+        $this->userId = $userId;
+    }
+
+    public function getUserId() : int {
+        return $this->userId;
     }
 
     public function setAmount(int $amount) {

@@ -112,6 +112,10 @@ class EVolunteer extends EUser {
 
     // methods for managing user's applications
 
+    public function setApplications(array $applications) {
+        $this->applications = $applications;
+    }
+
     public function getApplications() {
         return $this->applications;
     }
@@ -122,6 +126,10 @@ class EVolunteer extends EUser {
 
     // methods for manipulating user's reviews
 
+    public function setReviews(array $reviews) {
+        $this->reviews = $reviews;
+    }
+
     public function getReviews() {
         return $this->reviews;
     }
@@ -131,6 +139,10 @@ class EVolunteer extends EUser {
     }
 
     // methods for manipulating user's donations
+
+    public function setDonations(array $donations) {
+        $this->donations = $donations;
+    }
 
     public function getDonations() {
         return $this->donations;

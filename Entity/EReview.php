@@ -3,6 +3,7 @@
 class EReview {
 
     private int $reviewId;
+    private int $userId;
     private string $text;
     private int $rating;
     private DateTime $date;
@@ -11,13 +12,11 @@ class EReview {
     public function __construct(
         string $text,
         int $rating,
-        string $date,
-        EVolunteer $author)
+        string $date)
     {
         $this->text = $text;
         $this->rating = $rating;
         $this->date = new DateTime($date);
-        $this->author = $author;
     }
 
     // 'set' and 'get' methods
@@ -28,6 +27,14 @@ class EReview {
 
     public function getReviewId() : int {
         return $this->reviewId;
+    }
+
+    public function setUserId(int $userId) {
+        $this->userId = $userId;
+    }
+
+    public function getUserId() : int {
+        return $this->userId;
     }
 
     public function setText(string $text) {

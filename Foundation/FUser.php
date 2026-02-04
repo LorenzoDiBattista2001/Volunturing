@@ -70,8 +70,8 @@ class FUser {
     
     
     public static function loadById(int $userId) : EUser {
-        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE user_id = :userId';
-        $params = array(':userId' => $userId);
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE user_id = :user_id';
+        $params = array(':user_id' => $userId);
 
         $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
         $properties = $stmt->fetch(PDO::FETCH_ASSOC);
