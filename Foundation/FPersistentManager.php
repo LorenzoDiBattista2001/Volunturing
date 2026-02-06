@@ -47,6 +47,14 @@ class FPersistentManager {
         return $volunteer;
     }
 
+    public function loadApplication(int $userId, int $eventId) : EApplication {
+        $application = FApplication::load($userId, $eventId);
+        $application->setCandidate($this->loadUserById($application->getUserId()));
+        $application->setEvent($this->loadEvent($application->getEventId()));
+        
+        return $application;
+    }
+
     public function loadReview(int $reviewId) : EReview {
         $review = FReview::load($reviewId);
         $review->setAuthor($this->loadUserById($review->getUserId()));
@@ -103,6 +111,10 @@ class FPersistentManager {
         }
 
         return $donations;
+    }
+
+    public function updateApplication(EApplication $application) : bool {
+        return FApplication::update($application);
     }
 
     public function existObject(string $class, int $objectId) : bool {
