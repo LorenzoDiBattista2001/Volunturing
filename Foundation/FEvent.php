@@ -44,8 +44,8 @@ class FEvent {
     }
 
     public static function exist(int $eventId) : bool {
-        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE event_id = :eventId';
-        $params = array(':eventId' => $eventId);
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE event_id = :event_id';
+        $params = array(':event_id' => $eventId);
 
         $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
 

@@ -51,6 +51,18 @@ class FDonation {
 
         return $donations;
     }
+
+    public static function exist(int $donationId) : bool {
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE donation_id = :donation_id';
+        $params = array(':donation_id' => $donationId);
+
+        $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+
+        if($stmt->rowCount() > 0) {
+            return true;
+        }
+        return false;
+    }
     
 }
 

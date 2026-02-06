@@ -51,6 +51,18 @@ class FReview {
 
         return $reviews;
     }
+
+    public static function exist(int $reviewId) : bool {
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE review_id = :review_id';
+        $params = array(':review_id' => $reviewId);
+
+        $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+
+        if($stmt->rowCount() > 0) {
+            return true;
+        }
+        return false;
+    }
     
 }
 

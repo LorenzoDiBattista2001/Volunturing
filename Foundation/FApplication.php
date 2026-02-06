@@ -62,6 +62,18 @@ class FApplication {
         return $applications;
     }
 
+    public static function exist(int $userId, int $eventId) : bool {
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE user_id = :user_id AND event_id = :event_id';
+        $params = array(':user_id' => $userId, ':event_id' => $eventId);
+
+        $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+
+        if($stmt->rowCount() > 0) {
+            return true;
+        }
+        return false;
+    }
+
 }
 
 ?>

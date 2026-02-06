@@ -104,6 +104,18 @@ class FUser {
         }
 
     }
+
+    public static function exist(int $userId) : bool {
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE user_id = :user_id';
+        $params = array(':user_id' => $userId);
+
+        $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+
+        if($stmt->rowCount() > 0) {
+            return true;
+        }
+        return false;
+    }
 }
 
 ?>

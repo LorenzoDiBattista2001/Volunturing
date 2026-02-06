@@ -105,6 +105,16 @@ class FPersistentManager {
         return $donations;
     }
 
+    public function existObject(string $class, int $objectId) : bool {
+
+        $fclass = 'F' . substr($class, 1);
+        return $fclass::exist($objectId);
+    }
+
+    public function existApplication(int $userId, int $eventId) : bool {
+        return FApplication::exist($userId, $eventId);
+    }
+
 }
 
 ?>
