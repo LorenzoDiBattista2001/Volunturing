@@ -21,6 +21,20 @@ class FReview {
         }
     }
 
+    public static function load(int $reviewId) : EReview {
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE review_id = :review_id';
+        $params = array(':review_id' => $reviewId);
+
+        $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+
+        $properties = $stmt->fetch(PDO::FETCH_ASSOC);
+        $review = new EReview($properties['text'], $properties['rating'], $properties['date']);
+        $review->setReviewId($properties['review_id']);
+        $review->setUserId($properties['user_id']);
+
+        return $review;
+    }
+
     public static function loadByUser(int $userId) {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE user_id = :user_id';
         $params = array(':user_id' => $userId);

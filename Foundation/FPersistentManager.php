@@ -47,6 +47,18 @@ class FPersistentManager {
         return $volunteer;
     }
 
+    public function loadReview(int $reviewId) : EReview {
+        $review = FReview::load($reviewId);
+        $review->setAuthor($this->loadUserById($review->getUserId()));
+        return $review;
+    }
+
+    public function loadDonation(int $donationId) : EDonation {
+        $donation = FDonation::load($donationId);
+        $donation->setDonator($this->loadUserById($donation->getUserId()));
+        return $donation;
+    }
+
     public function retrieveApplicationsByEvent(EEvent $event) {
 
         $applications = FApplication::loadByEvent($event->getEventId());

@@ -21,6 +21,20 @@ class FDonation {
         }
     }
 
+    public static function load(int $donationId) : EDonation {
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE donation_id = :donation_id';
+        $params = array(':donation_id' => $donationId);
+
+        $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+
+        $properties = $stmt->fetch(PDO::FETCH_ASSOC);
+        $donation = new EDonation($properties['amount'], $properties['reason'], $properties['date']);
+        $donation->setDonationId($properties['donation_id']);
+        $donation->setUserId($properties['user_id']);
+
+        return $donation;
+    }
+
     public static function loadByUser(int $userId) {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE user_id = :user_id';
         $params = array(':user_id' => $userId);
