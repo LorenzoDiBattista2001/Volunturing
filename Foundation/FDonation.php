@@ -6,14 +6,14 @@ class FDonation {
     const TABLE = 'donation';
 
     public static function store(EDonation $donation) : bool {
-        $query = 'INSER INTO ' . self::TABLE . ' VALUES' . self::VALUES;
+        $query = 'INSERT INTO ' . self::TABLE . ' VALUES' . self::VALUES;
         $params = array(':donation_id' => $donation->getDonationId(),
                     ':user_id' => $donation->getDonator()->getUserId(),
                     ':amount' => $donation->getAmount(),
                     ':date' => $donation->getDate()->format('Y-m-d'),
                     ':reason' => $donation->getReason());
         try {
-            $stmt = FConnectionDB::getInstance()->handleQuery($query);
+            $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
             return true;
         } catch (Exception $e) {
             print("STORE OPERATION FAILED: " . $e->getMessage());
