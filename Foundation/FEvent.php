@@ -43,6 +43,25 @@ class FEvent {
         return $event;
     }
 
+    public static function loadEventsByDate(string $date) {
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE date >= :date ORDER BY date ASC';
+        $params = array(':date' => $date);
+
+        $stm = FConnectionDB::getInstance()->handleQuery($query, $params);
+
+        $events = array();
+        while($row = $stm->fetch(PDO::FETCH_ASSOC)) {
+            $event = new EEvent($row['title'], $row['date'] . ' ' . $row['time'],
+            $row['place'], $row['coordinator'], $row['requestedVolunteerNumber'],
+            $row['maxVolunteerNumber'], EFieldOfAction::from($row['fieldOfAction']),
+            $row['candidateRequirements']);
+            $event->setEventId($row['event_id']);
+            $events[] = $event;
+        }
+
+        return $events;
+    }
+
     public static function exist(int $eventId) : bool {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE event_id = :event_id';
         $params = array(':event_id' => $eventId);

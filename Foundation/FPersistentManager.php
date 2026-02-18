@@ -34,6 +34,11 @@ class FPersistentManager {
         return $event;
     }
 
+    public function retrieveScheduledEvents() {
+        $currentDate = date('Y-m-d');
+        return FEvent::loadEventsByDate($currentDate);
+    }
+
     public function loadUserById(int $userId) : EUser {
         $user = FUser::loadById($userId);
         if($user::class === 'EAdmin') return $user;

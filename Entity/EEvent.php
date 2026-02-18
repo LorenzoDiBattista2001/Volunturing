@@ -121,6 +121,10 @@ class EEvent {
     public function addApplication(EApplication $application) {
         $this->applications[] = $application;
     }
+
+    public function isFull() : bool {
+        return ($this->maxVolunteerNumber === count($this->applications));
+    }
 }
 
 ?>
