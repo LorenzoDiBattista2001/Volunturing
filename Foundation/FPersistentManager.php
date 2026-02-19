@@ -34,6 +34,10 @@ class FPersistentManager {
         return $event;
     }
 
+    public function retrieveAllEvents() {
+        return FEvent::loadAllEvents();
+    }
+
     public function retrieveScheduledEvents() {
         $currentDate = date('Y-m-d');
         return FEvent::loadEventsByDate($currentDate);
