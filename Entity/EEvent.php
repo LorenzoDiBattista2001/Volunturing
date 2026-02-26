@@ -129,8 +129,20 @@ class EEvent {
         $this->applications[] = $application;
     }
 
+    public function getApprovedApplicationsNumber() : int {
+        $count = 0;
+        if(count($this->applications) === 0) return $count;
+        
+        foreach($this->applications as $application) {
+            if($application->wasAccepted()) {
+                $count++;
+            }
+        }
+        return $count;
+    }
+
     public function isFull() : bool {
-        return ($this->maxVolunteerNumber === count($this->applications));
+        return ($this->maxVolunteerNumber === $this->getApprovedApplicationsNumber());
     }
 }
 
