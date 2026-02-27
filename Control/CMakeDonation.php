@@ -2,20 +2,12 @@
 
 class CMakeDonation {
 
-    private static int $tempAmount;
-    private static string $tempReason;
-    private static int $tempUserId;
-
     public static function donate() : void {
-        print('Inserire un importo: ' . "\n");
-        print('Inserire una causale (opzionale): ' . "\n");
+        // show donation form
     }
 
-    public static function insertAmount(int $amount, string $message, int $userId) : void {
-        self::$tempAmount = $amount;
-        self::$tempReason = $message;
-        self::$tempUserId = $userId;
-        print('Inserire i dati della carta di credito: ' . "\n");
+    public static function insertAmount() : void {
+        // show credit card form
     }
 
     public static function confirmDonation(string $firstName, string $lastName,
@@ -32,8 +24,9 @@ class CMakeDonation {
         $paymentCompleted = $card->performPayment($donation);
         if($paymentCompleted) {
             return FPersistentManager::getInstance()->storeObject($donation);
+            // show confirmation message
         } else {
-            print('ERROR: payment process failed');
+            // show error message
         }
 
     }

@@ -4,25 +4,11 @@ class CManageEvents {
 
     public static function accessEventManagement() : void {
         $events = FPersistentManager::getInstance()->retrieveAllEvents();
-        print('AGGIUNGI EVENTO +' . "\n");
-        print('-----------------------------------------------------------' . "\n");
-        foreach($events as $event) {
-            print('TITOLO: ' . $event->getTitle() . "\n");
-            print('DATA: ' . $event->getDateAndTime()->format('Y-m-d') . "\n");
-            print('AREA DI INTERVENTO: ' . $event->getFieldOfAction()->value . "\n");
-            print('-----------------------------------------------------------' . "\n");
-        }
+        // show events list
     }
 
     public static function addEvent() : void {
-        print('Inserire i dati dell\'evento' . "\n");
-        print('Titolo: ' . "\n");
-        print('Area di intervento: ' . "\n");
-        print('Responsabile: ' . "\n");
-        print('Data: ' . 'Ora: ' . 'Luogo: ' . "\n");
-        print('Numero atteso di volontari: ' . "\n");
-        print('Numero massimo di candidature accettabili: ' . "\n");
-        print('Requisiti del candidato: ' . "\n");
+        // show add event form
     }
 
     public static function createEvent(
@@ -43,11 +29,8 @@ class CManageEvents {
             exit();
         }
         
-        if(FPersistentManager::getInstance()->storeObject($event)) {
-            print('Nuovo evento creato con successo!');
-        } else {
-            print('ERRORE: creazione evento non riuscita');
-        }
+        $done = FPersistentManager::getInstance()->storeObject($event);
+        // display confirmation message if $done === true, error message otherwise
 
     }
 }
