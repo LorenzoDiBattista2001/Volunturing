@@ -1,2 +1,5 @@
 test.php
 config.test.php
+var/
+vendor/
+composer.lock
