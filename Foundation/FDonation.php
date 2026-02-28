@@ -7,7 +7,7 @@ class FDonation {
 
     public static function store(EDonation $donation) : bool {
         $query = 'INSERT INTO ' . self::TABLE . ' VALUES' . self::VALUES;
-        $params = array(':donation_id' => $donation->getDonationId(),
+        $params = array(':donation_id' => null,
                     ':user_id' => $donation->getDonator()->getUserId(),
                     ':amount' => $donation->getAmount(),
                     ':date' => $donation->getDate()->format('Y-m-d'),

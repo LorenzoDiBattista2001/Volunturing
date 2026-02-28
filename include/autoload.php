@@ -12,7 +12,7 @@
                 $package = 'Foundation';
                 break; 
             case 'C':
-                $package = 'Controller';
+                $package = 'Control';
                 break;
             case 'V':
                 $package = 'View';

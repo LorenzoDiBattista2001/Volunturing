@@ -37,10 +37,47 @@ class FEvent {
         $properties = $stmt->fetch(PDO::FETCH_ASSOC);
         $event = new EEvent($properties['title'], $properties['date'] . ' ' . $properties['time'], 
             $properties['place'], $properties['coordinator'], $properties['requestedVolunteerNumber'],
-            $properties['maxVolunteerNumber'], EFieldOfAction::from($properties['fieldOfAction']), 
+            $properties['maxVolunteerNumber'], $properties['fieldOfAction'], 
             $properties['candidateRequirements']);
         $event->setEventId($properties['event_id']);
         return $event;
+    }
+
+    public static function loadAllEvents() {
+        $query = 'SELECT * FROM ' . self::TABLE . ' ORDER BY date ASC';
+
+        $stmt = FConnectionDB::getInstance()->handleQuery($query);
+
+        $events = array();
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $event = new EEvent($row['title'], $row['date'] . ' ' . $row['time'],
+            $row['place'], $row['coordinator'], $row['requestedVolunteerNumber'],
+            $row['maxVolunteerNumber'], $row['fieldOfAction'],
+            $row['candidateRequirements']);
+            $event->setEventId($row['event_id']);
+            $events[] = $event;
+        }
+
+        return $events;
+    }
+
+    public static function loadEventsByDate(string $date) {
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE date >= :date ORDER BY date ASC';
+        $params = array(':date' => $date);
+
+        $stm = FConnectionDB::getInstance()->handleQuery($query, $params);
+
+        $events = array();
+        while($row = $stm->fetch(PDO::FETCH_ASSOC)) {
+            $event = new EEvent($row['title'], $row['date'] . ' ' . $row['time'],
+            $row['place'], $row['coordinator'], $row['requestedVolunteerNumber'],
+            $row['maxVolunteerNumber'], $row['fieldOfAction'],
+            $row['candidateRequirements']);
+            $event->setEventId($row['event_id']);
+            $events[] = $event;
+        }
+
+        return $events;
     }
 
     public static function exist(int $eventId) : bool {

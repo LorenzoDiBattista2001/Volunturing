@@ -18,7 +18,7 @@ class ECreditCard {
         $this->ownerFirstName = $ownerFirstName;
         $this->ownerLastName = $ownerLastName;
         $this->number = $number;
-        $this->expirationDate = new DateTime($expirationDate);
+        $this->setExpirationDate($expirationDate);
         $this->cvv = $cvv;
     }
 
@@ -49,6 +49,9 @@ class ECreditCard {
     }
 
     public function setExpirationDate(string $expirationDate) {
+        if(!$this->validateExpirationDate(new DateTime($expirationDate))) {
+            throw new Exception('ERROR: credit card is expired');
+        }
         $this->expirationDate = new DateTime($expirationDate);
     }
 
@@ -62,6 +65,19 @@ class ECreditCard {
 
     public function getCVV() : string {
         return $this->cvv;
+    }
+
+    // card validation methods
+
+    public function validateExpirationDate(DateTime $expirationDate) : bool {
+        $currentDate = new DateTime('now');
+        return $expirationDate > $currentDate;
+    }
+
+    // payment methods
+
+    public function performPayment(EDonation $donation) : bool {
+        return true;
     }
 }
 

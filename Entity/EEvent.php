@@ -20,16 +20,23 @@ class EEvent {
         string $coordinator,
         int $requestedVolunteerNumber,
         int $maxVolunteerNumber,
-        EFieldOfAction $fieldOfAction,
+        string $fieldOfAction,
         ?string $candidateRequirements) 
     {
+        if($requestedVolunteerNumber > $maxVolunteerNumber) {
+            throw new Exception('The number of requested volunteers cannot
+                            exceed the max volunteers\' number');
+        }
+        if(EFieldOfAction::tryFrom($fieldOfAction) === NULL) {
+            throw new Exception('Invalid entry for attribute \'field of action\'');
+        }
         $this->title = $title;
         $this->dateAndTime = new DateTime($dateAndTime);
         $this->place = $place;
         $this->coordinator = $coordinator;
         $this->requestedVolunteerNumber = $requestedVolunteerNumber;
         $this->maxVolunteerNumber = $maxVolunteerNumber;
-        $this->fieldOfAction = $fieldOfAction;
+        $this->fieldOfAction = EFieldOfAction::from($fieldOfAction);
         $this->candidateRequirements = $candidateRequirements;
         $this->applications = array();
     }
@@ -120,6 +127,22 @@ class EEvent {
 
     public function addApplication(EApplication $application) {
         $this->applications[] = $application;
+    }
+
+    public function getApprovedApplicationsNumber() : int {
+        $count = 0;
+        if(count($this->applications) === 0) return $count;
+        
+        foreach($this->applications as $application) {
+            if($application->wasAccepted()) {
+                $count++;
+            }
+        }
+        return $count;
+    }
+
+    public function isFull() : bool {
+        return ($this->maxVolunteerNumber === $this->getApprovedApplicationsNumber());
     }
 }
 
