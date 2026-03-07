@@ -7,7 +7,7 @@
 {/block}
 {block name="body"}
   <!-- HERO SECTION-->
-    <main class="container my-5">
+    <main class="container my-5 flex-grow-1">
       <div class="row justify-content-center">
         <div class="col-lg-10">
           <div class="card border-0 shadow-lg overflow-hidden">

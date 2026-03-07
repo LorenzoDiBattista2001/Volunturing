@@ -4,23 +4,28 @@ class CSubmitApplication {
 
     public static function showEvents() : void {
         $scheduledEvents = FPersistentManager::getInstance()->retrieveScheduledEvents();
-        // show events list
+        $view = new VSubmitApplication();
+        $view->displayEventsList($scheduledEvents);
     }
 
     public static function selectEvent(int $eventId) : void {
         $event = FPersistentManager::getInstance()->loadEvent($eventId);
-        // show event details
+        $view = new VSubmitApplication();
+        $view->displayEventDetails($event);
     }
 
     public static function startApplicationProcess(int $userId, int $eventId) : void {
-        if (FPersistentManager::getInstance()->existApplication($userId, $eventId)) {
-            // show alert: user has already applied
-        }
+        $view = new VSubmitApplication();
         $event = FPersistentManager::getInstance()->loadEvent($eventId);
-        if($event->isFull()) {
-            // show alert: event is full
+        if (FPersistentManager::getInstance()->existApplication($userId, $eventId)) {
+            $view->displayEventDetails($event, alreadyApplied: true);
+            exit();
         }
-        // show application form
+        if($event->isFull()) {
+            $view->displayEventDetails($event, eventFull: true);
+            exit();
+        }
+        $view->displayApplicationForm($event);
     }
 
     public static function createApplication(?string $message, int $userId, int $eventId) : void {
@@ -28,9 +33,9 @@ class CSubmitApplication {
         $application->setUserId($userId);
         $application->setEventId($eventId);
         FPersistentManager::getInstance()->storeObject($application);
-        // show confirmation message
+        $view = new VSubmitApplication();
+        $view->displayConfirmationMessage();
     }
-
 
 }
 

@@ -1,0 +1,24 @@
+  .btn-submit-application {
+      background-color: #ff9411;
+      border: none;
+      transition: all 0.3s ease;
+  }
+
+  .btn-submit-application:hover {
+      background-color: #e6850f;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 148, 17, 0.3);
+  }
+
+  .info-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #6c757d;
+      font-weight: 700;
+  }      
+
+  .info-value {
+      font-weight: 500;
+      color: #212529;
+  }

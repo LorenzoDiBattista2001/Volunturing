@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
   <head>
     <meta charset="utf-8">
@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     {block name="head"}{/block}
   </head>
-  <body class="bg-light">
+  <body class="bg-light d-flex flex-column min-vh-100">
 
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm" style="background-color: #ff9411;">
@@ -23,12 +23,12 @@
         <div class="collapse navbar-collapse" id="mainNav">
           <ul class="navbar-nav mx-auto gap-2 fw-semibold">
             {if $isLogged}
-            <li class="nav-item"><a class="nav-link active" href="#">HOME</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">HOME</a></li>
             <li class="nav-item"><a class="nav-link" href="#">EVENTI</a></li>
             <li class="nav-item"><a class="nav-link" href="#">CONTATTI</a></li>
             <li class="nav-item"><a class="nav-link" href="#">DONA ORA</a></li>
             {else}
-            <li class="nav-item"><a class="nav-link active" href="#">HOME</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">HOME</a></li>
             <li class="nav-item"><a class="nav-link" href="#">ABOUT</a></li>
             <li class="nav-item"><a class="nav-link" href="#">CONTATTI</a></li>
             {/if}
@@ -68,7 +68,7 @@
     </footer>
 
     <!-- Bootstrap Bundle with Popper -->
-    {block name="script"}{/block}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    {block name="script"}{/block}
   </body>
 </html>

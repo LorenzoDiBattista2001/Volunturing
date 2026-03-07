@@ -35,6 +35,9 @@ class FApplication {
         $properties = $stmt->fetch(PDO::FETCH_ASSOC);
         $application = new EApplication($properties['submittedDate'] . ' ' . $properties['submittedTime'],
             EApplicationState::from($properties['state']), $properties['message']);
+        if($properties['wasAccepted']) {
+            $application->markAsAccepted();
+        }
         $application->setUserId($properties['user_id']);
         $application->setEventId($properties['event_id']);
 
@@ -51,6 +54,9 @@ class FApplication {
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $application = new EApplication($row['submittedDate'] . ' ' . $row['submittedTime'],
                 EApplicationState::from($row['state']), $row['message']);
+            if($row['wasAccepted']) {
+                $application->markAsAccepted();
+            }
             $application->setUserId($row['user_id']);
             $application->setEventId($row['event_id']);
             $applications[] = $application;
@@ -69,6 +75,9 @@ class FApplication {
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $application = new EApplication($row['submittedDate'] . ' ' . $row['submittedTime'],
                 EApplicationState::from($row['state']), $row['message']);
+            if($row['wasAccepted']) {
+                $application->markAsAccepted();
+            }
             $application->setUserId($row['user_id']);
             $application->setEventId($row['event_id']);
             $applications[] = $application;
