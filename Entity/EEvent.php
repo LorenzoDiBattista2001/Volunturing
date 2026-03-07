@@ -11,6 +11,7 @@ class EEvent {
     private int $maxVolunteerNumber;
     private EFieldOfAction $fieldOfAction;
     private ?string $candidateRequirements;
+    private string $description;
     private array $applications;
 
     public function __construct(
@@ -21,7 +22,8 @@ class EEvent {
         int $requestedVolunteerNumber,
         int $maxVolunteerNumber,
         string $fieldOfAction,
-        ?string $candidateRequirements) 
+        ?string $candidateRequirements,
+        string $description) 
     {
         if($requestedVolunteerNumber > $maxVolunteerNumber) {
             throw new Exception('The number of requested volunteers cannot
@@ -38,6 +40,7 @@ class EEvent {
         $this->maxVolunteerNumber = $maxVolunteerNumber;
         $this->fieldOfAction = EFieldOfAction::from($fieldOfAction);
         $this->candidateRequirements = $candidateRequirements;
+        $this->description = $description;
         $this->applications = array();
     }
 
@@ -113,6 +116,14 @@ class EEvent {
 
     public function getCandidateRequirements() : ?string {
         return $this->candidateRequirements;
+    }
+
+    public function setDescription(string $description) {
+        $this->description = $description;
+    }
+
+    public function getDescription() : string {
+        return $this->description;
     }
 
     // methods for managing event's applications

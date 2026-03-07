@@ -100,7 +100,7 @@
                   <h4 class="fw-bold mb-3">Descrizione</h4>
                   <div class="text-secondary lh-lg">
                     <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae nemo eos incidunt repudiandae beatae odit dignissimos rerum distinctio tenetur cumque.
+                      {$event->getDescription()}
                     </p>
                   </div>
                 </div>

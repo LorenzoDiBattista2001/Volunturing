@@ -19,11 +19,12 @@ class CManageEvents {
         int $requestedVolunteerNumber,
         int $maxVolunteerNumber,
         string $fieldOfAction,
-        ?string $candidateRequirements
+        ?string $candidateRequirements,
+        string $description
     ) : void {
         try {
             $event = new EEvent($title, $dateAndTime, $place, $coordinator, $requestedVolunteerNumber,
-            $maxVolunteerNumber, $fieldOfAction, $candidateRequirements);
+            $maxVolunteerNumber, $fieldOfAction, $candidateRequirements, $description);
         } catch (Exception $e) {
             print("ERROR: " . $e->getMessage());
             exit();
