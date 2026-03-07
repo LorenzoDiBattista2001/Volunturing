@@ -141,6 +141,18 @@ class EEvent {
         return $count;
     }
 
+    public function getPendingApplications() {
+        $pendingApplications = array();
+
+        foreach($this->applications as $application) {
+            if($application->isPending()) {
+                $pendingApplications[] = $application;
+            }
+        }
+
+        return $pendingApplications;
+    }
+
     public function isFull() : bool {
         return ($this->maxVolunteerNumber === $this->getApprovedApplicationsNumber());
     }
