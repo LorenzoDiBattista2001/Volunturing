@@ -30,8 +30,8 @@ class FEvent {
     }
 
     public static function load(int $eventId) : EEvent {
-        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE event_id = :eventId';
-        $params = array(':eventId' => $eventId);
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE event_id = :event_id';
+        $params = array(':event_id' => $eventId);
 
         $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
 
@@ -79,6 +79,19 @@ class FEvent {
         }
 
         return $events;
+    }
+
+    public static function delete(int $eventId) : bool {
+        $query = 'DELETE FROM ' . self::TABLE . ' WHERE event_id = :event_id';
+        $params = array(':event_id' => $eventId);
+
+        try {
+            $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+            return true;
+        } catch (Exception $e) {
+            print("DELETE OPERATION FAILED: " . $e->getMessage());
+            return false;
+        }
     }
 
     public static function exist(int $eventId) : bool {

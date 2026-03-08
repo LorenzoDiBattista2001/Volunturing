@@ -167,6 +167,12 @@ class EEvent {
     public function isFull() : bool {
         return ($this->maxVolunteerNumber === $this->getApprovedApplicationsNumber());
     }
+
+    // additional methods
+
+    public function isScheduled() : bool {
+        return $this->getDateAndTime() > new DateTime('now');
+    }
 }
 
 ?>
