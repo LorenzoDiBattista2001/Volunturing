@@ -6,6 +6,7 @@ class USession {
 
     private function __construct() {
         ini_set('session.gc_maxlifetime', GC_MAX_LIFETIME);
+        session_set_cookie_params(SESSION_COOKIE_LIFETIME, secure: true, httponly: true);
         session_start();
     }
 
@@ -28,8 +29,8 @@ class USession {
         return isset($_SESSION[$key]);
     }
 
-    public function getSessionStatus() {
-        session_status();
+    public function getSessionStatus() : bool {
+        return session_status();
     }
 
     public function unsetSessionVariables() {
