@@ -98,11 +98,11 @@ class EVolunteer extends EUser {
         return $this->description;
     }
 
-    public function blockUser() {
+    public function block() {
         $this->isBlocked = true;
     }
 
-    public function unlockUser() {
+    public function unlock() {
         $this->isBlocked = false;
     }
 
