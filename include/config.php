@@ -8,4 +8,5 @@
 
     // Session parameters
     define('GC_MAX_LIFETIME', 3600);
+    define('SESSION_COOKIE_LIFETIME', 0);
 ?>

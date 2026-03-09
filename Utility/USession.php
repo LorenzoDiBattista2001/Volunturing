@@ -29,7 +29,7 @@ class USession {
         return isset($_SESSION[$key]);
     }
 
-    public function getSessionStatus() : bool {
+    public function getSessionStatus() {
         return session_status();
     }
 
