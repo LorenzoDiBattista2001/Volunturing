@@ -95,6 +95,29 @@ class EApplication {
     public function getEventId() : int {
         return $this->eventId;
     }
+
+    // application management methods
+
+    public function approve() : void {
+        $this->setState(EApplicationState::APPROVED);
+        $this->markAsAccepted();
+    }
+
+    public function reject(string $reason) : void {
+        $this->setState(EApplicationState::REJECTED);
+        $this->setReasonForRejection($reason);
+    }
+
+    public function withdraw() : void {
+        $this->setState(EApplicationState::WITHDRAWN);
+    }
+
+    public function isPending() : bool {
+        if($this->getState() === EApplicationState::WAITING) {
+            return true;
+        }
+        return false;
+    }
 }
 
 ?>

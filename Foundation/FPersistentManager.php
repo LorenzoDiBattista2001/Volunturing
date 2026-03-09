@@ -28,6 +28,17 @@ class FPersistentManager {
         return $fclass::store($obj);
     }
 
+    public function deleteObject(int $objectId, string $className) : bool {
+
+        if($className === 'EVolunteer' || $className === 'EAdmin') {
+            $fclass = 'FUser';
+        } else {
+            $fclass = 'F' . substr($className, 1);
+        }
+
+        return $fclass::delete($objectId);
+    }
+
     public function loadEvent(int $eventId) : EEvent {
         $event = FEvent::load($eventId);
         $event->setApplications($this->retrieveApplicationsByEvent($event));

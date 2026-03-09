@@ -45,7 +45,7 @@ class FApplication {
     }
 
     public static function loadByEvent(int $eventId) {
-        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE event_id = :event_id';
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE event_id = :event_id ORDER BY submittedDate ASC, submittedTime ASC';
         $params = array(':event_id' => $eventId);
 
         $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);

@@ -3,7 +3,7 @@
 class FEvent {
 
     const VALUES = '(:event_id, :title, :date, :time, :place, :coordinator, :requestedVolunteerNumber, 
-                    :maxVolunteerNumber, :fieldOfAction, :candidateRequirements)';
+                    :maxVolunteerNumber, :fieldOfAction, :candidateRequirements, :description)';
     const TABLE = 'event';
 
     public static function store(EEvent $event) : bool {
@@ -17,7 +17,8 @@ class FEvent {
                 ':requestedVolunteerNumber' => $event->getRequestedVolunteerNumber(), 
                 ':maxVolunteerNumber' => $event->getMaxVolunteerNumber(),
                 ':fieldOfAction' => $event->getFieldOfAction()->value,
-                ':candidateRequirements' => $event->getCandidateRequirements());
+                ':candidateRequirements' => $event->getCandidateRequirements(),
+                ':description' => $event->getDescription());
             
         try {
             $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
@@ -29,8 +30,8 @@ class FEvent {
     }
 
     public static function load(int $eventId) : EEvent {
-        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE event_id = :eventId';
-        $params = array(':eventId' => $eventId);
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE event_id = :event_id';
+        $params = array(':event_id' => $eventId);
 
         $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
 
@@ -38,7 +39,7 @@ class FEvent {
         $event = new EEvent($properties['title'], $properties['date'] . ' ' . $properties['time'], 
             $properties['place'], $properties['coordinator'], $properties['requestedVolunteerNumber'],
             $properties['maxVolunteerNumber'], $properties['fieldOfAction'], 
-            $properties['candidateRequirements']);
+            $properties['candidateRequirements'], $properties['description']);
         $event->setEventId($properties['event_id']);
         return $event;
     }
@@ -51,9 +52,9 @@ class FEvent {
         $events = array();
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $event = new EEvent($row['title'], $row['date'] . ' ' . $row['time'],
-            $row['place'], $row['coordinator'], $row['requestedVolunteerNumber'],
-            $row['maxVolunteerNumber'], $row['fieldOfAction'],
-            $row['candidateRequirements']);
+                $row['place'], $row['coordinator'], $row['requestedVolunteerNumber'],
+                $row['maxVolunteerNumber'], $row['fieldOfAction'],
+                $row['candidateRequirements'], $row['description']);
             $event->setEventId($row['event_id']);
             $events[] = $event;
         }
@@ -70,14 +71,27 @@ class FEvent {
         $events = array();
         while($row = $stm->fetch(PDO::FETCH_ASSOC)) {
             $event = new EEvent($row['title'], $row['date'] . ' ' . $row['time'],
-            $row['place'], $row['coordinator'], $row['requestedVolunteerNumber'],
-            $row['maxVolunteerNumber'], $row['fieldOfAction'],
-            $row['candidateRequirements']);
+                $row['place'], $row['coordinator'], $row['requestedVolunteerNumber'],
+                $row['maxVolunteerNumber'], $row['fieldOfAction'],
+                $row['candidateRequirements'], $row['description']);
             $event->setEventId($row['event_id']);
             $events[] = $event;
         }
 
         return $events;
+    }
+
+    public static function delete(int $eventId) : bool {
+        $query = 'DELETE FROM ' . self::TABLE . ' WHERE event_id = :event_id';
+        $params = array(':event_id' => $eventId);
+
+        try {
+            $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+            return true;
+        } catch (Exception $e) {
+            print("DELETE OPERATION FAILED: " . $e->getMessage());
+            return false;
+        }
     }
 
     public static function exist(int $eventId) : bool {
