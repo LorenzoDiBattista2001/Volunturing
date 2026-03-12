@@ -5,8 +5,8 @@
 {block name="head"}
     <link rel="stylesheet" href="public/css/eventDetails.css">
 {/block}
-{block name="body"}
 
+{block name="body"}
     <main class="container my-5 flex-grow-1">
       <div class="row justify-content-center">
         <div class="col-lg-10">

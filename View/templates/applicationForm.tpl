@@ -77,5 +77,5 @@
 {/block}
 
 {block name="script"}
-  <script src="public/js/applicationForm.js"></script>
+  <script src="public/js/formFeedback.js"></script>
 {/block}

@@ -35,6 +35,7 @@ class FUser {
         
         try {
             $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+            $volunteer->setUserId(FConnectionDB::getInstance()->getLastInsertId());
             return true;
         } catch (Exception $e) {
             print("STORE OPERATION FAILED: " . $e->getMessage());
@@ -89,6 +90,7 @@ class FUser {
                 $properties['houseNumber'],
                 $properties['isBlocked']
             );
+            $volunteer->setHashedPassword($properties['password']);
             $volunteer->setUserId($properties['user_id']);
             return $volunteer;
         } else {
@@ -98,6 +100,45 @@ class FUser {
                 $properties['email'],
                 $properties['password']
             );
+            $admin->setHashedPassword($properties['password']);
+            $admin->setUserId($properties['user_id']);
+            return $admin;
+        }
+
+    }
+
+    public static function loadByEmail(string $email) : EUser {
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE email = :email';
+        $params = array(':email' => $email);
+
+        $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+        $properties = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if(!$properties['isAdmin']) {
+            $volunteer = new EVolunteer(
+                $properties['firstName'],
+                $properties['lastName'],
+                $properties['email'],
+                $properties['password'],
+                $properties['birthDate'],
+                $properties['birthPlace'],
+                $properties['taxCode'],
+                $properties['telephoneNumber'],
+                $properties['streetAddress'],
+                $properties['houseNumber'],
+                $properties['isBlocked']
+            );
+            $volunteer->setHashedPassword($properties['password']);
+            $volunteer->setUserId($properties['user_id']);
+            return $volunteer;
+        } else {
+            $admin = new EAdmin(
+                $properties['firstName'],
+                $properties['lastName'],
+                $properties['email'],
+                $properties['password']
+            );
+            $admin->setHashedPassword($properties['password']);
             $admin->setUserId($properties['user_id']);
             return $admin;
         }

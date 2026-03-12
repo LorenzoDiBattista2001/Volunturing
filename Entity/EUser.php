@@ -17,7 +17,7 @@ class EUser {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->email = $email;
-        $this->password = $password;
+        $this->setPassword($password);
     }
 
     // 'set' and 'get' methods
@@ -55,7 +55,11 @@ class EUser {
     }
 
     public function setPassword(string $password) {
-        $this->password = $password;
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
+    }
+
+    public function setHashedPassword(string $hashedPasswordFromDatabase) {
+        $this->password = $hashedPasswordFromDatabase;
     }
 
     public function getPassword() : string {

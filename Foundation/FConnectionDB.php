@@ -27,8 +27,8 @@ class FConnectionDB {
         return $stmt;
     } 
 
-    public function getLastInsertId(?string $name = null) {
-        $this->dbh->lastInsertId($name);
+    public function getLastInsertId(?string $name = null) : int {
+        return $this->dbh->lastInsertId($name);
     }
 
     public function beginTransaction() {

@@ -2,11 +2,11 @@
 
 class UServer {
 
-    private static function getRequestMethod() {
+    public static function getRequestMethod() {
         return $_SERVER['REQUEST_METHOD'];
     }
 
-    private static function getRequestUri() {
+    public static function getRequestUri() {
         return $_SERVER['REQUEST_URI'];
     }
 }

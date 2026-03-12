@@ -60,6 +60,12 @@ class FPersistentManager {
         return $this->loadVolunteer($user);
     }
 
+    public function loadUserByEmail(string $email) : EUser {
+        $user = FUser::loadByEmail($email);
+        if($user::class === 'EAdmin') return $user;
+        return $this->loadVolunteer($user);
+    }
+
     private function loadVolunteer(EVolunteer $volunteer) : EVolunteer {
         $volunteer->setApplications($this->retrieveApplicationsByUser($volunteer));
         $volunteer->setReviews($this->retrieveReviewsByUser($volunteer));

@@ -55,7 +55,7 @@ class CProcessApplications {
             foreach($pendingApplications as $application) {
                 $application->reject('POSTI ESAURITI');
                 if(!$pm->updateApplication($application)) {
-                    throw new Exception('Error occured while trying to update applications');
+                    throw new Exception('Error occurred while trying to update applications');
                 }
             }
             $db->commit();
