@@ -6,7 +6,7 @@ class UServer {
         return $_SERVER['REQUEST_METHOD'];
     }
 
-    public static function getRequestUri() {
+    public static function getRequestURI() {
         return $_SERVER['REQUEST_URI'];
     }
 }
