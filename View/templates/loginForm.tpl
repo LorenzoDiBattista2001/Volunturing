@@ -3,7 +3,7 @@
 {block name="title"}Volunturing - Login{/block}
 
 {block name="head"}
-  <link href="public/css/authenticationForms.css" rel="stylesheet">
+  <link href="{$css_path}/authenticationForms.css" rel="stylesheet">
 {/block}
 
 {block name="body"}
@@ -58,5 +58,5 @@
 {/block}
 
 {block name="script"}
-    <script src="public/js/formFeedback.js"></script>
+    <script src="{$js_path}/formFeedback.js"></script>
 {/block}

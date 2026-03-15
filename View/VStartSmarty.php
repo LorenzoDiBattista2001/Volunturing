@@ -10,6 +10,9 @@ class VStartSmarty {
         $smarty->setConfigDir(__DIR__ . DIRECTORY_SEPARATOR . 'configs' . DIRECTORY_SEPARATOR);
         $smarty->setCacheDir(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR);
 
+        $smarty->assign('css_path', CSS_PATH);
+        $smarty->assign('js_path', JS_PATH);
+
         return $smarty;
     }
 }

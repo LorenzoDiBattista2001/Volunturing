@@ -56,8 +56,8 @@ class CFrontController {
 
     public function run() : void {
         $requestURI = UServer::getRequestURI();
-        $temp = str_replace(ROOT, '', $requestURI);
-        $URIElements = explode('/', trim($temp, '/'));
+        // $cleanURI = str_replace(ROOT, '', $requestURI);
+        $URIElements = explode('/', trim($requestURI, '/'));
 
         if($URIElements[0] === 'admin') {
             $this->handleAdminRequests(array_slice($URIElements, 1));

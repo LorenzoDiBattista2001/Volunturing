@@ -3,7 +3,7 @@
 {block name="title"}Volunturing - Home{/block}
 
 {block name="head"}
-    <link rel="stylesheet" href="public/css/home.css"/>
+    <link rel="stylesheet" href="{$css_path}/home.css"/>
 {/block}
 {block name="body"}
   <!-- HERO SECTION-->

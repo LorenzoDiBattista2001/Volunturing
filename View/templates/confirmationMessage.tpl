@@ -3,7 +3,7 @@
 {block name="title"}Candidatura Confermata{/block}
 
 {block name="head"}
-    <link rel="stylesheet" href="public/css/confirmationMessage.css">
+    <link rel="stylesheet" href="{$css_path}/confirmationMessage.css">
 {/block}  
 
 

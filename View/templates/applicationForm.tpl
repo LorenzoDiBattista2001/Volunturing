@@ -3,7 +3,7 @@
 {block name="title"}Volunturing - Candidati{/block}
     
 {block name="head"}
-  <link rel="stylesheet" href="public/css/applicationForm.css">
+  <link rel="stylesheet" href="{$css_path}/applicationForm.css">
 {/block}    
     
 {block name="body"}
@@ -18,7 +18,7 @@
             </div>
 
             <div class="card-body p-4 p-md-5">
-              <form class="needs-validation" novalidate action="test.php" method="POST" enctype="application/x-www-form-urlencoded">
+              <form class="needs-validation" novalidate action="/events/submitApplication" method="POST" enctype="application/x-www-form-urlencoded">
                 
                 <div class="mb-4">
                   <label for="motivation" class="form-label">
@@ -77,5 +77,5 @@
 {/block}
 
 {block name="script"}
-  <script src="public/js/formFeedback.js"></script>
+  <script src="{$js_path}/formFeedback.js"></script>
 {/block}

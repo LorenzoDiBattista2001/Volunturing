@@ -3,7 +3,7 @@
 {block name="title"}Volunturing - Dettagli Evento{/block}
 
 {block name="head"}
-    <link rel="stylesheet" href="public/css/eventDetails.css">
+    <link rel="stylesheet" href="{$css_path}/eventDetails.css">
 {/block}
 
 {block name="body"}

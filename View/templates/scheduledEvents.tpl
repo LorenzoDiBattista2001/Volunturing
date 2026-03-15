@@ -3,7 +3,7 @@
 {block name="title"}Volunturing - Eventi Programmati{/block}
 
 {block name="head"}
-    <link rel="stylesheet" href="public/css/scheduledEvents.css"/>
+    <link rel="stylesheet" href="{$css_path}/scheduledEvents.css"/>
 {/block}
 
 {block name="body"}
