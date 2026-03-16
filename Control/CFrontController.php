@@ -54,13 +54,24 @@ class CFrontController {
         )]
     );
 
+    private static $systemMap = array(
+        'login' => 'performLogin',
+        'register' => 'register',
+        'loginForm' => 'authenticate',
+        'registrationForm' => 'startRegistration',
+        'personal' => 'accessPersonalArea'
+    );
+
     public function run() : void {
         $requestURI = UServer::getRequestURI();
-        // $cleanURI = str_replace(ROOT, '', $requestURI);
         $URIElements = explode('/', trim($requestURI, '/'));
 
-        if($URIElements[0] === 'admin') {
+        if($URIElements[0] === '') {
+            call_user_func([CUser::class, 'showHome']);
+        } elseif($URIElements[0] === 'admin') {
             $this->handleAdminRequests(array_slice($URIElements, 1));
+        } elseif ($URIElements[0] === 'system') {
+            $this->handleSystemOperations(array_slice($URIElements, 1));
         } else {
             $this->handleVolunteersRequests($URIElements);
         }
@@ -111,6 +122,30 @@ class CFrontController {
             } else {
                 // display 404 error
                 print('Controllore o Metodo non trovato');
+            }
+        } else {
+            // display 404 error
+            print('URL non valida');
+        }
+    }
+
+    private function handleSystemOperations(array $elements) : void {
+        if(count($elements) < 1) {
+            // display 404 error
+            return;
+        }
+
+        $action = $elements[0];
+
+        if(isset(self::$systemMap[$action])) {
+            $method = self::$systemMap[$action];
+            $params = array_slice($elements, 1);
+
+            if(method_exists(CUser::class, $method)) {
+                call_user_func_array([CUser::class, $method], $params);
+            } else {
+                // display 404 error
+                print('Metodo non trovato');
             }
         } else {
             // display 404 error

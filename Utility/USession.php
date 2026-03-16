@@ -17,27 +17,27 @@ class USession {
         return self::$instance;
     }
 
-    public function setSessionElement($key, $value) {
+    public static function setSessionElement($key, $value) {
         $_SESSION[$key] = $value;
     }
 
-    public function getSessionElement($key) {
+    public static function getSessionElement($key) {
         return $_SESSION[$key];
     }
 
-    public function isElementSet($key) : bool {
+    public static function isElementSet($key) : bool {
         return isset($_SESSION[$key]);
     }
 
-    public function getSessionStatus() {
+    public static function getSessionStatus() {
         return session_status();
     }
 
-    public function unsetSessionVariables() {
+    public static function unsetSessionVariables() {
         session_unset();
     }
 
-    public function destroySession() {
+    public static function destroySession() {
         session_destroy();
     }
 }

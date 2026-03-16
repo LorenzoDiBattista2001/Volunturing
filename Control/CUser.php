@@ -22,7 +22,8 @@ class CUser {
                 $user = new EVolunteer($firstName, $lastName, $email, $password, $birthDate,
                     $birthPlace, $taxCode, $telephoneNumber, $streetAddress, $houseNumber, isBlocked: false);
                 FPersistentManager::getInstance()->storeObject($user);
-                USession::getInstance()->setSessionElement('user', $user->getUserId());
+                USession::getInstance();
+                USession::setSessionElement('user', $user->getUserId());
                 // display user's home page and welcome message
             } catch (Exception $e) {
                 print("Error occurred during registration: " . $e->getMessage());
@@ -34,6 +35,10 @@ class CUser {
         }
     }
 
+    public static function startRegistration() : void {
+
+    }
+
     public static function performLogin() : void {
         if(UServer::getRequestMethod() === 'POST') {
             $email = UHTTPMethods::post('email');
@@ -43,7 +48,8 @@ class CUser {
 
             try {
                 if(isset($user) && password_verify($password, $user->getPassword())) {
-                    USession::getInstance()->setSessionElement('user', $user->getUserId());
+                    USession::getInstance();
+                    USession::setSessionElement('user', $user->getUserId());
                     // display user's home page
                 } else {
                     // reload login form
@@ -56,8 +62,21 @@ class CUser {
         }
     }
 
+    public static function authenticate() : void {
+
+    }
+
     public static function isLogged() : bool {
-        return USession::getInstance()->isElementSet('user');
+        return USession::isElementSet('user');
+    }
+
+    public static function accessPersonalArea() : void {
+
+    }
+
+    public static function showHome() : void {
+        $view = new VUser();
+        $view->displayHomePage(self::isLogged());
     }
 }
 ?>
