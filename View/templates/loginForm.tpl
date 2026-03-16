@@ -18,7 +18,7 @@
             </div>
 
             <div class="card-body p-4 p-md-5">
-              <form action="test.php" method="POST" class="needs-validation" novalidate>
+              <form action="/system/login" method="POST" class="needs-validation" novalidate>
                 
                 <div class="mb-4">
                   <label for="email" class="form-label">Indirizzo Email</label>

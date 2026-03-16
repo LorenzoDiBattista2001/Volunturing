@@ -36,10 +36,10 @@
           <div class="d-flex gap-2">
             {if $isLogged}
             <a href="#" class="btn btn-outline-light btn-sm">PROFILO</a>
-            <a href="#" class="btn btn-light btn-sm fw-bold">LOGOUT</a>
+            <a href="/system/logout" class="btn btn-light btn-sm fw-bold">LOGOUT</a>
             {else}
-            <a href="#" class="btn btn-outline-light btn-sm">REGISTRATI</a>
-            <a href="#" class="btn btn-light btn-sm fw-bold">LOGIN</a>
+            <a href="/system/registrationForm" class="btn btn-outline-light btn-sm">REGISTRATI</a>
+            <a href="/system/loginForm" class="btn btn-light btn-sm fw-bold">LOGIN</a>
             {/if}
           </div>
         </div>

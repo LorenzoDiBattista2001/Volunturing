@@ -17,6 +17,7 @@ class CUser {
             $passwordConfirm = UHTTPMethods::post('passwordConfirm');
             if($password !== $passwordConfirm) {
                 // reload registration form
+                header('Location: /system/registrationForm');
             }
             try {
                 $user = new EVolunteer($firstName, $lastName, $email, $password, $birthDate,
@@ -25,6 +26,7 @@ class CUser {
                 USession::getInstance();
                 USession::setSessionElement('user', $user->getUserId());
                 // display user's home page and welcome message
+                header('Location: /');
             } catch (Exception $e) {
                 print("Error occurred during registration: " . $e->getMessage());
                 // redirect to error page
@@ -32,11 +34,17 @@ class CUser {
             }
         } else {
             //reload registration form
+            header('Location: /system/registrationForm');
         }
     }
 
     public static function startRegistration() : void {
-
+        if(!self::isLogged()) {
+            $view = new VUser();
+            $view->displayRegistrationForm();
+        } else {
+            header('Location: /');
+        }
     }
 
     public static function performLogin() : void {
@@ -51,22 +59,44 @@ class CUser {
                     USession::getInstance();
                     USession::setSessionElement('user', $user->getUserId());
                     // display user's home page
+                    header('Location: /');
                 } else {
                     // reload login form
+                    header('Location: /system/loginForm');
                 }
             } catch (Exception $e){
                 print("Error occurred during login: " . $e->getMessage());
             }
         } else {
             // reload login form
+            header('Location: /system/loginForm');
         }
     }
 
     public static function authenticate() : void {
+        if(!self::isLogged()) {
+            $view = new VUser();
+            $view->displayLoginForm();
+        } else {
+            header('Location: /');
+        }
+    }
 
+    public static function performLogout() : void {
+        if(self::isLogged()) {
+            USession::unsetSessionVariables();
+            USession::destroySession();
+            // display confirmation message
+            header('Location: /');
+        } else {
+            header('Location: /');
+        }
     }
 
     public static function isLogged() : bool {
+        if(UCookie::isCookieSet('PHPSESSID')) {
+            Usession::getInstance();
+        }
         return USession::isElementSet('user');
     }
 
@@ -79,4 +109,5 @@ class CUser {
         $view->displayHomePage(self::isLogged());
     }
 }
+
 ?>

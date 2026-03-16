@@ -59,6 +59,7 @@ class CFrontController {
         'register' => 'register',
         'loginForm' => 'authenticate',
         'registrationForm' => 'startRegistration',
+        'logout' => 'performLogout',
         'personal' => 'accessPersonalArea'
     );
 
