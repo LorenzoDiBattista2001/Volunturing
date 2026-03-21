@@ -23,8 +23,7 @@ class CUser {
                 $user = new EVolunteer($firstName, $lastName, $email, $password, $birthDate,
                     $birthPlace, $taxCode, $telephoneNumber, $streetAddress, $houseNumber, isBlocked: false);
                 FPersistentManager::getInstance()->storeObject($user);
-                USession::getInstance();
-                USession::setSessionElement('user', $user->getUserId());
+                USession::getInstance()->setSessionElement('user', $user->getUserId());
                 // display user's home page and welcome message
                 header('Location: /');
             } catch (Exception $e) {
@@ -56,8 +55,7 @@ class CUser {
 
             try {
                 if(isset($user) && password_verify($password, $user->getPassword())) {
-                    USession::getInstance();
-                    USession::setSessionElement('user', $user->getUserId());
+                    USession::getInstance()->setSessionElement('user', $user->getUserId());
                     // display user's home page
                     header('Location: /');
                 } else {
@@ -84,20 +82,19 @@ class CUser {
 
     public static function performLogout() : void {
         if(self::isLogged()) {
-            USession::unsetSessionVariables();
-            USession::destroySession();
+            USession::getInstance()->unsetSessionVariables();
+            USession::getInstance()->destroySession();
+
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
             // display confirmation message
-            header('Location: /');
         } else {
             header('Location: /');
         }
     }
 
     public static function isLogged() : bool {
-        if(UCookie::isCookieSet('PHPSESSID')) {
-            Usession::getInstance();
-        }
-        return USession::isElementSet('user');
+        return USession::getInstance()->isElementSet('user');
     }
 
     public static function accessPersonalArea() : void {
