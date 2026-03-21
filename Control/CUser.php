@@ -17,7 +17,7 @@ class CUser {
             $passwordConfirm = UHTTPMethods::post('passwordConfirm');
             if($password !== $passwordConfirm) {
                 // reload registration form
-                header('Location: /system/registrationForm');
+                header('Location: /auth/registrationForm');
             }
             try {
                 $user = new EVolunteer($firstName, $lastName, $email, $password, $birthDate,
@@ -33,7 +33,7 @@ class CUser {
             }
         } else {
             //reload registration form
-            header('Location: /system/registrationForm');
+            header('Location: /auth/registrationForm');
         }
     }
 
@@ -60,14 +60,14 @@ class CUser {
                     header('Location: /');
                 } else {
                     // reload login form
-                    header('Location: /system/loginForm');
+                    header('Location: /auth/loginForm');
                 }
             } catch (Exception $e){
                 print("Error occurred during login: " . $e->getMessage());
             }
         } else {
             // reload login form
-            header('Location: /system/loginForm');
+            header('Location: /auth/loginForm');
         }
     }
 

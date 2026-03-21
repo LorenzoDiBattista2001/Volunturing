@@ -18,7 +18,7 @@
             </div>
 
             <div class="card-body p-4 p-md-5">
-              <form action="/system/register" method="POST" class="needs-validation" novalidate>
+              <form action="/auth/register" method="POST" class="needs-validation" novalidate>
                 
                 <div class="row g-3 mb-4">
                   <div class="col-md-6">

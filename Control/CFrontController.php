@@ -54,7 +54,7 @@ class CFrontController {
         )]
     );
 
-    private static $systemMap = array(
+    private static $userMap = array(
         'login' => 'performLogin',
         'register' => 'register',
         'loginForm' => 'authenticate',
@@ -71,7 +71,7 @@ class CFrontController {
             call_user_func([CUser::class, 'showHome']);
         } elseif($URIElements[0] === 'admin') {
             $this->handleAdminRequests(array_slice($URIElements, 1));
-        } elseif ($URIElements[0] === 'system') {
+        } elseif ($URIElements[0] === 'auth' || $URIElements[0] === 'account') {
             $this->handleSystemOperations(array_slice($URIElements, 1));
         } else {
             $this->handleVolunteersRequests($URIElements);
@@ -138,8 +138,8 @@ class CFrontController {
 
         $action = $elements[0];
 
-        if(isset(self::$systemMap[$action])) {
-            $method = self::$systemMap[$action];
+        if(isset(self::$userMap[$action])) {
+            $method = self::$userMap[$action];
             $params = array_slice($elements, 1);
 
             if(method_exists(CUser::class, $method)) {
