@@ -73,7 +73,7 @@ class CUser {
 
     public static function authenticate() : void {
         if(!self::isLogged()) {
-            $view = new VUser();
+            $view = new VUser(false);
             $view->displayLoginForm();
         } else {
             header('Location: /account/personal');
@@ -104,10 +104,12 @@ class CUser {
 
     public static function accessPersonalArea() : void {
         if(self::isLogged()) {
-            if(self::isAdmin()) {
+            $user = FPersistentManager::getInstance()->loadUserById(USession::getInstance()->getSessionElement('user'));
+            $view = new VUser(true);
+            if($user::class === 'EAdmin') {
                 // display admin's personal area
             } else {
-                // display volunteer's personal area
+                $view->displayVolunteerPersonalArea($user);
             }
         } else {
             header('Location: /auth/loginForm');

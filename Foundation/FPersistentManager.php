@@ -98,7 +98,7 @@ class FPersistentManager {
         $applications = FApplication::loadByEvent($event->getEventId());
         
         foreach($applications as $application) {
-            $application->setEvent($event);
+            $application->setEvent($event); // consider deleting line
             $application->setCandidate(FUser::loadById($application->getUserId()));
         }
 
@@ -111,7 +111,7 @@ class FPersistentManager {
         
         foreach($applications as $application) {
             $application->setEvent(FEvent::load($application->getEventId()));
-            $application->setCandidate($candidate);
+            $application->setCandidate($candidate); // consider deleting line
         }
 
         return $applications;
