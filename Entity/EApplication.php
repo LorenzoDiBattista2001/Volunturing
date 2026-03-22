@@ -19,7 +19,7 @@ class EApplication {
     {
         $this->submittedDateTime = new DateTime($submittedDateTime);
         $this->state = $state;
-        $this->message = $message;
+        $this->setMessage($message);
     }
 
     // 'set' and 'get' methods
@@ -41,7 +41,11 @@ class EApplication {
     }
 
     public function setMessage(?string $message) {
-        $this->message = $message;
+        if($message === '') {
+            $this->message = null;
+        } else {
+            $this->message = $message;
+        }
     }
 
     public function getMessage() : ?string {

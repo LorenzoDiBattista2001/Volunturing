@@ -18,7 +18,7 @@
             </div>
 
             <div class="card-body p-4 p-md-5">
-              <form class="needs-validation" novalidate action="/events/submitApplication" method="POST" enctype="application/x-www-form-urlencoded">
+              <form class="needs-validation" novalidate action="/events/submitApplication/{$eventId}" method="POST" enctype="application/x-www-form-urlencoded">
                 
                 <div class="mb-4">
                   <label for="motivation" class="form-label">

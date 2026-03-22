@@ -6,7 +6,7 @@ class VSubmitApplication {
 
     public function __construct(bool $isLogged) {
         $this->smarty = VStartSmarty::configuration();
-        $this->smarty->assign($isLogged);
+        $this->smarty->assign('isLogged', $isLogged);
     }
 
     public function displayEventsList($scheduledEvents) {
@@ -23,6 +23,7 @@ class VSubmitApplication {
 
     public function displayApplicationForm(EEvent $event) {
         $this->smarty->assign('title', $event->getTitle());
+        $this->smarty->assign('eventId', $event->getEventId());
         $this->smarty->display('applicationForm.tpl');
     }
 

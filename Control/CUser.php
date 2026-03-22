@@ -15,6 +15,8 @@ class CUser {
             $email = UHTTPMethods::post('email');
             $password = UHTTPMethods::post('password');
             $passwordConfirm = UHTTPMethods::post('passwordConfirm');
+            // check whether email already exists
+            // if email exists, display error page with link for reloading the form
             if($password !== $passwordConfirm) {
                 // reload registration form
                 header('Location: /auth/registrationForm');

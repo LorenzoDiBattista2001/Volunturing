@@ -77,9 +77,9 @@
 
                   <hr>
 
-                  <button class="btn btn-submit-application text-white w-100 py-3 fw-bold fs-5 shadow-sm">
+                  <a href="/events/apply/{$event->getEventId()}" class="btn btn-submit-application text-white w-100 py-3 fw-bold fs-5 shadow-sm">
                     <i class="bi bi-send-fill me-2"></i>CANDIDATI
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>

@@ -52,7 +52,7 @@
                     <i class="bi bi-calendar3 me-1"></i>{$event->getDateAndTime()->format('Y-m-d')}</small> 
                 </div>
                 <div class="d-flex align-items-end mb-2">
-                  <a href="#" class="btn me-auto btn-outline-warning btn-sm fw-bold stretched-link">
+                  <a href="/events/detail/{$event->getEventId()}" class="btn me-auto btn-outline-warning btn-sm fw-bold stretched-link">
                     Dettagli &rarr;
                   </a>
                 </div>

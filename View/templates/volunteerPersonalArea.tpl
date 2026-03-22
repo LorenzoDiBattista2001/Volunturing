@@ -20,7 +20,7 @@
                   <i class="bi bi-search text-warning fs-4"></i>
                 </div>
                 <h6 class="fw-bold small mb-0">ESPLORA EVENTI</h6>
-                <a href="#" class="stretched-link"></a>
+                <a href="/events/explore" class="stretched-link"></a>
               </div>
             </div>
             <div class="col-sm-6 col-md-3">

@@ -23,8 +23,8 @@
         <div class="collapse navbar-collapse" id="mainNav">
           <ul class="navbar-nav mx-auto gap-2 fw-semibold">
             {if $isLogged}
-            <li class="nav-item"><a class="nav-link" href="#">HOME</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">EVENTI</a></li>
+            <li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
+            <li class="nav-item"><a class="nav-link" href="/events/explore">EVENTI</a></li>
             <li class="nav-item"><a class="nav-link" href="#">CONTATTI</a></li>
             <li class="nav-item"><a class="nav-link" href="#">DONA ORA</a></li>
             {else}

@@ -24,7 +24,7 @@
                   <!-- Call to Action -->
                   <div class="row g-3 justify-content-center">
                     <div class="col-sm-5 col-md-4">
-                      <a href="#" class="btn btn-warning w-100 py-3 fw-bold shadow">
+                      <a href="/events/explore" class="btn btn-warning w-100 py-3 fw-bold shadow">
                         <i class="bi bi-calendar-event me-2"></i> ESPLORA EVENTI
                       </a>
                     </div>
