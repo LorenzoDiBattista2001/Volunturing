@@ -4,18 +4,18 @@ class CSubmitApplication {
 
     public static function showEvents() : void {
         $scheduledEvents = FPersistentManager::getInstance()->retrieveScheduledEvents();
-        $view = new VSubmitApplication();
+        $view = new VSubmitApplication(CUser::isLogged());
         $view->displayEventsList($scheduledEvents);
     }
 
     public static function selectEvent(int $eventId) : void {
         $event = FPersistentManager::getInstance()->loadEvent($eventId);
-        $view = new VSubmitApplication();
+        $view = new VSubmitApplication(CUser::isLogged());
         $view->displayEventDetails($event);
     }
 
     public static function startApplicationProcess(int $userId, int $eventId) : void {
-        $view = new VSubmitApplication();
+        $view = new VSubmitApplication(CUser::isLogged());
         $event = FPersistentManager::getInstance()->loadEvent($eventId);
         if (FPersistentManager::getInstance()->existApplication($userId, $eventId)) {
             $view->displayEventDetails($event, alreadyApplied: true);
@@ -33,7 +33,7 @@ class CSubmitApplication {
         $application->setUserId($userId);
         $application->setEventId($eventId);
         FPersistentManager::getInstance()->storeObject($application);
-        $view = new VSubmitApplication();
+        $view = new VSubmitApplication(CUser::isLogged());
         $view->displayConfirmationMessage();
     }
 

@@ -39,7 +39,7 @@ class CUser {
 
     public static function startRegistration() : void {
         if(!self::isLogged()) {
-            $view = new VUser();
+            $view = new VUser(self::isLogged());
             $view->displayRegistrationForm();
         } else {
             header('Location: /');
@@ -97,13 +97,17 @@ class CUser {
         return USession::getInstance()->isElementSet('user');
     }
 
+    public static function isAdmin() : bool {
+        
+    }
+
     public static function accessPersonalArea() : void {
 
     }
 
     public static function showHome() : void {
-        $view = new VUser();
-        $view->displayHomePage(self::isLogged());
+        $view = new VUser(self::isLogged());
+        $view->displayHomePage();
     }
 }
 
