@@ -25,7 +25,7 @@ class CUser {
                 FPersistentManager::getInstance()->storeObject($user);
                 USession::getInstance()->setSessionElement('user', $user->getUserId());
                 // display user's home page and welcome message
-                header('Location: /');
+                header('Location: /account/personal');
             } catch (Exception $e) {
                 print("Error occurred during registration: " . $e->getMessage());
                 // redirect to error page
@@ -57,7 +57,7 @@ class CUser {
                 if(isset($user) && password_verify($password, $user->getPassword())) {
                     USession::getInstance()->setSessionElement('user', $user->getUserId());
                     // display user's home page
-                    header('Location: /');
+                    header('Location: /account/personal');
                 } else {
                     // reload login form
                     header('Location: /auth/loginForm');
@@ -76,7 +76,7 @@ class CUser {
             $view = new VUser();
             $view->displayLoginForm();
         } else {
-            header('Location: /');
+            header('Location: /account/personal');
         }
     }
 
@@ -98,11 +98,20 @@ class CUser {
     }
 
     public static function isAdmin() : bool {
-        
+        $userId = USession::getInstance()->getSessionElement('user');
+        return FPersistentManager::getInstance()->isUserAdmin($userId);
     }
 
     public static function accessPersonalArea() : void {
-
+        if(self::isLogged()) {
+            if(self::isAdmin()) {
+                // display admin's personal area
+            } else {
+                // display volunteer's personal area
+            }
+        } else {
+            header('Location: /auth/loginForm');
+        }
     }
 
     public static function showHome() : void {

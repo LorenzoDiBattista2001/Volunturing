@@ -153,6 +153,10 @@ class FPersistentManager {
         return FApplication::exist($userId, $eventId);
     }
 
+    public function isUserAdmin(int $userId) : bool {
+        return FUser::isAdmin($userId);
+    }
+
 }
 
 ?>
