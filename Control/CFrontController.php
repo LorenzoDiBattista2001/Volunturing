@@ -55,6 +55,12 @@ class CFrontController {
         'review' => ['CWriteReview', array(
             'write' => 'writeReview',
             'publish' => 'publishReview'
+        )],
+        'confirmations' => ['CConfirmationMessage', array(
+            'applicationSubmitted' => 'confirmApplicationSubmission',
+            'applicationWithdrawn' => 'confirmApplicationWithdrawal',
+            'donationPerformed' => 'confirmDonationReception',
+            'reviewPublished' => 'confirmReviewPublishing'
         )]
     );
 

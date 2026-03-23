@@ -26,11 +26,6 @@ class VSubmitApplication {
         $this->smarty->assign('eventId', $event->getEventId());
         $this->smarty->display('applicationForm.tpl');
     }
-
-    public function displayConfirmationMessage() {
-        $this->smarty->display('confirmationMessage.tpl');
-    }
-
 }
 
 ?>

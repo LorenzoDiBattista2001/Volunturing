@@ -43,11 +43,10 @@ class CSubmitApplication {
                 $application->setUserId(USession::getInstance()->getSessionElement('user'));
                 $application->setEventId($eventId);
                 if(FPersistentManager::getInstance()->storeObject($application)) {
-                    $view->displayConfirmationMessage();
+                    header('Location: /confirmations/applicationSubmitted');
                 } else {
                     // display error message
                 }
-                
             } else {
                 header('Location: /auth/loginForm');
             }
