@@ -28,7 +28,11 @@ class CFrontController {
             'manage' => 'accessReviewManagement',
             'delete' => 'deleteReview',
             'confirmDeletion' => 'performDeletion'
-        )] 
+        )],
+        'confirmations' => ['CConfirmationMessage', array(
+            'eventCreated' => 'confirmEventCreation',
+            'eventDeleted' => 'confirmEventDeletion'
+        )]
     );
 
     private static $volunteersMap = array(
