@@ -4,7 +4,7 @@ class CSubmitApplication {
 
     public static function showEvents() : void {
         $scheduledEvents = FPersistentManager::getInstance()->retrieveScheduledEvents();
-        $view = new VSubmitApplication(CUser::isLogged());
+        $view = new VSubmitApplication();
         $view->displayEventsList($scheduledEvents);
     }
 
@@ -16,7 +16,7 @@ class CSubmitApplication {
 
     public static function startApplicationProcess(int $eventId) : void {
         if(CUser::isLogged()) {
-            $view = new VSubmitApplication(true);
+            $view = new VSubmitApplication();
             $event = FPersistentManager::getInstance()->loadEvent($eventId);
             $user = FPersistentManager::getInstance()->loadUserById(USession::getInstance()->getSessionElement('user'));
             if (FPersistentManager::getInstance()->existApplication($user->getUserId(), $eventId)) {
@@ -37,7 +37,7 @@ class CSubmitApplication {
     public static function createApplication(int $eventId) : void {
         if(UServer::getRequestMethod() === 'POST') {
             if(CUser::isLogged()) {
-                $view = new VSubmitApplication(true);
+                $view = new VSubmitApplication();
                 $message = UHTTPMethods::post('motivation');
                 $application = new EApplication(date('Y-m-d H:i:s'), EApplicationState::WAITING, $message);
                 $application->setUserId(USession::getInstance()->getSessionElement('user'));
@@ -45,13 +45,13 @@ class CSubmitApplication {
                 if(FPersistentManager::getInstance()->storeObject($application)) {
                     header('Location: /confirmations/applicationSubmitted');
                 } else {
-                    // display error message
+                    // display 500 error
                 }
             } else {
                 header('Location: /auth/loginForm');
             }
         } else {
-            header('Location: /events/submitApplications/' . $eventId);
+            header('Location: /events/submitApplication/' . $eventId);
         }
     }
 

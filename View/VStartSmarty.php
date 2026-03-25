@@ -13,6 +13,8 @@ class VStartSmarty {
         $smarty->assign('css_path', CSS_PATH);
         $smarty->assign('js_path', JS_PATH);
 
+        $smarty->assign('isLogged', CUser::isLogged());
+
         return $smarty;
     }
 }

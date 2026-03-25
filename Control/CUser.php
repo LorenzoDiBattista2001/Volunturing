@@ -30,7 +30,7 @@ class CUser {
                 header('Location: /account/personal');
             } catch (Exception $e) {
                 print("Error occurred during registration: " . $e->getMessage());
-                // redirect to error page
+                // display 500 error
                 exit();
             }
         } else {
@@ -41,7 +41,7 @@ class CUser {
 
     public static function startRegistration() : void {
         if(!self::isLogged()) {
-            $view = new VUser(self::isLogged());
+            $view = new VUser();
             $view->displayRegistrationForm();
         } else {
             header('Location: /');
@@ -65,6 +65,7 @@ class CUser {
                     header('Location: /auth/loginForm');
                 }
             } catch (Exception $e){
+                // display 500 error
                 print("Error occurred during login: " . $e->getMessage());
             }
         } else {
@@ -75,7 +76,7 @@ class CUser {
 
     public static function authenticate() : void {
         if(!self::isLogged()) {
-            $view = new VUser(false);
+            $view = new VUser();
             $view->displayLoginForm();
         } else {
             header('Location: /account/personal');
@@ -107,7 +108,7 @@ class CUser {
     public static function accessPersonalArea() : void {
         if(self::isLogged()) {
             $user = FPersistentManager::getInstance()->loadUserById(USession::getInstance()->getSessionElement('user'));
-            $view = new VUser(true);
+            $view = new VUser();
             if($user::class === 'EAdmin') {
                 // display admin's personal area
             } else {
@@ -119,7 +120,7 @@ class CUser {
     }
 
     public static function showHome() : void {
-        $view = new VUser(self::isLogged());
+        $view = new VUser();
         $view->displayHomePage();
     }
 }

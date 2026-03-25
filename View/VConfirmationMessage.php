@@ -4,9 +4,8 @@ class VConfirmationMessage {
 
     private $smarty;
 
-    public function __construct(bool $isLogged) {
+    public function __construct() {
         $this->smarty = VStartSmarty::configuration();
-        $this->smarty->assign('isLogged', $isLogged);
     }
 
     public function displayConfirmationMessage(string $header, string $text, string $link) {
