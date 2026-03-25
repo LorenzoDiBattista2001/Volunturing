@@ -8,7 +8,7 @@
 
 {block name="body"}
 <main class="container my-5 flex-grow-1">
-      <div class="row g-4 justify-content-center">
+      <div class="row justify-content-center">
         
         <div class="col-lg-9">
           <h2 class="h4 fw-bold mb-4">Benvenuto, {$volunteer->getFirstName()} {$volunteer->getLastName()}</h2>

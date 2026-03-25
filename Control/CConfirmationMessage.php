@@ -6,7 +6,7 @@ class CConfirmationMessage {
     private static string $volunteerLink = 'Visita la tua area personale';
 
     public static function confirmEventCreation() : void {
-        $view = new VConfirmationMessage(CUser::isLogged());
+        $view = new VConfirmationMessage();
         
         $header = 'Nuovo evento creato con successo!';
         $text = 'I dettagli dell\'evento sono ora visibili a tutti gli utenti';
@@ -15,7 +15,7 @@ class CConfirmationMessage {
     }
 
     public static function confirmEventDeletion() : void {
-        $view = new VConfirmationMessage(CUser::isLogged());
+        $view = new VConfirmationMessage();
 
         $header = 'Eliminazione evento completata';
         $text = 'L\'evento è stato eliminato correttamente';
@@ -24,7 +24,7 @@ class CConfirmationMessage {
     }
 
     public static function confirmApplicationSubmission() : void {
-        $view = new VConfirmationMessage(CUser::isLogged());
+        $view = new VConfirmationMessage();
 
         $header = 'Candidatura inviata con successo!';
         $text = 'Monitora lo stato della tua candidatura dalla tua area personale';
@@ -33,7 +33,7 @@ class CConfirmationMessage {
     }
 
     public static function confirmApplicationWithdrawal(int $eventId) : void {
-        $view = new VConfirmationMessage(CUser::isLogged());
+        $view = new VConfirmationMessage();
         $event = FPersistentManager::getInstance()->loadEvent($eventId);
 
         $header = 'Candidatura ritirata';
@@ -43,7 +43,7 @@ class CConfirmationMessage {
     }
 
     public static function confirmDonationReception() : void {
-        $view = new VConfirmationMessage(CUser::isLogged());
+        $view = new VConfirmationMessage();
 
         $header = 'Transazione Riuscita';
         $text = 'Grazie infinite per la tua generosità!';
@@ -52,7 +52,7 @@ class CConfirmationMessage {
     }
 
     public static function confirmReviewPublishing() : void {
-        $view = new VConfirmationMessage(CUser::isLogged());
+        $view = new VConfirmationMessage();
 
         $header = 'Recensione pubblicata';
         $text = 'Grazie per aver espresso il tuo parere!';
