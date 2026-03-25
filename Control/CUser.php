@@ -57,7 +57,9 @@ class CUser {
 
             try {
                 if(isset($user) && password_verify($password, $user->getPassword())) {
+                    $role = ($user::class === 'EAdmin') ? 'admin' : 'volunteer';
                     USession::getInstance()->setSessionElement('user', $user->getUserId());
+                    USession::getInstance()->setSessionElement('role', $role);
                     // display user's home page
                     header('Location: /account/personal');
                 } else {
@@ -101,8 +103,7 @@ class CUser {
     }
 
     public static function isAdmin() : bool {
-        $userId = USession::getInstance()->getSessionElement('user');
-        return FPersistentManager::getInstance()->isUserAdmin($userId);
+        return (USession::getInstance()->getSessionElement('role') === 'admin');
     }
 
     public static function accessPersonalArea() : void {

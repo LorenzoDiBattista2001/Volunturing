@@ -156,14 +156,6 @@ class FUser {
         }
         return false;
     }
-
-    public static function isAdmin(int $userId) : bool {
-        $query = 'SELECT isAdmin FROM ' . self::TABLE . ' WHERE user_id = :user_id';
-        $params = array(':user_id' => $userId);
-
-        $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
-        return $stmt->fetch(PDO::FETCH_COLUMN); 
-    }
 }
 
 ?>
