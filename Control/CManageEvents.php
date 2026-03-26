@@ -3,14 +3,21 @@
 class CManageEvents {
 
     public static function accessEventManagement() : void {
-        // check if user is logged in
-        // check if user id admin
-        $events = FPersistentManager::getInstance()->retrieveAllEvents();
-        // show events list
+        if(CUser::isLogged() && CUser::isAdmin()) {
+            $events = FPersistentManager::getInstance()->retrieveAllEvents();
+            $view = new VManageEvents();
+            $view->displayEventsList($events);
+        } else {
+            header('Location: /');
+        }
     }
 
     public static function addEvent() : void {
-        // show add event form
+        if(CUser::isLogged() && CUser::isAdmin()) {
+
+        } else {
+            header('Location: /');
+        }
     }
 
     public static function createEvent(
