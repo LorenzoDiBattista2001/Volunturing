@@ -152,6 +152,16 @@ class FPersistentManager {
     public function existApplication(int $userId, int $eventId) : bool {
         return FApplication::exist($userId, $eventId);
     }
+
+    public function loadDashboardData() {
+        $data = array();
+
+        $data[] = FEvent::getScheduledEventsNumber();
+        $data[] = FApplication::getPendingApplicationsNumber();
+        $data[] = FUser::getVolunteersCount();
+        
+        return $data;
+    }
 }
 
 ?>

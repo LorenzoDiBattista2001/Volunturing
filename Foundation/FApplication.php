@@ -86,6 +86,15 @@ class FApplication {
         return $applications;
     }
 
+    public static function getPendingApplicationsNumber() : int {
+        $query = 'SELECT COUNT(*) FROM ' . self::TABLE . ' WHERE state = :state';
+        $params = array(':state' => EApplicationState::WAITING->value);
+
+        $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+
+        return $stmt->fetch(PDO::FETCH_COLUMN);
+    }
+
     public static function update(EApplication $application) : bool {
         $query = 'UPDATE ' . self::TABLE . ' SET state = :state, reasonForRejection = :reasonForRejection,
                             wasAccepted = :wasAccepted WHERE user_id = :user_id AND event_id = :event_id';

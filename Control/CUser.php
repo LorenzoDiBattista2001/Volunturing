@@ -111,7 +111,8 @@ class CUser {
             $user = FPersistentManager::getInstance()->loadUserById(USession::getInstance()->getSessionElement('user'));
             $view = new VUser();
             if($user::class === 'EAdmin') {
-                // display admin's personal area
+                $dashboardData = FPersistentManager::getInstance()->loadDashboardData();
+                $view->displayAdminDashboard($user, $dashboardData);
             } else {
                 $view->displayVolunteerPersonalArea($user);
             }

@@ -66,10 +66,10 @@ class FEvent {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE date >= :date ORDER BY date ASC';
         $params = array(':date' => $date);
 
-        $stm = FConnectionDB::getInstance()->handleQuery($query, $params);
+        $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
 
         $events = array();
-        while($row = $stm->fetch(PDO::FETCH_ASSOC)) {
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $event = new EEvent($row['title'], $row['date'] . ' ' . $row['time'],
                 $row['place'], $row['coordinator'], $row['requestedVolunteerNumber'],
                 $row['maxVolunteerNumber'], $row['fieldOfAction'],
@@ -79,6 +79,15 @@ class FEvent {
         }
 
         return $events;
+    }
+
+    public static function getScheduledEventsNumber() : int {
+        $query = 'SELECT COUNT(event_id) FROM ' . self::TABLE . ' WHERE date >= :date';
+        $params = array(':date' => date('Y-m-d'));
+
+        $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+        
+        return $stmt->fetch(PDO::FETCH_COLUMN);
     }
 
     public static function delete(int $eventId) : bool {

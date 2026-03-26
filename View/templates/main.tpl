@@ -35,7 +35,7 @@
           </ul>
           <div class="d-flex gap-2">
             {if $isLogged}
-            <a href="#" class="btn btn-outline-light btn-sm">PROFILO</a>
+            <a href="/account/personal" class="btn btn-outline-light btn-sm">PROFILO</a>
             <a href="/auth/logout" class="btn btn-light btn-sm fw-bold">LOGOUT</a>
             {else}
             <a href="/auth/registrationForm" class="btn btn-outline-light btn-sm">REGISTRATI</a>

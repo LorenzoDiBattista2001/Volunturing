@@ -145,6 +145,15 @@ class FUser {
 
     }
 
+    public static function getVolunteersCount() : int {
+        $query = 'SELECT COUNT(*) FROM ' . self::TABLE . ' WHERE isAdmin = :isAdmin';
+        $params = array(':isAdmin' => false);
+
+        $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+
+        return $stmt->fetch(PDO::FETCH_COLUMN);
+    }
+
     public static function exist(int $userId) : bool {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE user_id = :user_id';
         $params = array(':user_id' => $userId);

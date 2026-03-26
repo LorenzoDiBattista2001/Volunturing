@@ -27,6 +27,16 @@ class VUser {
         $this->smarty->assign('reviews', $volunteer->getReviews());
         $this->smarty->display('volunteerPersonalArea.tpl');
     }
+
+    public function displayAdminDashboard(EAdmin $admin, $dashboardData) {
+        $this->smarty->assign('firstName', $admin->getFirstName());
+        $this->smarty->assign('lastName', $admin->getLastName());
+        $this->smarty->assign('email', $admin->getEmail());
+        $this->smarty->assign('scheduledEventsNumber', $dashboardData[0]);
+        $this->smarty->assign('pendingApplicationsNumber', $dashboardData[1]);
+        $this->smarty->assign('usersCount', $dashboardData[2]);
+        $this->smarty->display('adminDashboard.tpl');
+    }
 }
 
 ?>
