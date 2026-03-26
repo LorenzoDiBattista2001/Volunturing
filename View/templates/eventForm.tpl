@@ -47,35 +47,40 @@
                 <div class="row g-3 mb-4">
                   <div class="col-md-3">
                     <label for="date" class="form-label">Data</label>
-                    <input type="date" class="form-control border-0 bg-light" id="date" required>
+                    <input type="date" class="form-control border-0 bg-light" id="date" name="date" required>
                   </div>
                   <div class="col-md-3">
                     <label for="time" class="form-label">Ora</label>
-                    <input type="time" class="form-control border-0 bg-light" id="time" required>
+                    <input type="time" class="form-control border-0 bg-light" id="time" name="time" required>
                   </div>
                   <div class="col-md-6">
                     <label for="place" class="form-label">Luogo</label>
-                    <input type="text" class="form-control border-0 bg-light" id="place" required>
+                    <input type="text" class="form-control border-0 bg-light" id="place" name="place" required>
                   </div>
                 </div>
 
                 <div class="row mb-3 ">
                   <label for="requesteVolunteerNumber" class="col-sm-6 col-form-label">Numero atteso di volontari: </label>
                   <div class="col-sm-2 me-auto">
-                    <input type="number" class="form-control border-1 bg-light" id="requesteVolunteerNumber" name="requesteVolunteerNumber">
+                    <input type="number" class="form-control border-1 bg-light" id="requesteVolunteerNumber" name="requestedVolunteerNumber" required>
                   </div>
                 </div>
 
                 <div class="row mb-3 ">
                   <label for="maxVolunteerNumber" class="col-sm-6 col-form-label">Numero massimo di candidature accettabili: </label>
                   <div class="col-sm-2 me-auto">
-                    <input type="number" class="form-control border-1 bg-light" id="maxVolunteerNumber" name="maxVolunteerNumber">
+                    <input type="number" class="form-control border-1 bg-light" id="maxVolunteerNumber" name="maxVolunteerNumber" required>
                   </div>
                 </div>
 
                 <div class="mb-4">
                   <label for="candidateRequirements" class="form-label">Requisiti del candidato (Opzionale):</label>
                   <textarea class="form-control border-1 bg-light" id="candidateRequirements" name="candidateRequirements" rows="3"></textarea>
+                </div>
+
+                <div class="mb-4">
+                  <label for="description" class="form-label">Descrizione dell'Evento:</label>
+                  <textarea class="form-control border-1 bg-light" id="description" name="description" rows="3" required></textarea>
                 </div>
 
                 <div class="text-center mt-4">
