@@ -12,6 +12,10 @@ class VManageEvents {
         $this->smarty->assign('events', $events);
         $this->smarty->display('eventsManagement.tpl');
     }
+
+    public function displayEventForm() {
+        $this->smarty->display('eventForm.tpl');
+    }
 }
 
 ?>

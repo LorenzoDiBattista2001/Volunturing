@@ -30,7 +30,7 @@
             <section class="col-lg-6">
 
               <div class="d-flex justify-content-center mb-4">
-                <a href="#" class="d-flex align-items-center justify-content-center btn btn-primary w-50" id="add"><span class="fw-bold">AGGIUNGI EVENTO</span><i class="bi bi-plus-circle ms-2"></i></a>
+                <a href="/admin/events/add" class="d-flex align-items-center justify-content-center btn btn-primary w-50" id="add"><span class="fw-bold">AGGIUNGI EVENTO</span><i class="bi bi-plus-circle ms-2"></i></a>
               </div>
 
               <div class="row row-cols-1 g-4">

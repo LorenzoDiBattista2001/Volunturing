@@ -14,7 +14,8 @@ class CManageEvents {
 
     public static function addEvent() : void {
         if(CUser::isLogged() && CUser::isAdmin()) {
-
+            $view = new VManageEvents();
+            $view->displayEventForm();   
         } else {
             header('Location: /');
         }
