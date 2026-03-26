@@ -38,7 +38,7 @@ class CManageEvents {
                 try {
                     $event = new EEvent($title, $date . ' ' . $time, $place, $coordinator, $requestedVolunteerNumber,
                             $maxVolunteerNumber, $fieldOfAction, $candidateRequirements, $description);
-                    if($event->getDateAndTime() < new DateTime('now')) {
+                    if(!($event->isScheduled())) {
                         throw new Exception('Choosen date for the event is not valid');
                     }
                 } catch (Exception $e) {
