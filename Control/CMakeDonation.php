@@ -3,7 +3,12 @@
 class CMakeDonation {
 
     public static function donate() : void {
-        // show donation form
+        if(CUser::isLogged()) {
+            $view = new VMakeDonation();
+            $view->displayDonationForm();
+        } else {
+            // tell the user that they have to log in in order to donate
+        }
     }
 
     public static function insertAmount() : void {

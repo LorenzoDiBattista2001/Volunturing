@@ -29,7 +29,7 @@
                   <i class="bi bi-heart-fill text-danger fs-4"></i>
                 </div>
                 <h6 class="fw-bold small mb-0">DONA ORA</h6>
-                <a href="#" class="stretched-link"></a>
+                <a href="/donation/start" class="stretched-link"></a>
               </div>
             </div>
             <div class="col-sm-6 col-md-3">
