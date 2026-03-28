@@ -63,7 +63,8 @@ class CFrontController {
             'reviewPublished' => 'confirmReviewPublishing'
         )],
         'errors' => ['CError', array(
-            '404' => 'handlePageNotFoundError'
+            '404' => 'handlePageNotFoundError',
+            '500' => 'handleInternalServerError'
         )]
     );
 

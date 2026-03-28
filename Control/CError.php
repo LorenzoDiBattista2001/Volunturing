@@ -14,6 +14,20 @@ class CError {
             $view->displayErrorMessage($header, $text);
         }
     }
+
+    public static function handleInternalServerError() : void {
+        $view = new VError();
+
+        $header = '500 Internal Server Error';
+
+        if(CUser::isLogged()) {
+            $text = 'L\'operazione richiesta non è andata a buon fine. Ci scusiamo per il disagio';
+            $view->displayErrorMessage($header, $text, CUser::isAdmin());
+        } else {
+            $text = 'Al momento il Server non è in grado di gestire la richiesta';
+            $view->displayErrorMessage($header, $text);
+        }
+    }
 }
 
 ?>
