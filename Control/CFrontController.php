@@ -63,6 +63,7 @@ class CFrontController {
             'reviewPublished' => 'confirmReviewPublishing'
         )],
         'errors' => ['CError', array(
+            '403' => 'handleAccessForbiddenError',
             '404' => 'handlePageNotFoundError',
             '500' => 'handleInternalServerError'
         )]
@@ -93,6 +94,11 @@ class CFrontController {
     }
 
     private function handleAdminRequests(array $elements) : void {
+        if(!CUser::isLogged() || !CUser::isAdmin()) {
+            header('Location: /errors/403');
+            return;
+        }
+
         if(count($elements) < 2) {
             header('Location: /errors/404');
             return;

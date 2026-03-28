@@ -28,6 +28,19 @@ class CError {
             $view->displayErrorMessage($header, $text);
         }
     }
+
+    public static function handleAccessForbiddenError() : void {
+        $view = new VError();
+
+        $header = '403 Accesso Negato';
+        $text = 'Non si dispone dell\'autorizzazione ad accedere al contenuto richiesto';
+
+        if(CUser::isLogged()) {
+            $view->displayErrorMessage($header, $text, CUser::isAdmin());
+        } else {
+            $view->displayErrorMessage($header, $text);
+        }
+    }
 }
 
 ?>
