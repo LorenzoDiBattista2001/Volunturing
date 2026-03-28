@@ -51,7 +51,7 @@
                   <div class="input-group">
                     <span class="input-group-text bg-light border-0 fw-bold text-muted">€</span>
                     <input type="number" class="form-control border-0 bg-light fs-5 fw-bold" id="amount" name="amount" min="10" placeholder="10,00" required>
-                    <div class="invalid-feedback">L'importo minimo per la donazione è di 10 euro.</div>
+                    <div class="invalid-feedback">L'importo minimo per la donazione &egrave; di 10 euro.</div>
                   </div>
                 </div>
 

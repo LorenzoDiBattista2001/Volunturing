@@ -12,7 +12,22 @@ class CMakeDonation {
     }
 
     public static function insertAmount() : void {
-        // show credit card form
+        if(CUser::isLogged()) {
+            if(UServer::getRequestMethod() === 'POST') {
+                $amount = UHTTPMethods::post('amount');
+                $reason = UHTTPMethods::post('reason');
+                
+                USession::getInstance()->setSessionElement('amount', $amount);
+                USession::getInstance()->setSessionElement('reason', $reason);
+
+                $view = new VMakeDonation();
+                $view->displayPaymentForm($amount);
+            } else {
+                header('Location: /donation/start');
+            }
+        } else {
+            header('Location: errors/403');
+        }
     }
 
     public static function confirmDonation(string $firstName, string $lastName,

@@ -11,6 +11,11 @@ class VMakeDonation {
     public function displayDonationForm() {
         $this->smarty->display('donationForm.tpl');
     }
+
+    public function displayPaymentForm(int $amount) {
+        $this->smarty->assign('amount', $amount);
+        $this->smarty->display('creditCardForm.tpl');
+    }
 }
 
 ?>

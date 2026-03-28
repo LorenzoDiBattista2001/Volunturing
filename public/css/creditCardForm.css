@@ -1,0 +1,44 @@
+.form-label {
+    font-weight: 600;
+    color: #495057;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.card-header-custom {
+    background-color: #fff9f2;
+    border-bottom: 2px solid #ff9411;
+}
+
+.btn-submit {
+    background-color: #ff9411;
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #e6850f;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 148, 17, 0.3);
+}
+
+.form-control:focus {
+    box-shadow: none;
+    background-color: #f8f9fa;
+    border: 1px solid #ff9411;
+}
+
+.input-group-text {
+    border-radius: 8px 0 0 8px;
+}
+
+.progress {
+    border-radius: 10px;
+}
+
+.alert-warning {
+    background-color: #fff3e0;
+    color: #e65100;
+}
