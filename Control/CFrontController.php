@@ -94,7 +94,7 @@ class CFrontController {
 
     private function handleAdminRequests(array $elements) : void {
         if(count($elements) < 2) {
-            // display 404 error
+            header('Location: /errors/404');
             return;
         }
 
@@ -109,18 +109,16 @@ class CFrontController {
             if(class_exists($controller) && method_exists($controller, $method)) {
                 call_user_func_array([$controller, $method], $params);
             } else {
-                // display 404 error
-                print('Controllore o Metodo non trovato');
+                header('Location: /errors/404');
             }
         } else {
-            // display 404 error
-            print('URL non valida');
+            header('Location: /errors/404');
         }
     }
 
     private function handleVolunteersRequests(array $elements) : void {
         if(count($elements) < 2) {
-            // display 404 error
+            header('Location: /errors/404');
             return;
         }
 
@@ -135,18 +133,16 @@ class CFrontController {
             if(class_exists($controller) && method_exists($controller, $method)) {
                 call_user_func_array([$controller, $method], $params);
             } else {
-                // display 404 error
-                print('Controllore o Metodo non trovato');
+                header('Location: /errors/404');
             }
         } else {
-            // display 404 error
-            print('URL non valida');
+            header('Location: /errors/404');
         }
     }
 
     private function handleSystemOperations(array $elements) : void {
         if(count($elements) < 1) {
-            // display 404 error
+            header('Location: /errors/404');
             return;
         }
 
@@ -159,12 +155,10 @@ class CFrontController {
             if(method_exists(CUser::class, $method)) {
                 call_user_func_array([CUser::class, $method], $params);
             } else {
-                // display 404 error
-                print('Metodo non trovato');
+                header('Location: /errors/404');
             }
         } else {
-            // display 404 error
-            print('URL non valida');
+            header('Location: /errors/404');
         }
     }
 }
