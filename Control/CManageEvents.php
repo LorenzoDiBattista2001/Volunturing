@@ -3,37 +3,60 @@
 class CManageEvents {
 
     public static function accessEventManagement() : void {
-        // check if user is logged in
-        // check if user id admin
-        $events = FPersistentManager::getInstance()->retrieveAllEvents();
-        // show events list
+        if(CUser::isLogged() && CUser::isAdmin()) {
+            $events = FPersistentManager::getInstance()->retrieveAllEvents();
+            $view = new VManageEvents();
+            $view->displayEventsList($events);
+        } else {
+            header('Location: /');
+        }
     }
 
     public static function addEvent() : void {
-        // show add event form
+        if(CUser::isLogged() && CUser::isAdmin()) {
+            $view = new VManageEvents();
+            $view->displayEventForm();   
+        } else {
+            header('Location: /');
+        }
     }
 
-    public static function createEvent(
-        string $title,
-        string $dateAndTime,
-        string $place,
-        string $coordinator,
-        int $requestedVolunteerNumber,
-        int $maxVolunteerNumber,
-        string $fieldOfAction,
-        ?string $candidateRequirements,
-        string $description
-    ) : void {
-        try {
-            $event = new EEvent($title, $dateAndTime, $place, $coordinator, $requestedVolunteerNumber,
-            $maxVolunteerNumber, $fieldOfAction, $candidateRequirements, $description);
-        } catch (Exception $e) {
-            print("ERROR: " . $e->getMessage());
-            exit();
+    public static function createEvent() : void {
+        if(CUser::isLogged() && CUser::isAdmin()) {
+            if(UServer::getRequestMethod() === 'POST') {
+                $title = UHTTPMethods::post('title');
+                $fieldOfAction = UHTTPMethods::post('fieldOfAction');
+                $coordinator = UHTTPMethods::post('coordinator');
+                $date = UHTTPMethods::post('date');
+                $time = UHTTPMethods::post('time');
+                $place = UHTTPMethods::post('place');
+                $requestedVolunteerNumber = UHTTPMethods::post('requestedVolunteerNumber');
+                $maxVolunteerNumber = UHTTPMethods::post('maxVolunteerNumber');
+                $candidateRequirements = UHTTPMethods::post('candidateRequirements');
+                $description = UHTTPMethods::post('description');
+
+                try {
+                    $event = new EEvent($title, $date . ' ' . $time, $place, $coordinator, $requestedVolunteerNumber,
+                            $maxVolunteerNumber, $fieldOfAction, $candidateRequirements, $description);
+                    if(!($event->isScheduled())) {
+                        throw new Exception('Choosen date for the event is not valid');
+                    }
+                } catch (Exception $e) {
+                    print("ERROR: " . $e->getMessage());
+                    exit();
+                }
+
+                if(FPersistentManager::getInstance()->storeObject($event)) {
+                    header('Location: /admin/confirmations/eventCreated');
+                } else {
+                    // display error message
+                }
+            } else {
+                header('Location: /admin/events/add');
+            }
+        } else {
+            header('Location: /');
         }
-        
-        $done = FPersistentManager::getInstance()->storeObject($event);
-        // display confirmation message if $done === true, error message otherwise
     }
 
     public static function selectEvent(int $eventId) : void {
