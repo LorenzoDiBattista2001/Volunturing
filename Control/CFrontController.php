@@ -61,6 +61,9 @@ class CFrontController {
             'applicationWithdrawn' => 'confirmApplicationWithdrawal',
             'donationPerformed' => 'confirmDonationReception',
             'reviewPublished' => 'confirmReviewPublishing'
+        )],
+        'errors' => ['CError', array(
+            '404' => 'handlePageNotFoundError'
         )]
     );
 

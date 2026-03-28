@@ -1,6 +1,6 @@
 {extends file="main.tpl"}
 
-{block name="title"}Candidatura Confermata{/block}
+{block name="title"}Conferma{/block}
 
 {block name="head"}
     <link rel="stylesheet" href="{$css_path}/confirmationMessage.css">

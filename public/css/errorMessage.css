@@ -1,0 +1,20 @@
+.error-icon {
+        font-size: 5rem;
+        color: #dc3545;
+        animation: shake 0.5s ease-in-out;
+      }
+      
+@keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-10px); }
+        75% { transform: translateX(10px); }
+}
+
+.btn-home {
+  background-color: #ff9411;
+  border: none;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-home:hover { background-color: #e6850f; color: white; }
