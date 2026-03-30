@@ -65,7 +65,10 @@ class CFrontController {
         'errors' => ['CError', array(
             '403' => 'handleAccessForbiddenError',
             '404' => 'handlePageNotFoundError',
-            '500' => 'handleInternalServerError'
+            '500' => 'handleInternalServerError',
+            'invalidCardData' => 'handleCreditCardErrors',
+            'invalidDonationAmount' => 'handleDonationAmountError',
+            'transactionFailed' => 'handlePaymentError'
         )]
     );
 

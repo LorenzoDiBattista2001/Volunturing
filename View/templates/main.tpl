@@ -26,7 +26,7 @@
             <li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
             <li class="nav-item"><a class="nav-link" href="/events/explore">EVENTI</a></li>
             <li class="nav-item"><a class="nav-link" href="#">CONTATTI</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">DONA ORA</a></li>
+            <li class="nav-item"><a class="nav-link" href="/donation/start">DONA ORA</a></li>
             {else}
             <li class="nav-item"><a class="nav-link" href="#">HOME</a></li>
             <li class="nav-item"><a class="nav-link" href="#">ABOUT</a></li>

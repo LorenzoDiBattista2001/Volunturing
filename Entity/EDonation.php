@@ -14,7 +14,7 @@ class EDonation {
         ?string $reason,
         string $date)
     {
-        $this->amount = $amount;
+        $this->setAmount($amount);
         $this->reason = $reason;
         $this->date = new DateTime($date);
     }
