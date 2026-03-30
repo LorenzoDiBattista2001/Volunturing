@@ -8,10 +8,10 @@ class VConfirmationMessage {
         $this->smarty = VStartSmarty::configuration();
     }
 
-    public function displayConfirmationMessage(string $header, string $text, string $link) {
+    public function displayConfirmationMessage(string $header, string $text, bool $isAdmin = false) {
         $this->smarty->assign('header', $header);
         $this->smarty->assign('text', $text);
-        $this->smarty->assign('link', $link);
+        $this->smarty->assign('isAdmin', $isAdmin);
         $this->smarty->display('confirmationMessage.tpl');
     }
 }

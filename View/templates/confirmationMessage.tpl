@@ -9,26 +9,22 @@
 {block name="body"}
     <main class="container my-5 flex-grow-1">
       <div class="row justify-content-center">
-        <div class="col-lg-7">
-          <div class="card border-0 shadow-lg overflow-hidden">
-            
-            <div class="card-header card-header-custom p-4 text-center">
-              <h2 class="h4 fw-bold mb-0 text-dark text-uppercase">{$header}</h2>
+        <div class="col-lg-6">
+          <div class="card border-0 shadow-lg p-5 text-center">
+            <div class="mb-4">
+              <i class="bi bi-check-circle-fill success-icon"></i>
             </div>
-
-            <div class="card-body p-4 p-md-5">
-                  <div class="row g-3 justify-content-center">
-                    <div class="col-md-8">
-                      <p class="text-center lead">{$text}</p>
-                    </div>
-                    <div class="action-divider">
-                      <div class="col-md-8 text-center">
-                        <a href="/account/personal" class="btn btn-link text-muted text-decoration-none small">
-                          {$link}
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+            <h2 class="fw-bold text-dark mb-3">{$header}</h2>
+            <p class="text-muted fs-5 mb-4">{$text}</p>
+            
+            <div class="d-grid gap-2 col-md-8 mx-auto">
+              <a href="/account/personal/" class="btn btn-warning fw-bold py-3 shadow-sm">
+                {if $isAdmin}
+                  TORNA ALLA DASHBOARD
+                {else}
+                  TORNA AL PROFILO
+                {/if}
+              </a>
             </div>
           </div>
         </div>

@@ -2,16 +2,13 @@
 
 class CConfirmationMessage {
 
-    private static string $adminLink = 'Torna alla dashboard';
-    private static string $volunteerLink = 'Visita la tua area personale';
-
     public static function confirmEventCreation() : void {
         $view = new VConfirmationMessage();
         
         $header = 'Nuovo evento creato con successo!';
         $text = 'I dettagli dell\'evento sono ora visibili a tutti gli utenti';
 
-        $view->displayConfirmationMessage($header, $text, self::$adminLink);
+        $view->displayConfirmationMessage($header, $text, isAdmin: true);
     }
 
     public static function confirmEventDeletion() : void {
@@ -20,7 +17,7 @@ class CConfirmationMessage {
         $header = 'Eliminazione evento completata';
         $text = 'L\'evento è stato eliminato correttamente';
 
-        $view->displayConfirmationMessage($header, $text, self::$adminLink);
+        $view->displayConfirmationMessage($header, $text, isAdmin: true);
     }
 
     public static function confirmApplicationSubmission() : void {
@@ -29,7 +26,7 @@ class CConfirmationMessage {
         $header = 'Candidatura inviata con successo!';
         $text = 'Monitora lo stato della tua candidatura dalla tua area personale';
 
-        $view->displayConfirmationMessage($header, $text, self::$volunteerLink);
+        $view->displayConfirmationMessage($header, $text);
     }
 
     public static function confirmApplicationWithdrawal(int $eventId) : void {
@@ -39,7 +36,7 @@ class CConfirmationMessage {
         $header = 'Candidatura ritirata';
         $text = 'La tua candidatura per l\'evento ' . $event->getTitle() . ' è stata ritirata';
 
-        $view->displayConfirmationMessage($header, $text, self::$volunteerLink);
+        $view->displayConfirmationMessage($header, $text);
     }
 
     public static function confirmDonationReception() : void {
@@ -48,7 +45,7 @@ class CConfirmationMessage {
         $header = 'Transazione Riuscita';
         $text = 'Grazie infinite per la tua generosità!';
 
-        $view->displayConfirmationMessage($header, $text, self::$volunteerLink);
+        $view->displayConfirmationMessage($header, $text);
     }
 
     public static function confirmReviewPublishing() : void {
@@ -57,7 +54,7 @@ class CConfirmationMessage {
         $header = 'Recensione pubblicata';
         $text = 'Grazie per aver espresso il tuo parere!';
 
-        $view->displayConfirmationMessage($header, $text, self::$volunteerLink);
+        $view->displayConfirmationMessage($header, $text);
     }
 }
 

@@ -1,10 +1,9 @@
-.card-header-custom {
-    background-color: #fff9f2;
-    border-bottom: 2px solid #ff9411;
-  }
-  
-.action-divider {
-    border-top: 1px solid #dee2e6;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-  }
+.success-icon {
+        font-size: 5rem;
+        color: #198754;
+        animation: scaleIn 0.5s ease-out;
+      }
+      @keyframes scaleIn {
+        0% { transform: scale(0); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+      }
