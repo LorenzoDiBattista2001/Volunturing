@@ -164,6 +164,18 @@ class EEvent {
         return $pendingApplications;
     }
 
+    public function getAcceptedApplications() {
+        $acceptedApplications = array();
+
+        foreach($this->applications as $application) {
+            if($application->isApproved()) {
+                $acceptedApplications[] = $application;
+            }
+        }
+
+        return $acceptedApplications;
+    }
+
     public function isFull() : bool {
         return ($this->maxVolunteerNumber === $this->getApprovedApplicationsNumber());
     }
@@ -172,6 +184,21 @@ class EEvent {
 
     public function isScheduled() : bool {
         return $this->getDateAndTime() > new DateTime('now');
+    }
+
+    public function getPendingApplicationsNumber() : int {
+        return count($this->getPendingApplications());
+    }
+
+    public function getAcceptedApplicationsNumber() : int {
+        return count($this->getAcceptedApplications());
+    }
+
+    public function getProgress() : int {
+        $n = $this->getAcceptedApplicationsNumber();
+        $d = $this->getMaxVolunteerNumber();
+
+        return (int) (ceil(($n / $d) * 100));
     }
 }
 

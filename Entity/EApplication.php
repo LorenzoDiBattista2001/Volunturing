@@ -122,6 +122,10 @@ class EApplication {
         }
         return false;
     }
+
+    public function isApproved() : bool {
+        return ($this->getState() === EApplicationState::APPROVED);
+    }
 }
 
 ?>
