@@ -35,7 +35,7 @@
             </div>
 
             <div class="card-body p-4 p-md-5">
-              <form action="/donation/confirm" method="POST" class="needs-validation" novalidate>
+              <form action="/donation/confirm" method="POST" class="needs-validation" novalidate id="form">
                 
                 <div class="row g-3 mb-4">
                   <div class="col-md-6">
@@ -53,14 +53,17 @@
                   <div class="input-group">
                     <span class="input-group-text bg-light border-0"><i class="bi bi-credit-card text-muted"></i></span>
                     <input type="text" class="form-control border-0 bg-light" id="cardNumber" name="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19" required>
-                    <div class="invalid-feedback">Inserisci un numero di carta valido.</div>
+                    <div class="invalid-feedback" id="cardNumberFeedback"></div>
                   </div>
                 </div>
 
                 <div class="row g-3 mb-4">
                   <div class="col-6">
                     <label for="expirationDate" class="form-label">Scadenza (MM/AA)</label>
-                    <input type="text" class="form-control border-0 bg-light" id="expirationDate" name="expirationDate" placeholder="MM/AA" maxlength="5" required>
+                    <div class="input-group">
+                      <input type="text" class="form-control border-0 bg-light" id="expirationDate" name="expirationDate" placeholder="MM/AA" maxlength="5" required>
+                      <div class="invalid-feedback" id="expirationDateFeedback"></div>
+                    </div>
                   </div>
                   <div class="col-6">
                     <label for="cvv" class="form-label">CVV / CVC</label>
@@ -69,6 +72,7 @@
                       <span class="input-group-text bg-light border-0" data-bs-toggle="tooltip" title="Codice di 3 cifre sul retro della carta">
                         <i class="bi bi-question-circle text-muted"></i>
                       </span>
+                      <div class="invalid-feedback" id="cvvFeedback"></div>
                     </div>
                   </div>
                 </div>
@@ -94,6 +98,5 @@
 {/block}
 
 {block name="script"}
-  <script src="{$js_path}/formFeedback.js"></script>
   <script src="{$js_path}/creditCardForm.js"></script>
 {/block}
