@@ -2,6 +2,8 @@
 
 class CError {
 
+    // generic error messages, valid for all kinds of users
+
     public static function handlePageNotFoundError() : void {
         $view = new VError();
 
@@ -40,6 +42,43 @@ class CError {
         } else {
             $view->displayErrorMessage($header, $text);
         }
+    }
+
+    // error messages for volunteers
+
+    public static function handleCreditCardErrors() : void {
+        if(CUser::isLogged() && USession::getInstance()->isElementSet('creditCardError')) {
+            $view = new VError();
+
+            $header = 'ERROR: INVALID CARD DATA';
+            $text = USession::getInstance()->getSessionElement('creditCardError');
+
+            $view->displayErrorMessage($header, $text);
+        } else {
+            header('Location: /errors/403');
+        }
+    }
+
+    public static function handleDonationAmountError() : void {
+        if(CUser::isLogged() && USession::getInstance()->isElementSet('donationError')) {
+            $view = new VError();
+
+            $header = 'ERROR: INVALID DONATION AMOUNT';
+            $text = USession::getInstance()->getSessionElement('donationError');
+
+            $view->displayErrorMessage($header, $text);
+        } else {
+            header('Location: /errors/403');
+        }
+    }
+
+    public static function handlePaymentError() : void {
+        $view = new VError();
+
+        $header = 'Transazione Fallita';
+        $text = 'Al momento non siamo in grado di eseguire la transazione. Ti invitiamo a riprovare più tardi';
+
+        $view->displayErrorMessage($header, $text);
     }
 }
 

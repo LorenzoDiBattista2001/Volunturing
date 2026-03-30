@@ -59,8 +59,8 @@
 
                 <div class="row g-3 mb-4">
                   <div class="col-6">
-                    <label for="expiryDate" class="form-label">Scadenza (MM/AA)</label>
-                    <input type="text" class="form-control border-0 bg-light" id="expiryDate" name="expiryDate" placeholder="MM/AA" maxlength="5" required>
+                    <label for="expirationDate" class="form-label">Scadenza (MM/AA)</label>
+                    <input type="text" class="form-control border-0 bg-light" id="expirationDate" name="expirationDate" placeholder="MM/AA" maxlength="5" required>
                   </div>
                   <div class="col-6">
                     <label for="cvv" class="form-label">CVV / CVC</label>
