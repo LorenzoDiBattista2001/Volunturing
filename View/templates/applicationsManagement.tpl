@@ -25,15 +25,15 @@
                 <div class="col-md-5 p-4 border-md-end">
                   <div class="d-flex align-items-center mb-2">
                     <span class="badge border {if $event->getFieldOfAction()->value == 'Tutela ambientale'} 
-                                            bg-success text-white border-success-subtle
+                                            bg-success-subtle text-success border-success-subtle
                                           {elseif $event->getFieldOfAction()->value == 'Supporto logistico'} 
-                                            bg-info text-dark border-info-subtle
+                                            bg-info-subtle text-info border-info-subtle
                                           {elseif $event->getFieldOfAction()->value == 'Raccolta fondi'} 
-                                            bg-danger text-white border-danger-subtle
+                                            bg-danger-subtle text-danger border-danger-subtle
                                           {elseif $event->getFieldOfAction()->value == 'Colletta alimentare'} 
-                                            bg-warning text-dark border-warning-subtle
+                                            bg-warning-subtle text-warning border-warning-subtle
                                           {/if}
-                                          rounded-pill">
+                                          rounded-pill me-2">
                           {$event->getFieldOfAction()->value}</span>
                     <small class="text-muted fw-bold"><i class="bi bi-calendar3 me-1"></i> {$event->getDateAndTime()->format('Y-m-d')}</small>
                   </div>

@@ -3,9 +3,13 @@
 class CProcessApplications {
 
     public static function accessApplicationManagement() : void {
-        // check if user is logged in
-        // check if user is admin
-        // show events list
+        if(CUser::isLogged() && CUser::isAdmin()) {
+            $events = FPersistentManager::getInstance()->retrieveScheduledEventsWithApplications();
+            $view = new VProcessApplications();
+            $view->displayEventsList($events);
+        } else {
+            header('Location: /errors/403');
+        }
     }
 
     public static function inspectEvent(int $eventId) : void {

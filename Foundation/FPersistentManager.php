@@ -54,6 +54,14 @@ class FPersistentManager {
         return FEvent::loadEventsByDate($currentDate);
     }
 
+    public function retrieveScheduledEventsWithApplications() {
+        $events = $this->retrieveScheduledEvents();
+        foreach($events as $event) {
+            $event->setApplications(FApplication::loadByEvent($event->getEventId()));
+        }
+        return $events;
+    }
+
     public function loadUserById(int $userId) : EUser {
         $user = FUser::loadById($userId);
         if($user::class === 'EAdmin') return $user;
