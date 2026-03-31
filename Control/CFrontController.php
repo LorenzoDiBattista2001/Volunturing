@@ -32,6 +32,9 @@ class CFrontController {
         'confirmations' => ['CConfirmationMessage', array(
             'eventCreated' => 'confirmEventCreation',
             'eventDeleted' => 'confirmEventDeletion'
+        )],
+        'errors' => ['CError', array(
+            'applicationProcessing' => 'handleApplicationProcessingErrors'
         )]
     );
 

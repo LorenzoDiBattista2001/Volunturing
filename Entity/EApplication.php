@@ -103,13 +103,28 @@ class EApplication {
     // application management methods
 
     public function approve() : void {
-        $this->setState(EApplicationState::APPROVED);
-        $this->markAsAccepted();
+        if($this->isPending() && !$this->getEvent()->isFull()) {
+            $this->setState(EApplicationState::APPROVED);
+            $this->markAsAccepted();
+        } elseif($this->isWithdrawn()) {
+            throw new Exception('This application has been withdrawn and cannot be approved');
+        }
+        else {
+            throw new Exception('The application cannot be approved');
+        }
     }
 
     public function reject(string $reason) : void {
-        $this->setState(EApplicationState::REJECTED);
-        $this->setReasonForRejection($reason);
+        if($this->isPending()) {
+            $this->setState(EApplicationState::REJECTED);
+            $this->setReasonForRejection($reason);
+        } elseif($this->isApproved()) {
+            throw new Exception('This application has been approved and cannot be rejected');
+        } elseif($this->isWithdrawn()) {
+            throw new Exception('This application was withdrawn by the candidate');
+        } else {
+            throw new Exception('This application has already been rejected');
+        }
     }
 
     public function withdraw() : void {
@@ -117,14 +132,15 @@ class EApplication {
     }
 
     public function isPending() : bool {
-        if($this->getState() === EApplicationState::WAITING) {
-            return true;
-        }
-        return false;
+        return ($this->getState() === EApplicationState::WAITING);
     }
 
     public function isApproved() : bool {
         return ($this->getState() === EApplicationState::APPROVED);
+    }
+
+    public function isWithdrawn() : bool {
+        return ($this->getState() === EApplicationState::WITHDRAWN);
     }
 }
 

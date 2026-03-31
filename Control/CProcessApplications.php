@@ -38,28 +38,61 @@ class CProcessApplications {
     }
 
     public static function approveApplication(int $eventId, int $userId) : void {
-        $pm = FPersistentManager::getInstance();
+        if(CUser::isLogged() && CUser::isAdmin()) {
+            $pm = FPersistentManager::getInstance();
+            $application = $pm->loadApplication($userId, $eventId);
 
-        $application = $pm->loadApplication($userId, $eventId);
-        $application->approve();
-        $pm->updateApplication($application);
+            try {
+                $application->approve();
+            } catch(Exception $e) {
+                USession::getInstance()->setSessionElement('applicationProcessingError', $e->getMessage());
+                header('Location: /admin/errors/applicationProcessing');
+                return;
+            }
 
-        $event = $pm->loadEvent($eventId);
-        if($event->isFull()) {
-            self::rejectAllApplications($event);
+            if(!$pm->updateApplication($application)) {
+                header('Location: /errors/500');
+                return;
+            } 
+
+            $event = $pm->loadEvent($eventId);
+            if($event->isFull()) {
+                self::rejectAllApplications($event);
+            } else {
+                header('Location: /admin/applications/process/' . $event->getEventId());
+            }
         } else {
-            self::inspectEvent($event->getEventId());
+            header('Location: /errors/403');
         }
     }
 
-    public static function rejectApplication(int $eventId, int $userId, string $reason) : void {
-        $pm = FPersistentManager::getInstance();
+    public static function rejectApplication(int $eventId, int $userId) : void {
+        if(CUser::isLogged() && CUser::isAdmin()) {
+            if(UServer::getRequestMethod() === 'POST') {
+                $pm = FPersistentManager::getInstance();
+                $reason = UHTTPMethods::post('reasonForRejection');
 
-        $application = $pm->loadApplication($userId, $eventId);
-        $application->reject($reason);
-        $pm->updateApplication($application);
+                $application = $pm->loadApplication($userId, $eventId);
+                try {
+                    $application->reject($reason);
+                } catch(Exception $e) {
+                    USession::getInstance()->setSessionElement('applicationProcessingError', $e->getMessage());
+                    header('Location: /admin/errors/applicationProcessing');
+                    return;
+                }
+                
+                if(!$pm->updateApplication($application)) {
+                    header('Location: /errors/500');
+                    return;
+                }
 
-        self::inspectEvent($application->getEventId());
+                header('Location: /admin/applications/process/' . $application->getEventId());
+            } else {
+                header('Location: /admin/applications/select/' . $eventId . '/' . $userId);
+            }
+        } else {
+            header('Location: /errors/403');
+        }
     }
 
     private static function rejectAllApplications(EEvent $event) : void {
@@ -78,10 +111,10 @@ class CProcessApplications {
             $db->commit();
         } catch(Exception $e) {
             $db->rollBack();
-            // display error message
+            header('Location: /errors/500');
         }
 
-        self::inspectEvent($event->getEventId());
+        header('Location: /admin/applications/process/' . $event->getEventId());
     }
 }
 ?>

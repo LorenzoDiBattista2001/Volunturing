@@ -29,7 +29,7 @@
                 <span class="small fw-bold">{$event->getAcceptedApplicationsNumber()}/{$event->getMaxVolunteerNumber()}</span>
               </div>
               <div class="progress mb-2">
-                <div class="progress-bar bg-success" role="progressbar" style="width: {$event->getProgress()}" aria-valuenow="{$event->getAcceptedApplicationsNumber()}" aria-valuemin="0" aria-valuemax="{$event->getMaxVolunteerNumber()}"></div>
+                <div class="progress-bar bg-success" role="progressbar" style="width: {$event->getProgress()}%" aria-valuenow="{$event->getAcceptedApplicationsNumber()}" aria-valuemin="0" aria-valuemax="{$event->getMaxVolunteerNumber()}"></div>
               </div>
               <p class="small text-muted">Obiettivo: {$event->getRequestedVolunteerNumber()}</p>
             </div>
