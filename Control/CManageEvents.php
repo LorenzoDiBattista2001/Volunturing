@@ -8,7 +8,7 @@ class CManageEvents {
             $view = new VManageEvents();
             $view->displayEventsList($events);
         } else {
-            header('Location: /');
+            header('Location: /errors/403');
         }
     }
 
@@ -17,7 +17,7 @@ class CManageEvents {
             $view = new VManageEvents();
             $view->displayEventForm();   
         } else {
-            header('Location: /');
+            header('Location: /errors/403');
         }
     }
 
@@ -42,20 +42,21 @@ class CManageEvents {
                         throw new Exception('Choosen date for the event is not valid');
                     }
                 } catch (Exception $e) {
-                    print("ERROR: " . $e->getMessage());
-                    exit();
+                    USession::getInstance()->setSessionElement('eventCreationError', $e->getMessage());
+                    header('Location: /admin/errors/eventCreation');
+                    return;
                 }
 
                 if(FPersistentManager::getInstance()->storeObject($event)) {
                     header('Location: /admin/confirmations/eventCreated');
                 } else {
-                    // display error message
+                    header('Location: /errors/500');
                 }
             } else {
                 header('Location: /admin/events/add');
             }
         } else {
-            header('Location: /');
+            header('Location: /errors/403');
         }
     }
 
