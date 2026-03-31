@@ -194,6 +194,10 @@ class EEvent {
         return count($this->getAcceptedApplications());
     }
 
+    public function getEmptySlotsNumber() : int {
+        return ($this->getMaxVolunteerNumber() - $this->getAcceptedApplicationsNumber());
+    }
+
     public function getProgress() : int {
         $n = $this->getAcceptedApplicationsNumber();
         $d = $this->getMaxVolunteerNumber();

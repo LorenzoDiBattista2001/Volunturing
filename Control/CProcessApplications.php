@@ -13,18 +13,25 @@ class CProcessApplications {
     }
 
     public static function inspectEvent(int $eventId) : void {
-        $pm = FPersistentManager::getInstance();
-        $event = $pm->loadEvent($eventId);
-        $applications = $event->getPendingApplications();
-        // display 'eventDetailsAndApplicationsList.tpl'
+        if(CUser::isLogged() && CUser::isAdmin()) {
+            $pm = FPersistentManager::getInstance();
+            $view = new VProcessApplications();
+
+            $event = $pm->loadEvent($eventId);
+            $applications = $event->getPendingApplications();
+            
+            $view->displayApplicationsList($event, $applications);
+        } else {
+            header('Location: /errors/403');
+        }
     }
 
-    public static function selectApplication(int $userId, int $eventId) : void {
+    public static function selectApplication(int $eventId, int $userId) : void {
         $application = FPersistentManager::getInstance()->loadApplication($userId, $eventId);
         // display 'applicationDetails.tpl'
     }
 
-    public static function approveApplication(int $userId, int $eventId) : void {
+    public static function approveApplication(int $eventId, int $userId) : void {
         $pm = FPersistentManager::getInstance();
 
         $application = $pm->loadApplication($userId, $eventId);
@@ -39,7 +46,7 @@ class CProcessApplications {
         }
     }
 
-    public static function rejectApplication(int $userId, int $eventId, string $reason) : void {
+    public static function rejectApplication(int $eventId, int $userId, string $reason) : void {
         $pm = FPersistentManager::getInstance();
 
         $application = $pm->loadApplication($userId, $eventId);

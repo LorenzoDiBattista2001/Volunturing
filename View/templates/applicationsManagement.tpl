@@ -49,7 +49,7 @@
                     </div>
                     <div class="col-4 border-start border-end">
                       <div class="h4 fw-bold mb-0">{$event->getAcceptedApplicationsNumber()}/{$event->getMaxVolunteerNumber()}</div>
-                      <div class="text-uppercase text-muted" style="font-size: 0.65rem; font-weight: 800;">Candidature Accettate</div>
+                      <div class="text-uppercase text-muted" style="font-size: 0.65rem; font-weight: 800;">Candidature Approvate</div>
                     </div>
                     <div class="col-4">
                       <div class="h4 fw-bold mb-0 text-primary">{$event->getRequestedVolunteerNumber()}</div>
@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="col-md-2 d-flex align-items-center justify-content-center p-3">
-                  <a href="/admin/applications/process" class="btn btn-warning fw-bold w-100 py-3 shadow-sm">
+                  <a href="/admin/applications/process/{$event->getEventId()}" class="btn btn-warning fw-bold w-100 py-3 shadow-sm">
                     VALUTA <i class="bi bi-chevron-right ms-1"></i>
                   </a>
                 </div>
