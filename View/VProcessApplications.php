@@ -18,6 +18,13 @@ class VProcessApplications {
         $this->smarty->assign('applications', $applications);
         $this->smarty->display('applicationsList.tpl');
     }
+
+    public function displayApplicationDetails(EApplication $application) {
+        $this->smarty->assign('application', $application);
+        $this->smarty->assign('event', $application->getEvent());
+        $this->smarty->assign('candidate', $application->getCandidate());
+        $this->smarty->display('applicationDetails.tpl');
+    }
 }
 
 ?>

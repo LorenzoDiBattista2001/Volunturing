@@ -1,0 +1,28 @@
+.info-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #8a9198;
+    font-weight: 800;
+    margin-bottom: 2px;
+}
+
+.info-value {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #2d3436;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border: 1px solid #ff9411;
+}
+
+.btn {
+    border-radius: 8px;
+    letter-spacing: 0.5px;
+}

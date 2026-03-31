@@ -27,8 +27,14 @@ class CProcessApplications {
     }
 
     public static function selectApplication(int $eventId, int $userId) : void {
-        $application = FPersistentManager::getInstance()->loadApplication($userId, $eventId);
-        // display 'applicationDetails.tpl'
+        if(CUser::isLogged() && CUser::isAdmin()) {
+            $application = FPersistentManager::getInstance()->loadApplication($userId, $eventId);
+            $view = new VProcessApplications();
+            $view->displayApplicationDetails($application);
+        } else {
+            header('Location: /errors/403');
+        }
+
     }
 
     public static function approveApplication(int $eventId, int $userId) : void {
