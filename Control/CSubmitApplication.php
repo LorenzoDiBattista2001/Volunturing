@@ -10,6 +10,10 @@ class CSubmitApplication {
 
     public static function selectEvent(int $eventId) : void {
         $event = FPersistentManager::getInstance()->loadEvent($eventId);
+        if(!$event->isScheduled()) {
+            header('Location: /errors/403');
+            return;
+        }
         $view = new VSubmitApplication(CUser::isLogged());
         $view->displayEventDetails($event);
     }
@@ -45,7 +49,7 @@ class CSubmitApplication {
                 if(FPersistentManager::getInstance()->storeObject($application)) {
                     header('Location: /confirmations/applicationSubmitted');
                 } else {
-                    // display 500 error
+                    header('Location: /errors/500');
                 }
             } else {
                 header('Location: /auth/loginForm');
