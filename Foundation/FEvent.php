@@ -44,6 +44,21 @@ class FEvent {
         return $event;
     }
 
+    public static function loadForUpdate(int $eventId) : EEvent {
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE event_id = :event_id FOR UPDATE';
+        $params = array(':event_id' => $eventId);
+
+        $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+
+        $properties = $stmt->fetch(PDO::FETCH_ASSOC);
+        $event = new EEvent($properties['title'], $properties['date'] . ' ' . $properties['time'], 
+            $properties['place'], $properties['coordinator'], $properties['requestedVolunteerNumber'],
+            $properties['maxVolunteerNumber'], $properties['fieldOfAction'], 
+            $properties['candidateRequirements'], $properties['description']);
+        $event->setEventId($properties['event_id']);
+        return $event;
+    }
+
     public static function loadAllEvents() {
         $query = 'SELECT * FROM ' . self::TABLE . ' ORDER BY date ASC';
 

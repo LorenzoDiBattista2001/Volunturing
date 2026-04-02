@@ -1,0 +1,43 @@
+.hover-lift {
+    transition: all 0.2s ease;
+    border: 1px solid transparent !important;
+}
+
+.hover-lift:hover {
+    transform: translateX(5px);
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1) !important;
+    border-left: 4px solid #ff9411 !important;
+}
+
+.ls-1 {
+    letter-spacing: 1px;
+}
+
+.bg-light-subtle {
+    background-color: #fcfcfc;
+}
+
+.border-md-end {
+    border-right: 1px solid #eee;
+}
+
+@media (max-width: 767.98px) {
+    .border-md-end {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+    }
+}
+
+.btn-warning {
+    background-color: #ff9411 !important;
+    border: none;
+    color: white !important;
+}
+
+.btn-warning:hover {
+    background-color: #e6850f !important;
+}
+
+.progress {
+    background-color: #e9ecef;
+}

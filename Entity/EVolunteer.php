@@ -151,7 +151,15 @@ class EVolunteer extends EUser {
     public function addDonation(EDonation $donation) {
         $this->donations[] = $donation;
     }
-     
+    
+    // additional methods
+
+    public function calculateAge() : int {
+        $now = new DateTime('now');
+        $interval = $this->birthDate->diff($now);
+
+        return $interval->format('%Y');
+    }
 }
 
 ?>

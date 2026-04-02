@@ -80,6 +80,21 @@ class CError {
 
         $view->displayErrorMessage($header, $text);
     }
+
+    // error messages for admins
+
+    public static function handleApplicationProcessingErrors() : void {
+        if(CUser::isLogged() && CUser::isAdmin() && USession::getInstance()->isElementSet('applicationProcessingError')) {
+            $view = new VError();
+
+            $header = 'Operation Denied';
+            $text = USession::getInstance()->getSessionElement('applicationProcessingError');
+
+            $view->displayErrorMessage($header, $text, isAdmin: true);
+        } else {
+            header('Location: /errors/403');
+        }
+    }
 }
 
 ?>

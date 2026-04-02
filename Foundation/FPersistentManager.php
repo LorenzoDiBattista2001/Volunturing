@@ -45,6 +45,12 @@ class FPersistentManager {
         return $event;
     }
 
+    public function loadEventForUpdate(int $eventId) : EEvent {
+        $event = FEvent::loadForUpdate($eventId);
+        $event->setApplications($this->retrieveApplicationsByEvent($event));
+        return $event;
+    }
+
     public function retrieveAllEvents() {
         return FEvent::loadAllEvents();
     }
@@ -52,6 +58,14 @@ class FPersistentManager {
     public function retrieveScheduledEvents() {
         $currentDate = date('Y-m-d');
         return FEvent::loadEventsByDate($currentDate);
+    }
+
+    public function retrieveScheduledEventsWithApplications() {
+        $events = $this->retrieveScheduledEvents();
+        foreach($events as $event) {
+            $event->setApplications(FApplication::loadByEvent($event->getEventId()));
+        }
+        return $events;
     }
 
     public function loadUserById(int $userId) : EUser {
