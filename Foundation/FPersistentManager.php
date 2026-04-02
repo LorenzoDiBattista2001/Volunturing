@@ -45,6 +45,12 @@ class FPersistentManager {
         return $event;
     }
 
+    public function loadEventForUpdate(int $eventId) : EEvent {
+        $event = FEvent::loadForUpdate($eventId);
+        $event->setApplications($this->retrieveApplicationsByEvent($event));
+        return $event;
+    }
+
     public function retrieveAllEvents() {
         return FEvent::loadAllEvents();
     }

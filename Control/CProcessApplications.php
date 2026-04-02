@@ -40,26 +40,35 @@ class CProcessApplications {
     public static function approveApplication(int $eventId, int $userId) : void {
         if(CUser::isLogged() && CUser::isAdmin()) {
             $pm = FPersistentManager::getInstance();
-            $application = $pm->loadApplication($userId, $eventId);
+            $db = FConnectionDB::getInstance();
 
             try {
+                $db->beginTransaction();
+
+                $event = $pm->loadEventForUpdate($eventId);
+                $application = $pm->loadApplication($userId, $eventId);
+                $application->setEvent($event);
+
                 $application->approve();
+
+                if(!$pm->updateApplication($application)) {
+                    throw new Exception('Error occurred while updating the application');
+                } 
+
+                // reload event after the application was updated
+                $event = $pm->loadEvent($eventId);
+                if($event->isFull()) {
+                    self::rejectAllApplications($event);
+                }
+                $db->commit();
+
+                header('Location: /admin/applications/process/' . $event->getEventId());
+
             } catch(Exception $e) {
+                $db->rollBack();
                 USession::getInstance()->setSessionElement('applicationProcessingError', $e->getMessage());
                 header('Location: /admin/errors/applicationProcessing');
                 return;
-            }
-
-            if(!$pm->updateApplication($application)) {
-                header('Location: /errors/500');
-                return;
-            } 
-
-            $event = $pm->loadEvent($eventId);
-            if($event->isFull()) {
-                self::rejectAllApplications($event);
-            } else {
-                header('Location: /admin/applications/process/' . $event->getEventId());
             }
         } else {
             header('Location: /errors/403');
@@ -97,24 +106,14 @@ class CProcessApplications {
 
     private static function rejectAllApplications(EEvent $event) : void {
         $pm = FPersistentManager::getInstance();
-        $db = FConnectionDB::getInstance();
-
         $pendingApplications = $event->getPendingApplications();
-        $db->beginTransaction();
-        try {
-            foreach($pendingApplications as $application) {
-                $application->reject('POSTI ESAURITI');
-                if(!$pm->updateApplication($application)) {
-                    throw new Exception('Error occurred while trying to update applications');
-                }
-            }
-            $db->commit();
-        } catch(Exception $e) {
-            $db->rollBack();
-            header('Location: /errors/500');
-        }
 
-        header('Location: /admin/applications/process/' . $event->getEventId());
+        foreach($pendingApplications as $application) {
+            $application->reject('POSTI ESAURITI');
+            if(!$pm->updateApplication($application)) {
+                throw new Exception('Error occurred while trying to update applications');
+            }
+        }
     }
 }
 ?>
