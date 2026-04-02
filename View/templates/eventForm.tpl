@@ -18,7 +18,7 @@
             </div>
 
             <div class="card-body p-4 p-md-5">
-              <form action="/admin/events/create" method="POST" class="needs-validation" novalidate>
+              <form action="/admin/events/create" method="POST" class="needs-validation" novalidate id="eventForm">
                 
                 <div class="row row-cols-1 mb-4">
                   <div>
@@ -31,7 +31,7 @@
                   <div class="col-md-6">
                     <label for="fieldOfAction" class="form-label">Area di Intervento</label>
                     <select class="form-select border-0 bg-light" id="fieldOfAction" name="fieldOfAction" aria-label="area di intervento">
-                      <option selected>--Area di Intervento--</option>
+                      <option value="" selected>--Area di Intervento--</option>
                       <option value="Tutela ambientale">Tutela Ambientale</option>
                       <option value="Supporto logistico">Supporto Logistico</option>
                       <option value="Raccolta fondi">Raccolta Fondi</option>
@@ -47,7 +47,10 @@
                 <div class="row g-3 mb-4">
                   <div class="col-md-3">
                     <label for="date" class="form-label">Data</label>
-                    <input type="date" class="form-control border-0 bg-light" id="date" name="date" required>
+                    <div class="input-group">
+                      <input type="date" class="form-control border-0 bg-light" id="date" name="date" required>
+                      <div class="invalid-feedback" id="eventDateFeedback"></div>
+                    </div>
                   </div>
                   <div class="col-md-3">
                     <label for="time" class="form-label">Ora</label>
@@ -62,7 +65,7 @@
                 <div class="row mb-3 ">
                   <label for="requesteVolunteerNumber" class="col-sm-6 col-form-label">Numero atteso di volontari: </label>
                   <div class="col-sm-2 me-auto">
-                    <input type="number" class="form-control border-1 bg-light" id="requesteVolunteerNumber" name="requestedVolunteerNumber" required>
+                    <input type="number" class="form-control border-1 bg-light" id="requestedVolunteerNumber" name="requestedVolunteerNumber" required>
                   </div>
                 </div>
 
@@ -72,6 +75,7 @@
                     <input type="number" class="form-control border-1 bg-light" id="maxVolunteerNumber" name="maxVolunteerNumber" required>
                   </div>
                 </div>
+                <div id="volunteerNumberFeedback" class="small text-danger mb-4" style="display: none;"></div>
 
                 <div class="mb-4">
                   <label for="candidateRequirements" class="form-label">Requisiti del candidato (Opzionale):</label>
@@ -98,5 +102,5 @@
 {/block}
 
 {block name="script"}
-  <script src="{$js_path}/formFeedback.js"></script>
+  <script src="{$js_path}/eventForm.js"></script>
 {/block}
