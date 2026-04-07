@@ -34,7 +34,8 @@ class CFrontController {
             'eventDeleted' => 'confirmEventDeletion'
         )],
         'errors' => ['CError', array(
-            'applicationProcessing' => 'handleApplicationProcessingErrors'
+            'applicationProcessing' => 'handleApplicationProcessingErrors',
+            'eventCreation' => 'handleEventCreationErrors'
         )]
     );
 

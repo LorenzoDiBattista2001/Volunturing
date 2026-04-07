@@ -95,6 +95,19 @@ class CError {
             header('Location: /errors/403');
         }
     }
+
+    public static function handleEventCreationErrors() : void {
+        if(CUser::isLogged() && CUser::isAdmin() && USession::getInstance()->isElementSet('eventCreationError')) {
+            $view = new VError();
+
+            $header = 'Event Creation Failed';
+            $text = USession::getInstance()->getSessionElement('eventCreationError');
+
+            $view->displayErrorMessage($header, $text, isAdmin: true);
+        } else {
+            header('Location: /errors/403');
+        }
+    }
 }
 
 ?>
