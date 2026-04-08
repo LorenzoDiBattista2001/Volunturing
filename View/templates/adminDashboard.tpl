@@ -108,10 +108,10 @@
 
               <h6 class="fw-bold mb-3"><i class="bi bi-shield-check me-2"></i>Sicurezza</h6>
               <div class="d-grid gap-2">
-                <button class="btn btn-outline-warning btn-sm fw-bold py-2">
+                <button class="btn btn-outline-warning btn-sm fw-bold py-2" data-bs-toggle="modal" data-bs-target="#passwordModal">
                   <i class="bi bi-key me-2"></i>CAMBIA PASSWORD
                 </button>
-                <button class="btn btn-outline-secondary btn-sm fw-bold py-2">
+                <button class="btn btn-outline-secondary btn-sm fw-bold py-2" data-bs-toggle="modal" data-bs-target="#emailModal">
                   <i class="bi bi-envelope-at me-2"></i>MODIFICA EMAIL
                 </button>
               </div>
@@ -122,5 +122,65 @@
       </div>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+          <div class="modal-header">
+            <h5 class="modal-title fw-bold" id="passwordModalLabel">Cambia Password</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form class="needs-validation" novalidate action="#" method="POST">
+            <div class="modal-body p-4">
+              <div class="mb-3">
+                <label class="form-label small fw-bold">Password Attuale</label>
+                <input type="password" class="form-control bg-light border-0" required name="currentPassword">
+              </div>
+              <div class="mb-3">
+                <label class="form-label small fw-bold">Nuova Password</label>
+                <input type="password" class="form-control bg-light border-0" required minlength="8" name="newPassword">
+              </div>
+              <div class="mb-0">
+                <label class="form-label small fw-bold">Conferma Nuova Password</label>
+                <input type="password" class="form-control bg-light border-0" required name="confirmPassword">
+              </div>
+            </div>
+            <div class="modal-footer border-0 p-4 pt-0">
+              <button type="button" class="btn btn-light fw-bold" data-bs-dismiss="modal">ANNULLA</button>
+              <button type="submit" class="btn btn-brand fw-bold px-4">SALVA MODIFICHE</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+          <div class="modal-header">
+            <h5 class="modal-title fw-bold" id="emailModalLabel">Modifica Email</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form class="needs-validation" novalidate action="#" method="POST">
+            <div class="modal-body p-4">
+              <div class="mb-3">
+                <label class="form-label small fw-bold">Nuovo Indirizzo Email</label>
+                <input type="email" class="form-control bg-light border-0" required name="newEmail" placeholder="nuova.email@example.com">
+              </div>
+              <div class="mb-0">
+                <label class="form-label small fw-bold">Password per Conferma</label>
+                <input type="password" class="form-control bg-light border-0" required name="password">
+              </div>
+            </div>
+            <div class="modal-footer border-0 p-4 pt-0">
+              <button type="button" class="btn btn-light fw-bold" data-bs-dismiss="modal">ANNULLA</button>
+              <button type="submit" class="btn btn-brand fw-bold px-4">AGGIORNA EMAIL</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+{/block}
+
+{block name="script"}
+  <script src="formFeedback.js"></script>
 {/block}

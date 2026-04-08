@@ -2,6 +2,10 @@
   color: #ff9411; 
 }
 
+.bg-brand { 
+  background-color: #ff9411; 
+}
+
 .hover-lift {
   transition: all 0.3s ease;
 }
@@ -25,6 +29,22 @@
 
 .card {
   border-radius: 12px;
+}
+
+.modal-header {
+  border-bottom: 2px solid #ff9411;
+  background-color: #fff9f2;
+}
+      
+.btn-brand {
+  background-color: #ff9411;
+  color: white;
+  border: none;
+}
+
+.btn-brand:hover {
+  background-color: #e6850f;
+  color: white;
 }
 
 .bg-warning-subtle { background-color: #fff3e0 !important; }
