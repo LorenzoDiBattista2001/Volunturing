@@ -14,6 +14,12 @@ class VConfirmationMessage {
         $this->smarty->assign('isAdmin', $isAdmin);
         $this->smarty->display('confirmationMessage.tpl');
     }
+
+    public function displayLogoutMessage(string $header, string $text) {
+        $this->smarty->assign('header', $header);
+        $this->smarty->assign('text', $text);
+        $this->smarty->display('logoutMessage.tpl');
+    }
 }
 
 ?>

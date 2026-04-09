@@ -65,7 +65,8 @@ class CFrontController {
             'applicationWithdrawn' => 'confirmApplicationWithdrawal',
             'donationPerformed' => 'confirmDonationReception',
             'reviewPublished' => 'confirmReviewPublishing',
-            'passwordChanged' => 'confirmPasswordChange'
+            'passwordChanged' => 'confirmPasswordChange',
+            'logout' => 'confirmLogout'
         )],
         'errors' => ['CError', array(
             '403' => 'handleAccessForbiddenError',

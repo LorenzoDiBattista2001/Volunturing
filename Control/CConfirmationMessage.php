@@ -65,6 +65,15 @@ class CConfirmationMessage {
 
         $view->displayConfirmationMessage($header, $text, CUser::isAdmin());
     }
+
+    public static function confirmLogout() : void {
+        $view = new VConfirmationMessage();
+
+        $header = 'LOGOUT COMPLETATO';
+        $text = 'A presto!';
+
+        $view->displayLogoutMessage($header, $text);
+    }
 }
 
 ?>
