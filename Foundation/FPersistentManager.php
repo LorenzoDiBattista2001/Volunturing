@@ -180,6 +180,10 @@ class FPersistentManager {
         
         return $data;
     }
+
+    public function emailExist(string $email) : bool {
+        return FUser::emailExist($email);
+    }
 }
 
 ?>

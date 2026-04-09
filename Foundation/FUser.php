@@ -178,6 +178,15 @@ class FUser {
         }
         return false;
     }
+
+    public static function emailExist(string $email) : bool {
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE email = :email';
+        $params = array(':email' => $email);
+
+        $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+
+        return ($stmt->rowCount() > 0);
+    }
 }
 
 ?>

@@ -15,23 +15,29 @@ class CUser {
             $email = UHTTPMethods::post('email');
             $password = UHTTPMethods::post('password');
             $passwordConfirm = UHTTPMethods::post('passwordConfirm');
-            // check whether email already exists
-            // if email exists, display error page with link for reloading the form
+            if(FPersistentManager::getInstance()->emailExist($email)) {
+                USession::getInstance()->setSessionElement('registrationError', 'L\'indirizzo email inserito non è disponibile');
+                header('Location: /errors/registration');
+                return;
+            }
             if($password !== $passwordConfirm) {
-                // reload registration form
-                header('Location: /auth/registrationForm');
+                USession::getInstance()->setSessionElement('registrationError', 'Le due password non coincidono');
+                header('Location: /errors/registration');
+                return;
             }
             try {
                 $user = new EVolunteer($firstName, $lastName, $email, $password, $birthDate,
                     $birthPlace, $taxCode, $telephoneNumber, $streetAddress, $houseNumber, isBlocked: false);
-                FPersistentManager::getInstance()->storeObject($user);
+                if(!FPersistentManager::getInstance()->storeObject($user)) {
+                    header('Location: /errors/500');
+                    return;
+                }
                 USession::getInstance()->setSessionElement('user', $user->getUserId());
-                // display user's home page and welcome message
                 header('Location: /account/personal');
             } catch (Exception $e) {
-                print("Error occurred during registration: " . $e->getMessage());
-                // display 500 error
-                exit();
+                USession::getInstance()->setSessionElement('registrationError', $e->getMessage());
+                header('Location: /errors/registration');
+                return;
             }
         } else {
             //reload registration form

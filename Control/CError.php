@@ -55,6 +55,17 @@ class CError {
         }
     }
 
+    public static function handleRegistrationErrors() : void {
+        if(USession::getInstance()->isElementSet('registrationError')) {
+            $view = new VError();
+
+            $header = 'Registrazione fallita';
+            $text = USession::getInstance()->getSessionElement('registrationError');
+
+            $view->displayErrorMessage($header, $text);
+        }
+    }
+
     // error messages for volunteers
 
     public static function handleCreditCardErrors() : void {

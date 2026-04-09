@@ -75,7 +75,8 @@ class CFrontController {
             'invalidCardData' => 'handleCreditCardErrors',
             'invalidDonationAmount' => 'handleDonationAmountError',
             'transactionFailed' => 'handlePaymentError',
-            'changePassword' => 'handleChangePasswordErrors'
+            'changePassword' => 'handleChangePasswordErrors',
+            'registration' => 'handleRegistrationErrors'
         )]
     );
 
