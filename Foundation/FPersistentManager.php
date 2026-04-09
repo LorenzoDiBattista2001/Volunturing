@@ -157,6 +157,10 @@ class FPersistentManager {
         return FApplication::update($application);
     }
 
+    public function updateUserPassword(int $userId, string $password) : bool {
+        return FUser::updatePassword($userId, $password);
+    }
+
     public function existObject(string $class, int $objectId) : bool {
 
         $fclass = 'F' . substr($class, 1);

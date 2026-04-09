@@ -48,6 +48,40 @@ class CUser {
         }
     }
 
+    public static function changePassword() : void {
+        if(UServer::getRequestMethod() === 'POST') {
+            if(CUser::isLogged()) {
+                $user = FPersistentManager::getInstance()->loadUserById(USession::getInstance()->getSessionElement('user'));
+                $currentPassword = UHTTPMethods::post('currentPassword');
+                $newPassword = UHTTPMethods::post('newPassword');
+                $confirmPassword = UHTTPMethods::post('confirmPassword');
+
+                if(!password_verify($currentPassword, $user->getPassword())) {
+                    USession::getInstance()->setSessionElement('changePasswordError', 'La password corrente è errata');
+                    header('Location: /errors/changePassword');
+                    return;
+                }
+                if($newPassword != $confirmPassword) {
+                    USession::getInstance()->setSessionElement('changePasswordError', 'Le due password inserite sono diverse');
+                    header('Location: /errors/changePassword');
+                    return;
+                }
+
+                $user->setPassword($newPassword);
+                if(!FPersistentManager::getInstance()->updateUserPassword($user->getUserId(), $user->getPassword())) {
+                    header('Location: /errors/500');
+                    return;
+                }
+                header('Location: /confirmations/passwordChanged');
+
+            } else {
+                header('Location: /errors/403');
+            }
+        } else {
+            header('Location: /account/changePassword');
+        }
+    }
+
     public static function performLogin() : void {
         if(UServer::getRequestMethod() === 'POST') {
             $email = UHTTPMethods::post('email');

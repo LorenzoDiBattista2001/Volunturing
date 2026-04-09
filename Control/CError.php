@@ -44,6 +44,17 @@ class CError {
         }
     }
 
+    public static function handleChangePasswordErrors() : void {
+        if(CUser::isLogged() && USession::getInstance()->isElementSet('changePasswordError')) {
+            $view = new VError();
+
+            $header = 'Errore nel Cambio Password';
+            $text = USession::getInstance()->getSessionElement('changePasswordError');
+
+            $view->displayErrorMessage($header, $text, CUser::isAdmin());
+        }
+    }
+
     // error messages for volunteers
 
     public static function handleCreditCardErrors() : void {

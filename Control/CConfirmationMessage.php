@@ -56,6 +56,15 @@ class CConfirmationMessage {
 
         $view->displayConfirmationMessage($header, $text);
     }
+
+    public static function confirmPasswordChange() : void {
+        $view = new VConfirmationMessage();
+
+        $header = 'Operazione Riuscita';
+        $text = 'La tua password è stata aggiornata correttamente';
+
+        $view->displayConfirmationMessage($header, $text, CUser::isAdmin());
+    }
 }
 
 ?>

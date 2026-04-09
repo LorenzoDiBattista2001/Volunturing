@@ -64,7 +64,8 @@ class CFrontController {
             'applicationSubmitted' => 'confirmApplicationSubmission',
             'applicationWithdrawn' => 'confirmApplicationWithdrawal',
             'donationPerformed' => 'confirmDonationReception',
-            'reviewPublished' => 'confirmReviewPublishing'
+            'reviewPublished' => 'confirmReviewPublishing',
+            'passwordChanged' => 'confirmPasswordChange'
         )],
         'errors' => ['CError', array(
             '403' => 'handleAccessForbiddenError',
@@ -72,7 +73,8 @@ class CFrontController {
             '500' => 'handleInternalServerError',
             'invalidCardData' => 'handleCreditCardErrors',
             'invalidDonationAmount' => 'handleDonationAmountError',
-            'transactionFailed' => 'handlePaymentError'
+            'transactionFailed' => 'handlePaymentError',
+            'changePassword' => 'handleChangePasswordErrors'
         )]
     );
 
@@ -82,7 +84,8 @@ class CFrontController {
         'loginForm' => 'authenticate',
         'registrationForm' => 'startRegistration',
         'logout' => 'performLogout',
-        'personal' => 'accessPersonalArea'
+        'personal' => 'accessPersonalArea',
+        'changePassword' => 'changePassword'
     );
 
     public function run() : void {

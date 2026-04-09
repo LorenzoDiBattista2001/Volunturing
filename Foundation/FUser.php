@@ -68,6 +68,19 @@ class FUser {
             return false;
         }
     }
+
+    public static function updatePassword(int $userId, string $password) : bool {
+        $query = 'UPDATE ' . self::TABLE . ' SET password = :password WHERE user_id = :user_id';
+        $params = array(':user_id' => $userId, ':password' => $password);
+
+        try {
+            $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+            return true;
+        } catch (Exception $e) {
+            print("UPDATE OPERATION FAILED: " . $e->getMessage());
+            return false;
+        }
+    }
     
     public static function loadById(int $userId) : EUser {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE user_id = :user_id';
