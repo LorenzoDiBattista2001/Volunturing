@@ -20,6 +20,15 @@ class CConfirmationMessage {
         $view->displayConfirmationMessage($header, $text, isAdmin: true);
     }
 
+    public static function confirmScheduledEventDeletion() : void {
+        $view = new VConfirmationMessage();
+
+        $header = 'Eliminazione evento completata';
+        $text = 'L\'evento è stato eliminato correttamente. A tutti i volontari interessati è stata recapitata una email di notifica';
+
+        $view->displayConfirmationMessage($header, $text, isAdmin: true);
+    }
+
     public static function confirmApplicationSubmission() : void {
         $view = new VConfirmationMessage();
 

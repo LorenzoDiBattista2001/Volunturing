@@ -61,28 +61,59 @@ class CManageEvents {
     }
 
     public static function selectEvent(int $eventId) : void {
-        $event = FPersistentManager::getInstance()->loadEvent($eventId);
-        // display event details along with management options
-    }
-
-    public static function deleteEvent(int $eventId) : void {
-        $event = FPersistentManager::getInstance()->loadEvent($eventId);
-        if($event->isScheduled()) {
-            // display form for entering reason for deletion
+        if(CUser::isLogged() && CUser::isAdmin()) {
+            $event = FPersistentManager::getInstance()->loadEvent($eventId);
+            $view = new VManageEvents();
+            $view->displayEventPanel($event);
         } else {
-            // display confirmation request
+            header('Location: /errors/403');
         }
     }
 
-    public static function performDeletion(int $eventId, ?string $reasonForDeletion = null) {
-        $pm = FPersistentManager::getInstance();
-        if(!isset($reasonForDeletion)) {
-            $pm->deleteObject($eventId, EEvent::class);
-            // display confirmation message
+    public static function deleteEvent(int $eventId) {
+        if(CUser::isLogged() && CUser::isAdmin()) {
+            if(UServer::getRequestMethod() === 'POST') {
+                $pm = FPersistentManager::getInstance();
+                $event = $pm->loadEvent($eventId);
+
+                try {
+                    if($event->isScheduled()) {
+                        $reasonForDeletion = UHTTPMethods::post('reasonForDeletion');
+                        if(!isset($reasonForDeletion) || $reasonForDeletion === '') {
+                            throw new Exception('Reason is required when deleting scheluded events');
+                        } 
+                    }
+
+                    if(!$pm->deleteObject($eventId, EEvent::class)) {
+                        header('Location: /errors/500');
+                        return;
+                    }
+                    
+                    if($event->isScheduled()) {
+                        $view = new VEmail();
+                        $subject = 'Volontorino OdV - Avviso Cancellazione Evento';
+                        $body = $view->generateEventCancellationEmail($event, $reasonForDeletion);
+                        $currentApplications = array_merge($event->getAcceptedApplications(), $event->getPendingApplications());
+                        foreach($currentApplications as $application) {
+                            $candidate = $application->getCandidate();
+                            if(!UEmail::sendEmail($candidate->getEmail(), $candidate->getFirstName(), $subject, $body)) {
+                                throw new Exception('Failed to send emails to all volunteers involved');
+                            }
+                        }
+                        header('Location: /admin/confirmations/scheduledEventDeleted');
+                        return;
+                    }
+                    header('Location: /admin/confirmations/eventDeleted');
+                } catch (Exception $e) {
+                    USession::getInstance()->setSessionElement('eventDeletionError', $e->getMessage());
+                    header('Location: /admin/errors/eventDeletion');
+                    return;
+                }
+            } else {
+                header('Location: /admin/events/select/' . $eventId);
+            }
         } else {
-            // create notifications for all candidates involved
-            $pm->deleteObject($eventId, EEvent::class);
-            // display confirmation message
+            header('Location: /errors/403');
         }
     }
 }

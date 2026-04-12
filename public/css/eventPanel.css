@@ -1,0 +1,51 @@
+:root {
+        --brand-orange: #ff9411;
+        --dark-grey: #212529;
+      }
+
+      .btn-admin-action {
+        transition: all 0.3s ease;
+        border-radius: 8px;
+        padding: 12px;
+        font-weight: 600;
+      }
+
+      .btn-admin-action:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .info-label {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #6c757d;
+        font-weight: 700;
+        margin-bottom: 2px;
+      }
+
+      .info-value {
+        font-weight: 500;
+        color: var(--dark-grey);
+        margin-bottom: 15px;
+      }
+
+      .admin-sidebar-card {
+        border: none;
+        border-left: 4px solid var(--brand-orange);
+      }
+
+      .status-badge {
+        font-size: 0.75rem;
+        padding: 0.5em 1em;
+      }
+
+      .btn-delete {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+      }
+      .btn-delete:hover {
+        background-color: #bb2d3b;
+        color: white;
+      }

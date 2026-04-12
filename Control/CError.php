@@ -130,6 +130,19 @@ class CError {
             header('Location: /errors/403');
         }
     }
+
+    public static function handleEventDeletionErrors() : void {
+        if(CUser::isLogged() && CUser::isAdmin() && USession::getInstance()->isElementSet('eventDeletionError')) {
+            $view = new VError();
+
+            $header = 'Event Deletion Failed';
+            $text = USession::getInstance()->getSessionElement('eventDeletionError');
+
+            $view->displayErrorMessage($header, $text, isAdmin: true);
+        } else {
+            header('Location: /errors/403');
+        }
+    }
 }
 
 ?>

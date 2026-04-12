@@ -31,11 +31,13 @@ class CFrontController {
         )],
         'confirmations' => ['CConfirmationMessage', array(
             'eventCreated' => 'confirmEventCreation',
-            'eventDeleted' => 'confirmEventDeletion'
+            'eventDeleted' => 'confirmEventDeletion',
+            'scheduledEventDeleted' => 'confirmScheduledEventDeletion'
         )],
         'errors' => ['CError', array(
             'applicationProcessing' => 'handleApplicationProcessingErrors',
-            'eventCreation' => 'handleEventCreationErrors'
+            'eventCreation' => 'handleEventCreationErrors',
+            'eventDeletion' => 'handleEventDeletionErrors'
         )]
     );
 
