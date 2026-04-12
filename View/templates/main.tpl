@@ -46,6 +46,13 @@
       </div>
     </nav>
 
+    <div class="d-flex mt-5">
+      <div id="cookie-alert" class="alert alert-danger d-none w-75 mx-auto" role="alert">
+        <h4 class="alert-heading text-center">ATTENZIONE</h4>
+        <p class="text-center">I cookie del Browser sono disattivati. Perch&eacute; l'applicazione funzioni correttamente, &egrave; necessario abilitarli.</p>
+      </div>
+    </div>
+
     {block name="body"}{/block}
 
     <!-- FOOTER -->
@@ -69,6 +76,7 @@
 
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{$js_path}/checkCookies.js"></script>
     {block name="script"}{/block}
   </body>
 </html>
