@@ -116,6 +116,17 @@ class CManageEvents {
             header('Location: /errors/403');
         }
     }
+
+    public static function showVolunteersList(int $eventId) : void {
+        if(CUser::isLogged() && CUser::isAdmin()) {
+            $view = new VManageEvents();
+            $event = FPersistentManager::getInstance()->loadEvent($eventId);
+            $participants = $event->getParticipants();
+            $view->displayVolunteersList($event, $participants);
+        } else {
+            header('Location: /errors/403');
+        }
+    }
 }
 
 ?>

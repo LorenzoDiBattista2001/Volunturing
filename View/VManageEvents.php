@@ -22,6 +22,12 @@ class VManageEvents {
         $this->smarty->assign('isScheduled', $event->isScheduled());
         $this->smarty->display('eventPanel.tpl');
     }
+
+    public function displayVolunteersList(EEvent $event, $participants) {
+        $this->smarty->assign('event', $event);
+        $this->smarty->assign('participants', $participants);
+        $this->smarty->display('volunteersList.tpl');
+    }
 }
 
 ?>

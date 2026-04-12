@@ -8,7 +8,8 @@ class CFrontController {
             'add' => 'addEvent',
             'create' => 'createEvent',
             'select' => 'selectEvent',
-            'delete' => 'deleteEvent'
+            'delete' => 'deleteEvent',
+            'participants' => 'showVolunteersList'
         )],
         'applications' => ['CProcessApplications', array(
             'manage' => 'accessApplicationManagement',

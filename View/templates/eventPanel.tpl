@@ -71,7 +71,7 @@
 
             <div class="d-grid gap-3">
 
-              <a href="#" class="btn btn-outline-primary btn-admin-action">
+              <a href="/admin/events/participants/{$event->getEventId()}" class="btn btn-outline-primary btn-admin-action">
                 <i class="bi bi-people-fill me-2"></i> Visualizza Utenti Iscritti
               </a>
 

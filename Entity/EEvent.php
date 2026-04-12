@@ -186,6 +186,17 @@ class EEvent {
         return $this->getDateAndTime() > new DateTime('now');
     }
 
+    public function getParticipants() {
+        $participants = array();
+        $approvedApplications = $this->getAcceptedApplications();
+
+        foreach($approvedApplications as $application) {
+            $participants[] = $application->getCandidate();
+        }
+
+        return $participants;
+    }
+
     public function getPendingApplicationsNumber() : int {
         return count($this->getPendingApplications());
     }
