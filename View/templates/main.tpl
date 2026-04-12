@@ -53,6 +53,13 @@
       </div>
     </div>
 
+    <noscript>
+      <div class="alert alert-danger w-75 mx-auto" role="alert">
+        <h4 class="alert-heading text-center">ATTENZIONE</h4>
+        <p class="text-center">L'uso di JavaScript &egrave; disabilitato. Perché l'applicazione funzioni correttamente, assicurarsi di abilitare JavaScript e i cookie del Browser.</p>
+      </div>
+    </noscript>
+
     {block name="body"}{/block}
 
     <!-- FOOTER -->
