@@ -8,7 +8,8 @@ class CFrontController {
             'add' => 'addEvent',
             'create' => 'createEvent',
             'select' => 'selectEvent',
-            'delete' => 'deleteEvent'
+            'delete' => 'deleteEvent',
+            'participants' => 'showVolunteersList'
         )],
         'applications' => ['CProcessApplications', array(
             'manage' => 'accessApplicationManagement',
@@ -31,11 +32,13 @@ class CFrontController {
         )],
         'confirmations' => ['CConfirmationMessage', array(
             'eventCreated' => 'confirmEventCreation',
-            'eventDeleted' => 'confirmEventDeletion'
+            'eventDeleted' => 'confirmEventDeletion',
+            'scheduledEventDeleted' => 'confirmScheduledEventDeletion'
         )],
         'errors' => ['CError', array(
             'applicationProcessing' => 'handleApplicationProcessingErrors',
-            'eventCreation' => 'handleEventCreationErrors'
+            'eventCreation' => 'handleEventCreationErrors',
+            'eventDeletion' => 'handleEventDeletionErrors'
         )]
     );
 

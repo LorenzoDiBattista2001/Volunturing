@@ -58,7 +58,7 @@
                 
                       </div>
                       <div class="d-flex align-items-end mb-2">
-                        <a href="#" class="btn btn-outline-primary px-3 me-auto btn-sm fw-bold stretched-link"><i class="bi bi-pencil-square me-1"></i>
+                        <a href="/admin/events/select/{$event->getEventId()}" class="btn btn-outline-primary px-3 me-auto btn-sm fw-bold stretched-link"><i class="bi bi-pencil-square me-1"></i>
                           Ispeziona
                         </a>
                       </div>

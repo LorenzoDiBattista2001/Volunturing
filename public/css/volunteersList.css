@@ -1,0 +1,46 @@
+:root {
+        --brand-orange: #ff9411;
+        --dark-grey: #212529;
+      }
+
+      .bg-brand { background-color: var(--brand-orange) !important; }
+      .text-brand { color: var(--brand-orange) !important; }
+      
+      .app-row {
+        transition: all 0.2s ease;
+      }
+      .app-row:hover {
+        background-color: #f8f9fa;
+      }
+
+      .avatar-circle {
+        width: 40px;
+        height: 40px;
+        background-color: #e9ecef;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-weight: bold;
+        color: #495057;
+        margin-right: 12px;
+      }
+
+      @media print {
+        .no-print, .navbar, .breadcrumb, footer, .btn-print-action {
+          display: none !important;
+        }
+        .container {
+          width: 100% !important;
+          max-width: 100% !important;
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+        .card {
+          border: none !important;
+          box-shadow: none !important;
+        }
+        .table {
+            border: 1px solid #dee2e6;
+        }
+      }
