@@ -103,6 +103,7 @@ class FUser {
                 $properties['houseNumber'],
                 $properties['isBlocked']
             );
+            $volunteer->setDescription($properties['description']);
             $volunteer->setHashedPassword($properties['password']);
             $volunteer->setUserId($properties['user_id']);
             return $volunteer;
@@ -141,6 +142,7 @@ class FUser {
                 $properties['houseNumber'],
                 $properties['isBlocked']
             );
+            $volunteer->setDescription($properties['description']);
             $volunteer->setHashedPassword($properties['password']);
             $volunteer->setUserId($properties['user_id']);
             return $volunteer;
@@ -156,6 +158,33 @@ class FUser {
             return $admin;
         }
 
+    }
+
+    public static function loadAllVolunteers() {
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE isAdmin = :isAdmin';
+        $params = array(':isAdmin' => false);
+
+        $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+
+        $volunteers = array();
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $volunteer = new EVolunteer($row['firstName'], $row['lastName'],
+                $row['email'],
+                $row['password'],
+                $row['birthDate'],
+                $row['birthPlace'],
+                $row['taxCode'],
+                $row['telephoneNumber'],
+                $row['streetAddress'],
+                $row['houseNumber'],
+                $row['isBlocked']);
+            $volunteer->setDescription($row['description']);
+            $volunteer->setHashedPassword($row['password']);
+            $volunteer->setUserId($row['user_id']);
+            $volunteers[] = $volunteer;
+        }
+
+        return $volunteers;
     }
 
     public static function getVolunteersCount() : int {

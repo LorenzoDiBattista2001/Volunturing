@@ -160,6 +160,10 @@ class EVolunteer extends EUser {
 
         return $interval->format('%Y');
     }
+
+    public function getInitials() : string {
+        return strtoupper($this->getFirstName()[0] . $this->getLastName()[0]);
+    }
 }
 
 ?>

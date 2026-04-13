@@ -3,9 +3,13 @@
  class CManageUsers {
 
     public static function accessUserManagement() : void {
-      // check if user is logged in
-      // check if user is admin
-      // display users list
+      if(CUser::isLogged() && CUser::isAdmin()) {
+        $view = new VManageUsers();
+        $registeredUsers = FPersistentManager::getInstance()->retrieveRegisteredUsers();
+        $view->displayRegisteredUsers($registeredUsers);
+      } else {
+        header('Location: /errors/403');
+      }
 
     }
 

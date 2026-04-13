@@ -87,6 +87,10 @@ class FPersistentManager {
         return $volunteer;
     }
 
+    public function retrieveRegisteredUsers() {
+        return FUser::loadAllVolunteers();
+    }
+
     public function loadApplication(int $userId, int $eventId) : EApplication {
         $application = FApplication::load($userId, $eventId);
         $application->setCandidate($this->loadUserById($application->getUserId()));
