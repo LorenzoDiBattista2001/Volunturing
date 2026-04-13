@@ -78,9 +78,23 @@
                       <!-- <td><span class="badge bg-success-subtle text-success">Ambiente</span></td> -->
                       <td>{$application->getSubmittedDateTime()->format('Y-m-d')}</td>
                       <td>
+                      {if $application->getState()->value == 'In attesa di valutazione'}
                         <span class="badge rounded-pill bg-warning text-dark px-3 py-2">
                           <i class="bi bi-hourglass-split me-1"></i>{$application->getState()->value}
                         </span>
+                      {elseif $application->getState()->value == 'Rifiutata'}
+                        <span class="badge rounded-pill bg-danger text-white px-3 py-2">
+                          <i class="bi bi-x-circle me-1"></i>{$application->getState()->value}
+                        </span>
+                      {elseif $application->getState()->value == 'Ritirata'}
+                        <span class="badge rounded-pill bg-info text-dark px-3 py-2">
+                          <i class="bi bi-arrow-return-left me-1"></i>{$application->getState()->value}
+                        </span>
+                      {elseif $application->getState()->value == 'Approvata'}
+                        <span class="badge rounded-pill bg-success text-white px-3 py-2">
+                          <i class="bi bi-check-circle me-1"></i>{$application->getState()->value}
+                        </span>
+                      {/if}
                       </td>
                       <td class="pe-4 text-end">
                         <a href="/applications/select/{$volunteer->getUserId()}/{$application->getEventId()}" class="btn btn-light btn-sm rounded-circle"><i class="bi bi-hand-index"></i></a>
