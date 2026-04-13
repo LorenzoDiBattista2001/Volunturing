@@ -8,7 +8,7 @@ class FReview {
     public static function store(EReview $review) : bool {
         $query = 'INSERT INTO ' . self::TABLE . ' VALUES' . self::VALUES;
         $params = array(':review_id' => null,
-                ':user_id' => $review->getAuthor()->getUserId(),
+                ':user_id' => $review->getUserId(),
                 ':text' => $review->getText(),
                 ':rating' => $review->getRating(),
                 ':date' => $review->getDate()->format('Y-m-d'));

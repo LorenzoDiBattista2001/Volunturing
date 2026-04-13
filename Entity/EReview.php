@@ -14,8 +14,8 @@ class EReview {
         int $rating,
         string $date)
     {
-        $this->text = $text;
-        $this->rating = $rating;
+        $this->setText($text);
+        $this->setRating($rating);
         $this->date = new DateTime($date);
     }
 
@@ -38,6 +38,9 @@ class EReview {
     }
 
     public function setText(string $text) {
+        if(empty($text) || $text === '') {
+            throw new Exception('Per pubblicare una recensione, si richiede un commento testuale');
+        }
         $this->text = $text;
     }
 
@@ -46,11 +49,13 @@ class EReview {
     }
 
     public function setRating(int $rating) {
-        if($rating < 1 || $rating > 5) {
-            throw new Exception("Illegal rating value");
-        } else {
-            $this->rating = $rating;
+        if(empty($rating)) {
+            throw new Exception('Per pubblicare una recensione, si richiede una valutazione numerica');
         }
+        if($rating < 1 || $rating > 5) {
+            throw new Exception("La valutazione inserita non è ammessa: si prega di scegliere un valore compreso tra 1 e 5");
+        }
+        $this->rating = (int) $rating;
     }
 
     public function getRating() : int {

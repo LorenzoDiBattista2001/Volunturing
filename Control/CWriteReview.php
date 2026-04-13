@@ -11,13 +11,31 @@ class CWriteReview {
         }
     }
 
-    public static function publishReview(string $text, int $rating) : void {
-        $pm = FPersistentManager::getInstance();
-        $review = new EReview($text, $rating, (new DateTime('now'))->format('Y-m-d'));
-        // retrieve user id from session variables
-        $review->setUserId(1);
-        $review->setAuthor($pm->loadUserById(1));
-        $pm->storeObject($review);
+    public static function publishReview() : void {
+        if(CUser::isLogged()) {
+            if(UServer::getRequestMethod() === 'POST') {
+                $pm = FPersistentManager::getInstance();
+                $text = UHTTPMethods::post('reviewText');
+                $rating = UHTTPMethods::post('rating');
+                try {
+                    $review = new EReview($text, $rating, date('Y-m-d'));
+                    $review->setUserId(USession::getInstance()->getSessionElement('user'));
+                    if(!$pm->storeObject($review)) {
+                        header('Location: /errors/500');
+                        return;
+                    }
+                    header('Location: /confirmations/reviewPublished');
+                } catch (Exception $e) {
+                    USession::getInstance()->setSessionElement('reviewPublishingError', $e->getMessage());
+                    header('Location: /errors/reviewPublishing');
+                    return;
+                }
+            } else {
+                header('Location: /review/write');
+            }
+        } else {
+            header('Location: /errors/403');
+        }
     }
 }
 ?>

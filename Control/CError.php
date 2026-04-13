@@ -114,6 +114,17 @@ class CError {
         }
     }
 
+    public static function handleReviewPublishingErrors() : void {
+        if(CUser::isLogged() && USession::getInstance()->isElementSet('reviewPublishingError')) {
+            $view = new VError();
+
+            $header = 'Pubblicazione Recensione Fallita';
+            $text = USession::getInstance()->getSessionElement('reviewPublishingError');
+
+            $view->displayErrorMessage($header, $text);
+        }
+    }
+
     // error messages for admins
 
     public static function handleApplicationProcessingErrors() : void {
