@@ -38,7 +38,7 @@
                   <i class="bi bi-chat-left-dots-fill text-success fs-4"></i>
                 </div>
                 <h6 class="fw-bold small mb-0">RECENSISCI</h6>
-                <a href="#" class="stretched-link"></a>
+                <a href="/review/write" class="stretched-link"></a>
               </div>
             </div>
             <div class="col-sm-6 col-md-3">

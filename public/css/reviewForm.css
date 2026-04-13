@@ -1,0 +1,69 @@
+:root {
+  --brand-orange: #ff9411;
+  --brand-orange-light: #fff4e6;
+}
+
+.rating-container {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+/* hide actual radio buttons */
+.rating-container input {
+    display: none;
+}
+
+.rating-container label {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #dee2e6;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  color: #6c757d;
+  transition: all 0.2s ease;
+  background-color: white;
+  font-size: 1.2rem;
+}
+
+.rating-container label:hover,
+.rating-container label:hover ~ label,
+.rating-container input:checked ~ label {
+  background-color: var(--brand-orange);
+  border-color: var(--brand-orange);
+  color: white;
+  transform: scale(1.1);
+}
+
+.btn-submit-review {
+  background-color: var(--brand-orange);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-submit-review:hover {
+  background-color: #e6850f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 148, 17, 0.3);
+  color: white;
+}
+
+.review-card {
+  border: none;
+  border-radius: 15px;
+  background-color: white;
+}
+
+.form-control:focus {
+  border-color: var(--brand-orange);
+  box-shadow: 0 0 0 0.25rem rgba(255, 148, 17, 0.1);
+}

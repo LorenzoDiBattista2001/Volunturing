@@ -3,9 +3,12 @@
 class CWriteReview {
 
     public static function writeReview() : void {
-        // check if user is logged in
-        // check if user has at least one application completed
-        // display form for writing a review
+        if(CUser::isLogged()) {
+            $view = new VWriteReview();
+            $view->displayReviewForm();
+        } else {
+            header('Location: /errors/403');
+        }
     }
 
     public static function publishReview(string $text, int $rating) : void {
