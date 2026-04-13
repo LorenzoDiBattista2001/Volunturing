@@ -128,7 +128,13 @@ class EApplication {
     }
 
     public function withdraw() : void {
-        $this->setState(EApplicationState::WITHDRAWN);
+        if($this->isWithdrawn()) {
+            throw new Exception('This application has already been withdrawn');
+        } elseif($this->isRejected()) {
+            throw new Exception('This application was rejected and cannot be withdrawn');
+        } else {
+            $this->setState(EApplicationState::WITHDRAWN);
+        }
     }
 
     public function isPending() : bool {
@@ -141,6 +147,10 @@ class EApplication {
 
     public function isWithdrawn() : bool {
         return ($this->getState() === EApplicationState::WITHDRAWN);
+    }
+
+    public function isRejected() : bool {
+        return ($this->getState() === EApplicationState::REJECTED);
     }
 }
 

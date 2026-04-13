@@ -83,6 +83,9 @@ class CProcessApplications {
 
                 $application = $pm->loadApplication($userId, $eventId);
                 try {
+                    if(empty($reason)) {
+                        throw new Exception('Reason for rejection is required when rejecting an application');
+                    }
                     $application->reject($reason);
                 } catch(Exception $e) {
                     USession::getInstance()->setSessionElement('applicationProcessingError', $e->getMessage());

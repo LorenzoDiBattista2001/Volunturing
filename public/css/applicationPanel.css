@@ -1,0 +1,44 @@
+:root {
+        --brand-orange: #ff9411;
+        --dark-grey: #2d3436;
+      }
+
+      .info-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        color: #8a9198;
+        font-weight: 800;
+        margin-bottom: 2px;
+      }
+
+      .info-value {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--dark-grey);
+      }
+
+      .status-card {
+        border-top: 4px solid var(--brand-orange);
+      }
+
+      .btn-withdraw {
+        transition: all 0.3s ease;
+      }
+      
+      .btn-withdraw:hover {
+        background-color: #dc3545;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .motivation-box {
+        background-color: #fff9f2;
+        border-left: 4px solid var(--brand-orange);
+        font-style: italic;
+      }
+
+      .rejection-box {
+        background-color: #fff5f5;
+        border-left: 4px solid #dc3545;
+      }

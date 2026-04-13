@@ -103,6 +103,17 @@ class CError {
         $view->displayErrorMessage($header, $text);
     }
 
+    public static function handleApplicationWithdrawalErrors() : void {
+        if(CUser::isLogged() && USession::getInstance()->isElementSet('applicationWithdrawalError')) {
+            $view = new VError();
+
+            $header = 'Operation Failed';
+            $text = USession::getInstance()->getSessionElement('applicationWithdrawalError');
+
+            $view->displayErrorMessage($header, $text);
+        }
+    }
+
     // error messages for admins
 
     public static function handleApplicationProcessingErrors() : void {

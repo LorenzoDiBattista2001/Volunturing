@@ -83,7 +83,7 @@
                         </span>
                       </td>
                       <td class="pe-4 text-end">
-                        <button class="btn btn-light btn-sm rounded-circle"><i class="bi bi-hand-index"></i></button>
+                        <a href="/applications/select/{$volunteer->getUserId()}/{$application->getEventId()}" class="btn btn-light btn-sm rounded-circle"><i class="bi bi-hand-index"></i></a>
                       </td>
                     </tr>
                     {/foreach}

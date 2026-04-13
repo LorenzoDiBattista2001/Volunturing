@@ -38,6 +38,7 @@ class FApplication {
         if($properties['wasAccepted']) {
             $application->markAsAccepted();
         }
+        $application->setReasonForRejection($properties['reasonForRejection']);
         $application->setUserId($properties['user_id']);
         $application->setEventId($properties['event_id']);
 

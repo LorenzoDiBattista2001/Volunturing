@@ -68,7 +68,7 @@
             <form action="/admin/applications/reject/{$event->getEventId()}/{$candidate->getUserId()}" method="POST">
               <div class="mb-4">
                 <label for="reasonForRejection" class="form-label small fw-bold text-muted">Motivazione Rifiuto (Opzionale)</label>
-                <textarea class="form-control bg-light border-0" id="reasonForRejection" name="reasonForRejection" rows="3" placeholder="Inserisci qui il motivo se decidi di rifiutare..."></textarea>
+                <textarea class="form-control bg-light border-0" id="reasonForRejection" name="reasonForRejection" rows="3" placeholder="Inserisci qui il motivo se decidi di rifiutare..." required></textarea>
               </div>
 
               <div class="d-grid gap-3">
