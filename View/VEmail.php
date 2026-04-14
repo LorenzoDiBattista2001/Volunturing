@@ -13,6 +13,11 @@ class VEmail {
         $this->smarty->assign('reasonForDeletion', $reasonForDeletion);
         return $this->smarty->fetch('eventCancellationEmail.tpl');
     }
+
+    public function generateUserBlockingEmail($reason) : string {
+        $this->smarty->assign('reason', $reason);
+        return $this->smarty->fetch('userBlockingEmail.tpl');
+    }
 }
 
 ?>

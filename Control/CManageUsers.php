@@ -51,7 +51,7 @@
 
             $view = new VEmail();
             $subject = 'Volontorino OdV - Avviso Blocco Profilo';
-            $body = '';
+            $body = $view->generateUserBlockingEmail($reason);
             if(!UEmail::sendEmail($volunteer->getEmail(), $volunteer->getFirstName(), $subject, $body)) {
               throw new Exception('Failed to send notification email to blocked user: ' . $volunteer->getEmail());
             }
