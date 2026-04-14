@@ -1,0 +1,74 @@
+:root {
+        --brand-orange: #ff9411;
+        --brand-orange-light: #fff9f2;
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .text-brand { color: var(--brand-orange); }
+      .bg-brand { background-color: var(--brand-orange); }
+
+      .reviews-hero {
+        background: linear-gradient(135deg, var(--brand-orange) 0%, #e6850f 100%);
+        padding: 80px 0;
+        color: white;
+        margin-bottom: 50px;
+        border-radius: 0 0 50% 50% / 10%;
+      }
+
+      .review-card {
+        border: none;
+        border-radius: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: white;
+      }
+
+      .review-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 1rem 3rem rgba(0,0,0,0.08) !important;
+      }
+
+      .avatar-circle {
+        width: 50px;
+        height: 50px;
+        background-color: var(--brand-orange-light);
+        color: var(--brand-orange);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-weight: bold;
+        font-size: 1.1rem;
+        border: 2px solid var(--brand-orange);
+      }
+
+      .star-rating {
+        color: #ffc107;
+        font-size: 0.9rem;
+      }
+
+      .review-date {
+        font-size: 0.8rem;
+        color: #6c757d;
+      }
+
+      .quote-icon {
+        font-size: 2rem;
+        color: var(--brand-orange-light);
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        opacity: 0.5;
+      }
+
+      .stats-badge {
+        background-color: white;
+        color: var(--brand-orange);
+        padding: 15px 30px;
+        border-radius: 50px;
+        display: inline-flex;
+        align-items: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      }

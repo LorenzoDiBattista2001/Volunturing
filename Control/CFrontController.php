@@ -86,6 +86,9 @@ class CFrontController {
             'changePassword' => 'handleChangePasswordErrors',
             'registration' => 'handleRegistrationErrors',
             'login' => 'handleLoginErrors'
+        )],
+        'about' => ['CAbout', array(
+            'reviews' => 'showReviews'
         )]
     );
 

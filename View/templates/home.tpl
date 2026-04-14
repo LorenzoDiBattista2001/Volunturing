@@ -66,7 +66,7 @@
               </div>
               <h4 class="card-title fw-bold">Dicono di Noi</h4>
               <p class="card-text text-muted small">Leggi le storie e le testimonianze dei volontari che hanno già partecipato ai nostri eventi.</p>
-              <a href="#" class="btn btn-link text-warning fw-bold text-decoration-none">Leggi recensioni &rarr;</a>
+              <a href="/about/reviews" class="btn btn-link text-warning fw-bold text-decoration-none">Leggi recensioni &rarr;</a>
             </div>
           </div>
         </div>

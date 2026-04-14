@@ -35,6 +35,22 @@ class FReview {
         return $review;
     }
 
+    public static function loadAllReviews() {
+        $query = 'SELECT * FROM ' . self::TABLE . ' ORDER BY date ASC';
+
+        $stmt = FConnectionDB::getInstance()->handleQuery($query);
+
+        $reviews = array();
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $review = new EReview($row['text'], $row['rating'], $row['date']);
+            $review->setReviewId($row['review_id']);
+            $review->setUserId($row['user_id']);
+            $reviews[] = $review;
+        }
+
+        return $reviews;
+    }
+
     public static function loadByUser(int $userId) {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE user_id = :user_id';
         $params = array(':user_id' => $userId);
@@ -62,6 +78,22 @@ class FReview {
             return true;
         }
         return false;
+    }
+
+    public static function getAverageRating() : int {
+        $query = 'SELECT AVG(rating) FROM ' . self::TABLE;
+
+        $stmt = FConnectionDB::getInstance()->handleQuery($query);
+
+        return $stmt->fetch(PDO::FETCH_COLUMN);
+    }
+
+    public static function getReviewsNumber() : int {
+        $query = 'SELECT COUNT(review_id) FROM ' . self::TABLE;
+
+        $stmt = FConnectionDB::getInstance()->handleQuery($query);
+        
+        return $stmt->fetch(PDO::FETCH_COLUMN);
     }
     
 }

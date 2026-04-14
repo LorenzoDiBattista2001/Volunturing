@@ -68,10 +68,12 @@ class FPersistentManager {
         return $events;
     }
 
-    public function loadUserById(int $userId) : EUser {
+    public function loadUserById(int $userId, bool $full = true) : EUser {
         $user = FUser::loadById($userId);
-        if($user::class === 'EAdmin') return $user;
-        return $this->loadVolunteer($user);
+        // if($user::class === 'EAdmin') return $user;
+        // return $this->loadVolunteer($user);
+
+        return ((($user::class === 'EAdmin') || !$full) ? $user : $this->loadVolunteer($user));
     }
 
     public function loadUserByEmail(string $email) : EUser {
@@ -135,6 +137,16 @@ class FPersistentManager {
         return $applications;
     }
 
+    public function retrieveAllReviews() {
+        $reviews = FReview::loadAllReviews();
+
+        foreach($reviews as $review) {
+            $review->setAuthor($this->loadUserById($review->getUserId(), false));
+        }
+
+        return $reviews;
+    }
+
     public function retrieveReviewsByUser(EVolunteer $author) {
 
         $reviews = FReview::loadByUser($author->getUserId());
@@ -187,6 +199,14 @@ class FPersistentManager {
         $data[] = FUser::getVolunteersCount();
         
         return $data;
+    }
+
+    public function retrieveAverageRating() : int {
+        return FReview::getAverageRating();
+    }
+
+    public function retrieveReviewsNumber() : int {
+        return FReview::getReviewsNumber();
     }
 
     public function emailExist(string $email) : bool {
