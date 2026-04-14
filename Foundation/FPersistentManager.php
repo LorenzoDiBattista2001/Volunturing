@@ -28,7 +28,7 @@ class FPersistentManager {
         return $fclass::store($obj);
     }
 
-    public function deleteObject(int $objectId, string $className) : bool {
+    public function deleteObject(string $className, int $objectId) : bool {
 
         if($className === 'EVolunteer' || $className === 'EAdmin') {
             $fclass = 'FUser';

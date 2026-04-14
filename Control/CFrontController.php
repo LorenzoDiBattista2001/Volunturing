@@ -40,7 +40,8 @@ class CFrontController {
             'eventCreation' => 'handleEventCreationErrors',
             'eventDeletion' => 'handleEventDeletionErrors',
             'userBlocking' => 'handleUserBlockingErrors',
-            'userUnlocking' => 'handleUserUnlockingErrors'
+            'userUnlocking' => 'handleUserUnlockingErrors',
+            'reviewDeletion' => 'handleReviewDeletionErrors'
         )]
     );
 

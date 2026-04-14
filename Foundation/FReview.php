@@ -68,6 +68,19 @@ class FReview {
         return $reviews;
     }
 
+    public static function delete(int $reviewId) : bool {
+        $query = 'DELETE FROM ' . self::TABLE . ' WHERE review_id = :review_id';
+        $params = array(':review_id' => $reviewId);
+
+        try {
+            $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+            return true;
+        } catch (Exception $e) {
+            print("DELETE OPERATION FAILED: " . $e->getMessage());
+            return false;
+        }
+    }
+
     public static function exist(int $reviewId) : bool {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE review_id = :review_id';
         $params = array(':review_id' => $reviewId);

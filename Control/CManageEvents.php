@@ -84,7 +84,7 @@ class CManageEvents {
                         } 
                     }
 
-                    if(!$pm->deleteObject($eventId, EEvent::class)) {
+                    if(!$pm->deleteObject(EEvent::class, $eventId)) {
                         header('Location: /errors/500');
                         return;
                     }

@@ -214,6 +214,20 @@ class CError {
             header('Location: /errors/403');
         }
     }
+
+    public static function handleReviewDeletionErrors() : void {
+        if(CUser::isLogged() && CUser::isAdmin() && USession::getInstance()->isElementSet('reviewDeletionError')) {
+            $view = new VError();
+
+            $header = 'Failed to Delete Review';
+            $text = USession::getInstance()->getSessionElement('reviewDeletionError');
+            USession::getInstance()->unsetSessionElement('reviewDeletionError');
+
+            $view->displayErrorMessage($header, $text, isAdmin: true);
+        } else {
+            header('Location: /errors/403');
+        }
+    }
 }
 
 ?>
