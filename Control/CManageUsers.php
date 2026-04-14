@@ -14,7 +14,15 @@
     }
 
     public static function selectUser(int $userId) : void {
-
+      if(CUser::isLogged() && CUser::isAdmin()) {
+        $view = new VManageUsers();
+        $volunteer = FPersistentManager::getInstance()->loadUserById($userId);
+        if(!($volunteer::class === 'EVolunteer')) {
+          header('Location: /errors/403');
+          return;
+        }
+        $view->displayUserDetails($volunteer);
+      }
     }
 
     public static function blockUser(int $userId) : void {
