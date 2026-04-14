@@ -13,4 +13,10 @@
     // Paths
     define('CSS_PATH', '');
     define('JS_PATH', '');
+
+    // PHPMailer settings
+    define('SMTP_HOST', '');
+    define('SMTP_PORT', '');
+    define('SMTP_USER', '');
+    define('SMTP_PASSWORD', '');
 ?>
