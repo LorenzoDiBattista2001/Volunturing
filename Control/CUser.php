@@ -15,17 +15,14 @@ class CUser {
             $email = UHTTPMethods::post('email');
             $password = UHTTPMethods::post('password');
             $passwordConfirm = UHTTPMethods::post('passwordConfirm');
-            if(FPersistentManager::getInstance()->emailExist($email)) {
-                USession::getInstance()->setSessionElement('registrationError', 'L\'indirizzo email inserito non è disponibile');
-                header('Location: /errors/registration');
-                return;
-            }
-            if($password !== $passwordConfirm) {
-                USession::getInstance()->setSessionElement('registrationError', 'Le due password non coincidono');
-                header('Location: /errors/registration');
-                return;
-            }
+            
             try {
+                if(FPersistentManager::getInstance()->emailExist($email)) {
+                    throw new Exception('L\'indirizzo email inserito non è disponibile');
+                }
+                if($password !== $passwordConfirm) {
+                    throw new Exception('Le due password non coincidono');
+                }
                 $user = new EVolunteer($firstName, $lastName, $email, $password, $birthDate,
                     $birthPlace, $taxCode, $telephoneNumber, $streetAddress, $houseNumber, isBlocked: false);
                 if(!FPersistentManager::getInstance()->storeObject($user)) {
@@ -33,6 +30,7 @@ class CUser {
                     return;
                 }
                 USession::getInstance()->setSessionElement('user', $user->getUserId());
+                USession::getInstance()->setSessionElement('role', 'volunteer');
                 header('Location: /account/personal');
             } catch (Exception $e) {
                 USession::getInstance()->setSessionElement('registrationError', $e->getMessage());
@@ -61,21 +59,22 @@ class CUser {
                 $currentPassword = UHTTPMethods::post('currentPassword');
                 $newPassword = UHTTPMethods::post('newPassword');
                 $confirmPassword = UHTTPMethods::post('confirmPassword');
+                try {
+                    if(!password_verify($currentPassword, $user->getPassword())) {
+                        throw new Exception('La password corrente è errata');
+                    }
+                    if($newPassword != $confirmPassword) {
+                        throw new Exception('Le due password inserite sono diverse');
+                    }
 
-                if(!password_verify($currentPassword, $user->getPassword())) {
-                    USession::getInstance()->setSessionElement('changePasswordError', 'La password corrente è errata');
+                    $user->setPassword($newPassword);
+                    if(!FPersistentManager::getInstance()->updateUserPassword($user->getUserId(), $user->getPassword())) {
+                        header('Location: /errors/500');
+                        return;
+                    }
+                } catch (Exception $e) {
+                    USession::getInstance()->setSessionElement('changePasswordError', $e->getMessage());
                     header('Location: /errors/changePassword');
-                    return;
-                }
-                if($newPassword != $confirmPassword) {
-                    USession::getInstance()->setSessionElement('changePasswordError', 'Le due password inserite sono diverse');
-                    header('Location: /errors/changePassword');
-                    return;
-                }
-
-                $user->setPassword($newPassword);
-                if(!FPersistentManager::getInstance()->updateUserPassword($user->getUserId(), $user->getPassword())) {
-                    header('Location: /errors/500');
                     return;
                 }
                 header('Location: /confirmations/passwordChanged');
@@ -84,7 +83,42 @@ class CUser {
                 header('Location: /errors/403');
             }
         } else {
-            header('Location: /account/changePassword');
+            header('Location: /account/personal');
+        }
+    }
+
+    public static function changeEmail() : void {
+        if(CUser::isLogged()) {
+            if(UServer::getRequestMethod() === 'POST') {
+                $user = FPersistentManager::getInstance()->loadUserById(USession::getInstance()->getSessionElement('user'));
+                $email = UHTTPMethods::post('newEmail');
+                $password = UHTTPMethods::post('password');
+
+                try {
+                    if(!password_verify($password, $user->getPassword())) {
+                        throw new Exception('La password inserita non è corretta');
+                    }
+
+                    if(FPersistentManager::getInstance()->newEmailExist($email, $user->getUserId())) {
+                        throw new Exception('La nuova email inserita appartiene già ad un utente');
+                    }
+
+                    $user->setEmail($email);
+                    if(!FPersistentManager::getInstance()->updateUserEmail($user->getUserId(), $email)) {
+                        header('Location: /errors/500');
+                        return;
+                    }
+                } catch (Exception $e) {
+                    USession::getInstance()->setSessionElement('changeEmailError', $e->getMessage());
+                    header('Location: /errors/changeEmail');
+                    return;
+                }
+                header('Location: /confirmations/emailChanged');
+            } else {
+                header('Location: /account/personal');
+            }
+        } else {
+            header('Location: /errors/403');
         }
     }
 

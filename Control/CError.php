@@ -56,6 +56,18 @@ class CError {
         }
     }
 
+    public static function handleChangeEmailErrors() : void {
+        if(CUser::isLogged() && USession::getInstance()->isElementSet('changeEmailError')) {
+            $view = new VError();
+
+            $header = 'Errore nel Cambio Email';
+            $text = USession::getInstance()->getSessionElement('changeEmailError');
+            USession::getInstance()->unsetSessionElement('changeEmailError');
+
+            $view->displayErrorMessage($header, $text, CUser::isAdmin());
+        }
+    }
+
     public static function handleRegistrationErrors() : void {
         if(USession::getInstance()->isElementSet('registrationError')) {
             $view = new VError();

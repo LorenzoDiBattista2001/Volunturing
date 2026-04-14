@@ -160,7 +160,7 @@
             <h5 class="modal-title fw-bold" id="emailModalLabel">Modifica Email</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <form class="needs-validation" novalidate action="#" method="POST">
+          <form class="needs-validation" novalidate action="/account/changeEmail" method="POST">
             <div class="modal-body p-4">
               <div class="mb-3">
                 <label class="form-label small fw-bold">Nuovo Indirizzo Email</label>

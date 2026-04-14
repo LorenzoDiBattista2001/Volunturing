@@ -97,12 +97,29 @@ class CConfirmationMessage {
     }
 
     public static function confirmPasswordChange() : void {
-        $view = new VConfirmationMessage();
+        if(CUser::isLogged()) {
+            $view = new VConfirmationMessage();
 
-        $header = 'Operazione Riuscita';
-        $text = 'La tua password è stata aggiornata correttamente';
+            $header = 'Operazione Riuscita';
+            $text = 'La tua password è stata aggiornata correttamente';
 
-        $view->displayConfirmationMessage($header, $text, CUser::isAdmin());
+            $view->displayConfirmationMessage($header, $text, CUser::isAdmin());
+        } else {
+            header('Location: /errors/403');
+        }
+    }
+
+    public static function confirmEmailChange() : void {
+        if(CUser::isLogged()) {
+            $view = new VConfirmationMessage();
+
+            $header = 'Operazione Riuscita';
+            $text = 'La tua email è stata aggiornata correttamente';
+
+            $view->displayConfirmationMessage($header, $text, CUser::isAdmin());
+        } else {
+            header('Location: /errors/403');
+        }
     }
 
     public static function confirmLogout() : void {

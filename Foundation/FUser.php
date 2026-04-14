@@ -82,6 +82,19 @@ class FUser {
         }
     }
 
+    public static function updateEmail(int $userId, string $email) : bool {
+        $query = 'UPDATE ' . self::TABLE . ' SET email = :email WHERE user_id = :user_id';
+        $params = array(':user_id' => $userId, ':email' => $email);
+
+        try {
+            $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+            return true;
+        } catch (Exception $e) {
+            print("UPDATE OPERATION FAILED: " . $e->getMessage());
+            return false;
+        }
+    }
+
     public static function updateVolunteerState(EVolunteer $volunteer) : bool {
         $query = 'UPDATE ' . self::TABLE . ' SET isBlocked = :isBlocked WHERE user_id = :user_id';
         $params = array(':user_id' => $volunteer->getUserId(), ':isBlocked' => $volunteer->isBlocked());
@@ -223,6 +236,15 @@ class FUser {
     public static function emailExist(string $email) : bool {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE email = :email';
         $params = array(':email' => $email);
+
+        $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+
+        return ($stmt->rowCount() > 0);
+    }
+
+    public static function newEmailExist(string $email, int $userId) : bool {
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE email = :email AND user_id <> :user_id';
+        $params = array(':email' => $email, ':user_id' => $userId);
 
         $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
 

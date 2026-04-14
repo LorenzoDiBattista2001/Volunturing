@@ -72,6 +72,7 @@ class CFrontController {
             'donationPerformed' => 'confirmDonationReception',
             'reviewPublished' => 'confirmReviewPublishing',
             'passwordChanged' => 'confirmPasswordChange',
+            'emailChanged' => 'confirmEmailChange',
             'logout' => 'confirmLogout'
         )],
         'errors' => ['CError', array(
@@ -84,6 +85,7 @@ class CFrontController {
             'applicationWithdrawal' => 'handleApplicationWithdrawalErrors',
             'reviewPublishing' => 'handleReviewPublishingErrors',
             'changePassword' => 'handleChangePasswordErrors',
+            'changeEmail' => 'handleChangeEmailErrors',
             'registration' => 'handleRegistrationErrors',
             'login' => 'handleLoginErrors'
         )],
@@ -99,7 +101,8 @@ class CFrontController {
         'registrationForm' => 'startRegistration',
         'logout' => 'performLogout',
         'personal' => 'accessPersonalArea',
-        'changePassword' => 'changePassword'
+        'changePassword' => 'changePassword',
+        'changeEmail' => 'changeEmail'
     );
 
     public function run() : void {

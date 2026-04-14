@@ -177,6 +177,10 @@ class FPersistentManager {
         return FUser::updatePassword($userId, $password);
     }
 
+    public function updateUserEmail(int $userId, string $email) : bool {
+        return FUser::updateEmail($userId, $email);
+    }
+
     public function updateVolunteerState(EVolunteer $volunteer) : bool {
         return FUser::updateVolunteerState($volunteer);
     }
@@ -211,6 +215,10 @@ class FPersistentManager {
 
     public function emailExist(string $email) : bool {
         return FUser::emailExist($email);
+    }
+
+    public function newEmailExist(string $email, int $userId) : bool {
+        return FUser::newEmailExist($email, $userId);
     }
 }
 
