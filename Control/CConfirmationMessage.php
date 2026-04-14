@@ -44,6 +44,19 @@ class CConfirmationMessage {
         }
     }
 
+    public static function confirmUserUnlocking() : void {
+        if(CUser::isLogged() && CUser::isAdmin()) {
+            $view = new VConfirmationMessage();
+
+            $header = 'Utente Riabilitato con Successo';
+            $text = 'L\'utente è stato riabilitato e ha nuovamente la facoltà di effettuare il login';
+
+            $view->displayConfirmationMessage($header, $text, isAdmin: true);
+        } else {
+            header('Location: /errors/403');
+        }
+    }
+
     // confirmation messages for volunteers
 
     public static function confirmApplicationSubmission() : void {

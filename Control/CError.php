@@ -200,6 +200,20 @@ class CError {
             header('Location: /errors/403');
         }
     }
+
+    public static function handleUserUnlockingErrors() : void {
+        if(CUser::isLogged() && CUser::isAdmin() && USession::getInstance()->isElementSet('userUnlockingError')) {
+            $view = new VError();
+
+            $header = 'User Unlocking Failed';
+            $text = USession::getInstance()->getSessionElement('userUnlockingError');
+            USession::getInstance()->unsetSessionElement('userUnlockingError');
+
+            $view->displayErrorMessage($header, $text, isAdmin: true);
+        } else {
+            header('Location: /errors/403');
+        }
+    }
 }
 
 ?>

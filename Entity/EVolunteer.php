@@ -106,6 +106,9 @@ class EVolunteer extends EUser {
     }
 
     public function unlock() {
+        if(!$this->isBlocked()) {
+            throw new Exception('User is already unlocked');
+        }
         $this->isBlocked = false;
     }
 

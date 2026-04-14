@@ -72,7 +72,32 @@
     }
 
     public static function unlockUser(int $userId) : void {
+      if(CUser::isLogged() && CUser::isAdmin()) {
+        try {
+          $pm = FPersistentManager::getInstance();
+          $volunteer = $pm->loadUserById($userId);
 
+          if(!($volunteer::class === 'EVolunteer')) {
+            throw new Exception('Only users of type \'volunteer\' may be unlocked');
+          }
+
+          $volunteer->unlock();
+
+          if(!$pm->updateVolunteerState($volunteer)) {
+            header('Location: /errors/500');
+            return;
+          }
+
+          header('Location: /admin/confirmations/userUnlocked');
+          return;
+        } catch (Exception $e) {
+          USession::getInstance()->setSessionElement('userUnlockingError', $e->getMessage());
+          header('Location: /admin/errors/userUnlocking');
+          return;
+        }
+      } else {
+        header('Location: /errors/403');
+      }
     }
  }
 ?>

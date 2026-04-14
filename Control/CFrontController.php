@@ -22,7 +22,6 @@ class CFrontController {
             'manage' => 'accessUserManagement',
             'select' => 'selectUser',
             'block' => 'blockUser',
-            'confirmBlocking' => 'performUserBlocking',
             'unlock' => 'unlockUser' 
         )],
         'reviews' => ['CDeleteReviews', array(
@@ -34,13 +33,15 @@ class CFrontController {
             'eventCreated' => 'confirmEventCreation',
             'eventDeleted' => 'confirmEventDeletion',
             'scheduledEventDeleted' => 'confirmScheduledEventDeletion',
-            'userBlocked' => 'confirmUserBlocking'
+            'userBlocked' => 'confirmUserBlocking',
+            'userUnlocked' => 'confirmUserUnlocking'
         )],
         'errors' => ['CError', array(
             'applicationProcessing' => 'handleApplicationProcessingErrors',
             'eventCreation' => 'handleEventCreationErrors',
             'eventDeletion' => 'handleEventDeletionErrors',
-            'userBlocking' => 'handleUserBlockingErrors'
+            'userBlocking' => 'handleUserBlockingErrors',
+            'userUnlocking' => 'handleUserUnlockingErrors'
         )]
     );
 
