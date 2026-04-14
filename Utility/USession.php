@@ -21,6 +21,10 @@ class USession {
         $_SESSION[$key] = $value;
     }
 
+    public function unsetSessionElement($key) {
+        unset($_SESSION[$key]);
+    }
+
     public function getSessionElement($key) {
         return $_SESSION[$key];
     }

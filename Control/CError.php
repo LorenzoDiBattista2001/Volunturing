@@ -50,6 +50,7 @@ class CError {
 
             $header = 'Errore nel Cambio Password';
             $text = USession::getInstance()->getSessionElement('changePasswordError');
+            USession::getInstance()->unsetSessionElement('changePasswordError');
 
             $view->displayErrorMessage($header, $text, CUser::isAdmin());
         }
@@ -61,6 +62,19 @@ class CError {
 
             $header = 'Registrazione fallita';
             $text = USession::getInstance()->getSessionElement('registrationError');
+            USession::getInstance()->unsetSessionElement('registrationError');
+
+            $view->displayErrorMessage($header, $text);
+        }
+    }
+
+    public static function handleLoginErrors() : void {
+        if(USession::getInstance()->isElementSet('loginError')) {
+            $view = new VError();
+
+            $header = 'Login fallito';
+            $text = USession::getInstance()->getSessionElement('loginError');
+            USession::getInstance()->unsetSessionElement('loginError');
 
             $view->displayErrorMessage($header, $text);
         }
@@ -74,6 +88,7 @@ class CError {
 
             $header = 'ERROR: INVALID CARD DATA';
             $text = USession::getInstance()->getSessionElement('creditCardError');
+            USession::getInstance()->unsetSessionElement('creditCardError');
 
             $view->displayErrorMessage($header, $text);
         } else {
@@ -87,6 +102,7 @@ class CError {
 
             $header = 'ERROR: INVALID DONATION AMOUNT';
             $text = USession::getInstance()->getSessionElement('donationError');
+            USession::getInstance()->unsetSessionElement('donationError');
 
             $view->displayErrorMessage($header, $text);
         } else {
@@ -109,6 +125,7 @@ class CError {
 
             $header = 'Operation Failed';
             $text = USession::getInstance()->getSessionElement('applicationWithdrawalError');
+            USession::getInstance()->unsetSessionElement('applicationWithdrawalError');
 
             $view->displayErrorMessage($header, $text);
         }
@@ -120,6 +137,7 @@ class CError {
 
             $header = 'Pubblicazione Recensione Fallita';
             $text = USession::getInstance()->getSessionElement('reviewPublishingError');
+            USession::getInstance()->unsetSessionElement('reviewPublishingError');
 
             $view->displayErrorMessage($header, $text);
         }
@@ -133,6 +151,7 @@ class CError {
 
             $header = 'Operation Denied';
             $text = USession::getInstance()->getSessionElement('applicationProcessingError');
+            USession::getInstance()->unsetSessionElement('applicationProcessingError');
 
             $view->displayErrorMessage($header, $text, isAdmin: true);
         } else {
@@ -146,6 +165,7 @@ class CError {
 
             $header = 'Event Creation Failed';
             $text = USession::getInstance()->getSessionElement('eventCreationError');
+            USession::getInstance()->unsetSessionElement('eventCreationError');
 
             $view->displayErrorMessage($header, $text, isAdmin: true);
         } else {
@@ -159,6 +179,21 @@ class CError {
 
             $header = 'Event Deletion Failed';
             $text = USession::getInstance()->getSessionElement('eventDeletionError');
+            USession::getInstance()->unsetSessionElement('eventDeletionError');
+
+            $view->displayErrorMessage($header, $text, isAdmin: true);
+        } else {
+            header('Location: /errors/403');
+        }
+    }
+
+    public static function handleUserBlockingErrors() : void {
+        if(CUser::isLogged() && CUser::isAdmin() && USession::getInstance()->isElementSet('userBlockingError')) {
+            $view = new VError();
+
+            $header = 'User Blocking Failed';
+            $text = USession::getInstance()->getSessionElement('userBlockingError');
+            USession::getInstance()->unsetSessionElement('userBlockingError');
 
             $view->displayErrorMessage($header, $text, isAdmin: true);
         } else {

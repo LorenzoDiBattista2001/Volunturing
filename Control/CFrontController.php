@@ -33,12 +33,14 @@ class CFrontController {
         'confirmations' => ['CConfirmationMessage', array(
             'eventCreated' => 'confirmEventCreation',
             'eventDeleted' => 'confirmEventDeletion',
-            'scheduledEventDeleted' => 'confirmScheduledEventDeletion'
+            'scheduledEventDeleted' => 'confirmScheduledEventDeletion',
+            'userBlocked' => 'confirmUserBlocking'
         )],
         'errors' => ['CError', array(
             'applicationProcessing' => 'handleApplicationProcessingErrors',
             'eventCreation' => 'handleEventCreationErrors',
-            'eventDeletion' => 'handleEventDeletionErrors'
+            'eventDeletion' => 'handleEventDeletionErrors',
+            'userBlocking' => 'handleUserBlockingErrors'
         )]
     );
 
@@ -81,7 +83,8 @@ class CFrontController {
             'applicationWithdrawal' => 'handleApplicationWithdrawalErrors',
             'reviewPublishing' => 'handleReviewPublishingErrors',
             'changePassword' => 'handleChangePasswordErrors',
-            'registration' => 'handleRegistrationErrors'
+            'registration' => 'handleRegistrationErrors',
+            'login' => 'handleLoginErrors'
         )]
     );
 

@@ -26,16 +26,49 @@
     }
 
     public static function blockUser(int $userId) : void {
-      
+      if(CUser::isLogged() && CUser::isAdmin()) {
+        if(UServer::getRequestMethod() === 'POST') {
 
-    }
+          try {
+            $pm = FPersistentManager::getInstance();
+            $volunteer = $pm->loadUserById($userId);
 
-    public static function performUserBlocking(int $userId, string $reason) : void {
-      $pm = FPersistentManager::getInstance();
-      $volunteer = $pm->loadUserById($userId);
-      // check if user is an instance of EVolunteer
-      $volunteer->block();
-      // update volunteer on database
+            if(!($volunteer::class === 'EVolunteer')) {
+              throw new Exception('Only users of type \'volunteer\' may be blocked');
+            }
+
+            $reason = UHTTPMethods::post('reason');
+            if(!isset($reason) || $reason === '') {
+              throw new Exception('Reason is required when blocking a user');
+            }
+
+            $volunteer->block();
+
+            if(!$pm->updateVolunteerState($volunteer)) {
+              header('Location: /errors/500');
+              return;
+            }
+
+            $view = new VEmail();
+            $subject = 'Volontorino OdV - Avviso Blocco Profilo';
+            $body = '';
+            if(!UEmail::sendEmail($volunteer->getEmail(), $volunteer->getFirstName(), $subject, $body)) {
+              throw new Exception('Failed to send notification email to blocked user: ' . $volunteer->getEmail());
+            }
+
+            header('Location: /admin/confirmations/userBlocked');
+            return;
+          } catch (Exception $e) {
+            USession::getInstance()->setSessionElement('userBlockingError', $e->getMessage());
+            header('Location: /admin/errors/userBlocking');
+            return;
+          }
+        } else {
+          header('Location: /admin/users/select/' . $userId);
+        }
+      } else {
+        header('Location: /errors/403');
+      }
     }
 
     public static function unlockUser(int $userId) : void {

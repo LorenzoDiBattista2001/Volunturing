@@ -2,6 +2,8 @@
 
 class CConfirmationMessage {
 
+    // confirmation messages for admins
+
     public static function confirmEventCreation() : void {
         $view = new VConfirmationMessage();
         
@@ -28,6 +30,21 @@ class CConfirmationMessage {
 
         $view->displayConfirmationMessage($header, $text, isAdmin: true);
     }
+
+    public static function confirmUserBlocking() : void {
+        if(CUser::isLogged() && CUser::isAdmin()) {
+            $view = new VConfirmationMessage();
+
+            $header = 'Utente Bloccato con Successo';
+            $text = 'All\'utente bloccato è stata recapitata una email contenente la motivazione del blocco';
+
+            $view->displayConfirmationMessage($header, $text, isAdmin: true);
+        } else {
+            header('Location: /errors/403');
+        }
+    }
+
+    // confirmation messages for volunteers
 
     public static function confirmApplicationSubmission() : void {
         $view = new VConfirmationMessage();

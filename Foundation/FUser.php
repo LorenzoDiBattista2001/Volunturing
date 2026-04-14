@@ -81,6 +81,18 @@ class FUser {
             return false;
         }
     }
+
+    public static function updateVolunteerState(EVolunteer $volunteer) : bool {
+        $query = 'UPDATE ' . self::TABLE . ' SET isBlocked = :isBlocked WHERE user_id = :user_id';
+        $params = array(':user_id' => $volunteer->getUserId(), ':isBlocked' => $volunteer->isBlocked());
+
+        try {
+            $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
     
     public static function loadById(int $userId) : EUser {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE user_id = :user_id';

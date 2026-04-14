@@ -165,6 +165,10 @@ class FPersistentManager {
         return FUser::updatePassword($userId, $password);
     }
 
+    public function updateVolunteerState(EVolunteer $volunteer) : bool {
+        return FUser::updateVolunteerState($volunteer);
+    }
+
     public function existObject(string $class, int $objectId) : bool {
 
         $fclass = 'F' . substr($class, 1);

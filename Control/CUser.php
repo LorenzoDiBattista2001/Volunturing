@@ -92,26 +92,32 @@ class CUser {
         if(UServer::getRequestMethod() === 'POST') {
             $email = UHTTPMethods::post('email');
             $password = UHTTPMethods::post('password');
-
-            $user = FPersistentManager::getInstance()->loadUserByEmail($email);
+            $pm = FPersistentManager::getInstance();
 
             try {
-                if(isset($user) && password_verify($password, $user->getPassword())) {
+                if(!$pm->emailExist($email)) {
+                    throw new Exception('L\'email inserita non appartiene a nessun utente');
+                }
+                $user = FPersistentManager::getInstance()->loadUserByEmail($email);
+                if(password_verify($password, $user->getPassword())) {
                     $role = ($user::class === 'EAdmin') ? 'admin' : 'volunteer';
+
+                    if($role === 'volunteer' && $user->isBlocked()) {
+                        throw new Exception('Spiacenti, il tuo profilo risulta bloccato');
+                    } 
+
                     USession::getInstance()->setSessionElement('user', $user->getUserId());
                     USession::getInstance()->setSessionElement('role', $role);
-                    // display user's home page
                     header('Location: /account/personal');
                 } else {
-                    // reload login form
-                    header('Location: /auth/loginForm');
+                    throw new Exception('Password errata');
                 }
             } catch (Exception $e){
-                // display 500 error
-                print("Error occurred during login: " . $e->getMessage());
+                USession::getInstance()->setSessionElement('loginError', $e->getMessage());
+                header('Location: /errors/login');
+                return;
             }
         } else {
-            // reload login form
             header('Location: /auth/loginForm');
         }
     }
