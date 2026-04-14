@@ -1,0 +1,65 @@
+:root {
+        --brand-orange: #ff9411;
+        --brand-orange-light: #fff9f2;
+      }
+
+      .text-brand { color: var(--brand-orange); }
+      
+      .review-card-admin {
+        border: 1px solid #e9ecef;
+        border-radius: 12px;
+        transition: all 0.2s ease;
+        position: relative;
+        background-color: white;
+      }
+
+      .review-card-admin:hover {
+        border-color: var(--brand-orange);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      }
+
+      .avatar-circle {
+        width: 40px;
+        height: 40px;
+        background-color: var(--brand-orange-light);
+        color: var(--brand-orange);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-weight: bold;
+        font-size: 0.9rem;
+      }
+
+      .star-rating {
+        color: #ffc107;
+        font-size: 0.8rem;
+      }
+
+      .btn-delete-trigger {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        color: #dc3545;
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        padding: 5px;
+        line-height: 1;
+        transition: transform 0.2s ease, color 0.2s ease;
+      }
+
+      .btn-delete-trigger:hover {
+        transform: scale(1.2);
+        color: #a71d2a;
+      }
+
+      .modal-header-danger {
+        background-color: #fff5f5;
+        border-bottom: 2px solid #dc3545;
+      }
+
+      .breadcrumb-item a {
+        color: var(--brand-orange);
+        text-decoration: none;
+      }

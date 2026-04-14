@@ -26,8 +26,7 @@ class CFrontController {
         )],
         'reviews' => ['CDeleteReviews', array(
             'manage' => 'accessReviewManagement',
-            'delete' => 'deleteReview',
-            'confirmDeletion' => 'performDeletion'
+            'delete' => 'deleteReview'
         )],
         'confirmations' => ['CConfirmationMessage', array(
             'eventCreated' => 'confirmEventCreation',
