@@ -38,7 +38,6 @@ class CUser {
                 return;
             }
         } else {
-            //reload registration form
             header('Location: /auth/registrationForm');
         }
     }

@@ -28,12 +28,12 @@ class EVolunteer extends EUser {
         bool $isBlocked) 
     {
         parent::__construct($firstName, $lastName, $email, $password);
-        $this->birthDate = new DateTime($birthDate);
+        $this->setBirthDate($birthDate);
         $this->birthPlace = $birthPlace;
         $this->taxCode = $taxCode;
         $this->telephoneNumber = $telephoneNumber;
-        $this->streetAddress = $streetAddress;
-        $this->houseNumber = $houseNumber;
+        $this->setStreetAddress($streetAddress);
+        $this->setHouseNumber($houseNumber);
         $this->isBlocked = $isBlocked;
         $this->applications = array();
         $this->donations = array();
@@ -43,7 +43,24 @@ class EVolunteer extends EUser {
     // 'set' and 'get' methods
 
     public function setBirthDate(string $birthDate) {
-        $this->birthDate = new DateTime($birthDate);
+        $pattern = '/^(19|20)[0-9]{2}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/';
+        if(!preg_match($pattern, $birthDate)) {
+            throw new Exception('La data inserita non è in un formato valido');
+        }
+
+        $parts = explode('-', $birthDate);
+        if (!checkdate($parts[1], $parts[2], $parts[0])) {
+            throw new Exception('La data inserita non è logicamente corretta');
+        }
+
+        $dateObject = new DateTime($birthDate);
+        $now = new DateTime('today');
+        $interval = $dateObject->diff($now);
+
+        if($interval->y < 18) {
+            throw new Exception('Per potersi registrare è necessario essere maggiorenni');
+        }
+        $this->birthDate = $dateObject;
     }
 
     public function getBirthDate() : DateTime {
@@ -75,6 +92,9 @@ class EVolunteer extends EUser {
     }
 
     public function setStreetAddress(string $streetAddress) {
+        if(!$this->validateStreetAddress($streetAddress)) {
+            throw new Exception('Inserire un indirizzo valido');
+        }
         $this->streetAddress = $streetAddress;
     }
 
@@ -83,6 +103,10 @@ class EVolunteer extends EUser {
     }
 
     public function setHouseNumber(string $houseNumber) {
+        $pattern = '/^[1-9][0-9]{0,2}$/';
+        if(!preg_match($pattern, $houseNumber)) {
+            throw new Exception('Il numero civico inserito non è valido');
+        }
         $this->houseNumber = $houseNumber;
     }
 
@@ -156,6 +180,22 @@ class EVolunteer extends EUser {
 
     public function addDonation(EDonation $donation) {
         $this->donations[] = $donation;
+    }
+
+    // user data validation methods
+
+    public function validateStreetAddress(string $streetAddress) : bool {
+        $streetAddress = trim($streetAddress);
+        if(strlen($streetAddress) < 6) {
+            return false;
+        }
+        if(!strpos($streetAddress, ' ')) {
+            return false;
+        }
+        if(preg_match('/^[0-9]*$/', $streetAddress)) {
+            return false;
+        }
+        return true;
     }
     
     // additional methods

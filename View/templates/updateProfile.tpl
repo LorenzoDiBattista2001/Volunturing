@@ -34,22 +34,22 @@
 
                 <div class="mb-3">
                   <div class="d-flex justify-content-between">
-                    <label for="password" class="form-label">Password Nuova</label>
+                    <label for="newPassword" class="form-label">Password Nuova</label>
                   </div>
                   <div class="input-group">
                     <span class="input-group-text bg-light border-0"><i class="bi bi-lock text-muted"></i></span>
-                    <input type="password" class="form-control border-0 bg-light" id="password" name="password" minlength="8" required>
+                    <input type="password" class="form-control border-0 bg-light" id="newPassword" name="newPassword" minlength="8" required>
                     <div class="invalid-feedback"></div>
                   </div>
                 </div>
 
                 <div class="mb-3">
                   <div class="d-flex justify-content-between">
-                    <label for="confirm" class="form-label">Conferma Password</label>
+                    <label for="confirmPassword" class="form-label">Conferma Password</label>
                   </div>
                   <div class="input-group">
                     <span class="input-group-text bg-light border-0"><i class="bi bi-lock text-muted"></i></span>
-                    <input type="password" class="form-control border-0 bg-light" id="confirm" name="passwordConfirm" minlength="8" required>
+                    <input type="password" class="form-control border-0 bg-light" id="confirmPassword" name="confirmPassword" minlength="8" required>
                     <div class="invalid-feedback"></div>
                   </div>
                 </div>
