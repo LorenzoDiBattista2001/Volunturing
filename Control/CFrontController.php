@@ -73,6 +73,7 @@ class CFrontController {
             'reviewPublished' => 'confirmReviewPublishing',
             'passwordChanged' => 'confirmPasswordChange',
             'emailChanged' => 'confirmEmailChange',
+            'profileUpdated' => 'confirmProfileUpdate',
             'logout' => 'confirmLogout'
         )],
         'errors' => ['CError', array(
@@ -86,6 +87,7 @@ class CFrontController {
             'reviewPublishing' => 'handleReviewPublishingErrors',
             'changePassword' => 'handleChangePasswordErrors',
             'changeEmail' => 'handleChangeEmailErrors',
+            'profileUpdate' => 'handleProfileUpdateErrors',
             'registration' => 'handleRegistrationErrors',
             'login' => 'handleLoginErrors'
         )],
@@ -102,7 +104,9 @@ class CFrontController {
         'logout' => 'performLogout',
         'personal' => 'accessPersonalArea',
         'changePassword' => 'changePassword',
-        'changeEmail' => 'changeEmail'
+        'changeEmail' => 'changeEmail',
+        'manage' => 'manageAccount',
+        'update' => 'updateProfile'
     );
 
     public function run() : void {

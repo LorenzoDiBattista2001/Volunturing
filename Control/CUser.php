@@ -122,6 +122,36 @@ class CUser {
         }
     }
 
+    public static function updateProfile() : void {
+        if(self::isLogged() && self::isVolunteer()) {
+            if(UServer::getRequestMethod() === 'POST') {
+                $volunteer = FPersistentManager::getInstance()->loadUserById(USession::getInstance()->getSessionElement('user'), full: false);
+                $telephoneNumber = UHTTPMethods::post('telephoneNumber');
+                $streetAddress = UHTTPMethods::post('streetAddress');
+                $houseNumber = UHTTPMethods::post('houseNumber');
+                $description = UHTTPMethods::post('description');
+                try {
+                    $volunteer->setTelephoneNumber($telephoneNumber);
+                    $volunteer->setStreetAddress($streetAddress);
+                    $volunteer->setHouseNumber($houseNumber);
+                    $volunteer->setDescription($description);
+                } catch (Exception $e) {
+                    USession::getInstance()->setSessionElement('profileUpdateError', $e->getMessage());
+                    header('Location: /errors/profileUpdate');
+                    return;
+                }
+                if(!FPersistentManager::getInstance()->updateUserProfile($volunteer)) {
+                    header('Location: /errors/500');
+                }
+                header('Location: /confirmations/profileUpdated');
+            } else {
+                header('Location: /account/manage');
+            }
+        } else {
+            header('Location: /errors/403');
+        }
+    }
+
     public static function performLogin() : void {
         if(UServer::getRequestMethod() === 'POST') {
             $email = UHTTPMethods::post('email');
@@ -186,6 +216,10 @@ class CUser {
         return (USession::getInstance()->getSessionElement('role') === 'admin');
     }
 
+    public static function isVolunteer() : bool {
+        return (USession::getInstance()->getSessionElement('role') === 'volunteer');
+    }
+
     public static function accessPersonalArea() : void {
         if(self::isLogged()) {
             $user = FPersistentManager::getInstance()->loadUserById(USession::getInstance()->getSessionElement('user'));
@@ -198,6 +232,16 @@ class CUser {
             }
         } else {
             header('Location: /auth/loginForm');
+        }
+    }
+
+    public static function manageAccount() : void {
+        if(self::isLogged() && self::isVolunteer()) {
+            $view = new VUser();
+            $volunteer = FPersistentManager::getInstance()->loadUserById(USession::getInstance()->getSessionElement('user'));
+            $view->displayVolunteerAccountManagement($volunteer);
+        } else {
+            header('Location: /errors/403');
         }
     }
 

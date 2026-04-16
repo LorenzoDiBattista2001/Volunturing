@@ -95,7 +95,7 @@ class CError {
     // error messages for volunteers
 
     public static function handleCreditCardErrors() : void {
-        if(CUser::isLogged() && USession::getInstance()->isElementSet('creditCardError')) {
+        if(CUser::isLogged() && CUser::isVolunteer() && USession::getInstance()->isElementSet('creditCardError')) {
             $view = new VError();
 
             $header = 'ERROR: INVALID CARD DATA';
@@ -109,7 +109,7 @@ class CError {
     }
 
     public static function handleDonationAmountError() : void {
-        if(CUser::isLogged() && USession::getInstance()->isElementSet('donationError')) {
+        if(CUser::isLogged() && CUser::isVolunteer() && USession::getInstance()->isElementSet('donationError')) {
             $view = new VError();
 
             $header = 'ERROR: INVALID DONATION AMOUNT';
@@ -132,7 +132,7 @@ class CError {
     }
 
     public static function handleApplicationWithdrawalErrors() : void {
-        if(CUser::isLogged() && USession::getInstance()->isElementSet('applicationWithdrawalError')) {
+        if(CUser::isLogged() && CUser::isVolunteer() && USession::getInstance()->isElementSet('applicationWithdrawalError')) {
             $view = new VError();
 
             $header = 'Operation Failed';
@@ -144,7 +144,7 @@ class CError {
     }
 
     public static function handleReviewPublishingErrors() : void {
-        if(CUser::isLogged() && USession::getInstance()->isElementSet('reviewPublishingError')) {
+        if(CUser::isLogged() && CUser::isVolunteer() && USession::getInstance()->isElementSet('reviewPublishingError')) {
             $view = new VError();
 
             $header = 'Pubblicazione Recensione Fallita';
@@ -152,6 +152,20 @@ class CError {
             USession::getInstance()->unsetSessionElement('reviewPublishingError');
 
             $view->displayErrorMessage($header, $text);
+        }
+    }
+
+    public static function handleProfileUpdateErrors() : void {
+        if(CUser::isLogged() && CUser::isVolunteer() && USession::getInstance()->isElementSet('profileUpdateError')) {
+            $view = new VError();
+
+            $header = 'Modifica Profilo Non Riuscita';
+            $text = USession::getInstance()->getSessionElement('profileUpdateError');
+            USession::getInstance()->unsetSessionElement('profileUpdateError');
+
+            $view->displayErrorMessage($header, $text);
+        } else {
+            header('Location: /errors/403');
         }
     }
 

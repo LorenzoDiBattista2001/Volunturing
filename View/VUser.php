@@ -28,6 +28,11 @@ class VUser {
         $this->smarty->display('volunteerPersonalArea.tpl');
     }
 
+    public function displayVolunteerAccountManagement(EVolunteer $volunteer) {
+        $this->smarty->assign('user', $volunteer);
+        $this->smarty->display('updateProfile.tpl');
+    }
+
     public function displayAdminDashboard(EAdmin $admin, $dashboardData) {
         $this->smarty->assign('firstName', $admin->getFirstName());
         $this->smarty->assign('lastName', $admin->getLastName());

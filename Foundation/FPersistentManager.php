@@ -181,6 +181,10 @@ class FPersistentManager {
         return FUser::updateEmail($userId, $email);
     }
 
+    public function updateUserProfile(EVolunteer $volunteer) : bool {
+        return FUser::updateProfile($volunteer);
+    }
+
     public function updateVolunteerState(EVolunteer $volunteer) : bool {
         return FUser::updateVolunteerState($volunteer);
     }

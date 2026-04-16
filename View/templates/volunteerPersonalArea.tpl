@@ -47,7 +47,7 @@
                   <i class="bi bi-person-circle text-info fs-4"></i>
                 </div>
                 <h6 class="fw-bold small mb-0">GESTISCI ACCOUNT</h6>
-                <a href="#" class="stretched-link"></a>
+                <a href="/account/manage" class="stretched-link"></a>
               </div>
             </div>
           </div>

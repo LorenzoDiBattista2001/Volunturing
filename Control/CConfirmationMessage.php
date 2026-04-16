@@ -96,6 +96,19 @@ class CConfirmationMessage {
         $view->displayConfirmationMessage($header, $text);
     }
 
+    public static function confirmProfileUpdate() : void {
+        if(CUser::isLogged() && CUser::isVolunteer()) {
+            $view = new VConfirmationMessage();
+
+            $header = 'Profilo Aggiornato Correttamente';
+            $text = 'Le tue informazioni personali sono state correttamente aggiornate';
+
+            $view->displayConfirmationMessage($header, $text);
+        } else {
+            header('Location: /errors/403');
+        }
+    }
+
     public static function confirmPasswordChange() : void {
         if(CUser::isLogged()) {
             $view = new VConfirmationMessage();
