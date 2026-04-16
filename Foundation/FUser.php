@@ -30,8 +30,8 @@ class FUser {
                 ':streetAddress' => $volunteer->getStreetAddress(),
                 ':houseNumber' => $volunteer->getHouseNumber(),
                 ':description' => $volunteer->getDescription(),
-                ':isBlocked' => $volunteer->isBlocked(),
-                ':isAdmin' => false);
+                ':isBlocked' => (int) $volunteer->isBlocked(),
+                ':isAdmin' => 0);
         
         try {
             $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
@@ -58,7 +58,7 @@ class FUser {
                 ':houseNumber' => null,
                 ':description' => null,
                 ':isBlocked' => null,
-                ':isAdmin' => true);
+                ':isAdmin' => 1);
 
         try {
             $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
@@ -113,7 +113,7 @@ class FUser {
 
     public static function updateVolunteerState(EVolunteer $volunteer) : bool {
         $query = 'UPDATE ' . self::TABLE . ' SET isBlocked = :isBlocked WHERE user_id = :user_id';
-        $params = array(':user_id' => $volunteer->getUserId(), ':isBlocked' => $volunteer->isBlocked());
+        $params = array(':user_id' => $volunteer->getUserId(), ':isBlocked' => (int) $volunteer->isBlocked());
 
         try {
             $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);

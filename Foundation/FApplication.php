@@ -15,7 +15,7 @@ class FApplication {
                     ':state' => $application->getState()->value,
                     ':message' => $application->getMessage(),
                     ':reasonForRejection' => $application->getReasonForRejection(),
-                    ':wasAccepted' => $application->wasAccepted());
+                    ':wasAccepted' => (int) $application->wasAccepted());
                     
         try {
             $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
@@ -101,7 +101,7 @@ class FApplication {
                             wasAccepted = :wasAccepted WHERE user_id = :user_id AND event_id = :event_id';
         $params = array(':state' => $application->getState()->value, 
                         ':reasonForRejection' => $application->getReasonForRejection(),
-                        ':wasAccepted' => $application->wasAccepted(),
+                        ':wasAccepted' => (int) $application->wasAccepted(),
                         ':user_id' => $application->getUserId(),
                         ':event_id' => $application->getEventId());
 
