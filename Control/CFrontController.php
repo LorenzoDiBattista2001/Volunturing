@@ -111,6 +111,8 @@ class CFrontController {
 
     public function run() : void {
         $requestURI = UServer::getRequestURI();
+        $this->checkHTTPS($requestURI);
+
         $URIElements = explode('/', trim($requestURI, '/'));
 
         if($URIElements[0] === '') {
@@ -196,6 +198,20 @@ class CFrontController {
             }
         } else {
             header('Location: /errors/404');
+        }
+    }
+
+    private function checkHTTPS(string $requestURI) : void {
+        $https = UServer::getEntryByKey('HTTPS');
+        $forwarded = UServer::getEntryByKey('HTTP_X_FORWARDED_PROTO');
+    
+        $isHttps = (!empty($https) && $https !== 'off') || $forwarded === 'https';
+
+        if (!$isHttps) {
+            $location = 'https://' . UServer::getEntryByKey('HTTP_HOST') . $requestURI;
+            header('HTTP/1.1 301 Moved Permanently');
+            header('Location: ' . $location);
+            exit();
         }
     }
 }
