@@ -110,6 +110,8 @@ class CFrontController {
     );
 
     public function run() : void {
+        set_exception_handler([self::class, 'globalExceptionHandler']);
+
         $requestURI = UServer::getRequestURI();
         $this->checkHTTPS($requestURI);
 
@@ -213,6 +215,12 @@ class CFrontController {
             header('Location: ' . $location);
             exit();
         }
+    }
+
+    public static function globalExceptionHandler(Throwable $exception) : void {
+        error_log("Uncaught exception: " . $exception->getMessage() . " in " . $exception->getFile() . " at row " . $exception->getLine());
+        header('Location: /errors/500');
+        exit();
     }
 }
 

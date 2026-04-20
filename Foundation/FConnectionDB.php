@@ -6,12 +6,8 @@ class FConnectionDB {
     private $dbh;
 
     private function __construct() {
-        try {
-            $this->dbh = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
-        } catch(PDOException $e) {
-            print('ERROR: ' . $e->getMessage());
-            exit;
-        }
+        $this->dbh = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
+        $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     public static function getInstance() : FConnectionDB {

@@ -16,7 +16,6 @@ class FReview {
             $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
             return true;
         } catch (Exception $e) {
-            print("STORE OPERATION FAILED: " . $e->getMessage());
             return false;
         }
     }
@@ -76,7 +75,6 @@ class FReview {
             $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
             return true;
         } catch (Exception $e) {
-            print("DELETE OPERATION FAILED: " . $e->getMessage());
             return false;
         }
     }
@@ -87,10 +85,7 @@ class FReview {
 
         $stmt = FConnectionDB::getInstance()->handleQuery($query, $params);
 
-        if($stmt->rowCount() > 0) {
-            return true;
-        }
-        return false;
+        return ($stmt->rowCount() > 0);
     }
 
     public static function getAverageRating() : int {
