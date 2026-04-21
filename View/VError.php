@@ -14,6 +14,10 @@ class VError {
         $this->smarty->assign('isAdmin', $isAdmin);
         $this->smarty->display('errorMessage.tpl');
     }
+
+    public function displayLoginWarning() {
+        $this->smarty->display('loginWarning.tpl');
+    }
 }
 
 ?>

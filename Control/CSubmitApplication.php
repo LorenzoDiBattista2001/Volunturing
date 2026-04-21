@@ -19,11 +19,17 @@ class CSubmitApplication {
     }
 
     public static function startApplicationProcess(int $eventId) : void {
-        if(CUser::isLogged()) {
+        if(CUser::isLogged() && CUser::isVolunteer()) {
             $view = new VSubmitApplication();
-            $event = FPersistentManager::getInstance()->loadEvent($eventId);
-            $user = FPersistentManager::getInstance()->loadUserById(USession::getInstance()->getSessionElement('user'));
-            if (FPersistentManager::getInstance()->existApplication($user->getUserId(), $eventId)) {
+            $pm = FPersistentManager::getInstance();
+            $event = $pm->loadEvent($eventId);
+            if(!$event->isScheduled()) {
+                header('Location: /errors/403');
+                return;
+            }
+
+            $user = $pm->loadUserById(USession::getInstance()->getSessionElement('user'));
+            if ($pm->existApplication($user->getUserId(), $eventId)) {
                 $view->displayEventDetails($event, alreadyApplied: true);
                 exit();
             }
@@ -33,29 +39,37 @@ class CSubmitApplication {
              }
             $view->displayApplicationForm($event);
         } else {
-            // display message for telling the user they need to log in before applying
-            header('Location: /auth/loginForm');
+            header('Location: /errors/loginRequired');
         }
     }
 
     public static function createApplication(int $eventId) : void {
-        if(UServer::getRequestMethod() === 'POST') {
-            if(CUser::isLogged()) {
+        if(CUser::isLogged() && CUser::isVolunteer()) {
+            if(UServer::getRequestMethod() === 'POST') {
                 $view = new VSubmitApplication();
+                $pm = FPersistentManager::getInstance();
+                $event = $pm->loadEvent($eventId);
+                if(!$event->isScheduled()) {
+                    header('Location: /errors/403');
+                    return;
+                }
+
                 $message = UHTTPMethods::post('motivation');
                 $application = new EApplication(date('Y-m-d H:i:s'), EApplicationState::WAITING, $message);
                 $application->setUserId(USession::getInstance()->getSessionElement('user'));
                 $application->setEventId($eventId);
-                if(FPersistentManager::getInstance()->storeObject($application)) {
-                    header('Location: /confirmations/applicationSubmitted');
-                } else {
+
+                if(!$pm->storeObject($application)) {
                     header('Location: /errors/500');
+                    return;
                 }
+
+                header('Location: /confirmations/applicationSubmitted');
             } else {
-                header('Location: /auth/loginForm');
+                header('Location: /events/apply/' . $eventId);
             }
         } else {
-            header('Location: /events/submitApplication/' . $eventId);
+            header('Location: /errors/403');
         }
     }
 

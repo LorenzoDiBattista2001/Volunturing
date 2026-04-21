@@ -29,7 +29,7 @@
                       </a>
                     </div>
                     <div class="col-sm-5 col-md-4">
-                      <a href="#" class="btn btn-outline-success w-100 py-3 fw-bold">
+                      <a href="/donation/start" class="btn btn-outline-success w-100 py-3 fw-bold">
                         <i class="bi bi-heart-fill me-2"></i> DONA ORA
                       </a>
                     </div>

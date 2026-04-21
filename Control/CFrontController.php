@@ -89,7 +89,8 @@ class CFrontController {
             'changeEmail' => 'handleChangeEmailErrors',
             'profileUpdate' => 'handleProfileUpdateErrors',
             'registration' => 'handleRegistrationErrors',
-            'login' => 'handleLoginErrors'
+            'login' => 'handleLoginErrors',
+            'loginRequired' => 'handleLoginRequiredError'
         )],
         'about' => ['CAbout', array(
             'reviews' => 'showReviews'

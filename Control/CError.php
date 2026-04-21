@@ -92,6 +92,15 @@ class CError {
         }
     }
 
+    public static function handleLoginRequiredError() : void {
+        if(!CUser::isLogged()) {
+            $view = new VError();
+            $view->displayLoginWarning();
+        } else {
+            header('Location: /errors/403');
+        }
+    }
+
     // error messages for volunteers
 
     public static function handleCreditCardErrors() : void {
