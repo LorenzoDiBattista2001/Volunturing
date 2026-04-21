@@ -14,9 +14,9 @@ class EUser {
         string $email, 
         string $password) 
     {
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->email = $email;
+        $this->setFirstName($firstName);
+        $this->setLastName($lastName);
+        $this->setEmail($email);
         $this->setPassword($password);
     }
 
@@ -31,6 +31,9 @@ class EUser {
     }
 
     public function setFirstName(string $firstName) {
+        if(!isset($firstName) || $firstName === '') {
+            throw new Exception('Nessun nome inserito');
+        }
         $this->firstName = $firstName;
     }
 
@@ -39,6 +42,9 @@ class EUser {
     }
 
     public function setLastName(string $lastName) {
+        if(!isset($lastName) || $lastName === '') {
+            throw new Exception('Nessun cognome inserito');
+        }
         $this->lastName = $lastName;
     }
 
@@ -47,6 +53,9 @@ class EUser {
     }
 
     public function setEmail(string $email) {
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new Exception('Inserisci un indirizzo email valido');
+        }
         $this->email = $email;
     }
 
@@ -55,6 +64,9 @@ class EUser {
     }
 
     public function setPassword(string $password) {
+        if(strlen($password) < 8) {
+            throw new Exception('La password deve avere una lunghezza minima di 8 caratteri');
+        }
         $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
 

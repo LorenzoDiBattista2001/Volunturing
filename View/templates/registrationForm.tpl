@@ -18,16 +18,18 @@
             </div>
 
             <div class="card-body p-4 p-md-5">
-              <form action="/auth/register" method="POST" class="needs-validation" novalidate>
+              <form action="/auth/register" method="POST" class="needs-validation" novalidate id="registrationForm">
                 
                 <div class="row g-3 mb-4">
                   <div class="col-md-6">
                     <label for="firstName" class="form-label">Nome</label>
                     <input type="text" class="form-control border-0 bg-light" id="firstName" name="firstName" placeholder="Mario" required>
+                    <div class="invalid-feedback">Campo obbligatorio</div>
                   </div>
                   <div class="col-md-6">
                     <label for="lastName" class="form-label">Cognome</label>
                     <input type="text" class="form-control border-0 bg-light" id="lastName" name="lastName" placeholder="Rossi" required>
+                    <div class="invalid-feedback">Campo obbligatorio</div>
                   </div>
                 </div>
 
@@ -35,10 +37,12 @@
                   <div class="col-md-6">
                     <label for="birthDate" class="form-label">Data di Nascita</label>
                     <input type="date" class="form-control border-0 bg-light" id="birthDate" name="birthDate" required>
+                    <div class="invalid-feedback" id="birthDateFeedback"></div>
                   </div>
                   <div class="col-md-6">
                     <label for="birthPlace" class="form-label">Luogo di Nascita</label>
                     <input type="text" class="form-control border-0 bg-light" id="birthPlace" name="birthPlace" placeholder="Torino, Milano..." required>
+                    <div class="invalid-feedback" id="birthPlaceFeedback"></div>
                   </div>
                 </div>
 
@@ -46,10 +50,12 @@
                   <div class="col-md-6">
                     <label for="telephoneNumber" class="form-label">Numero di Telefono</label>
                     <input type="tel" class="form-control border-0 bg-light" id="telephoneNumber" name="telephoneNumber" required>
+                    <div class="invalid-feedback" id="telephoneNumberFeedback"></div>
                   </div>
                   <div class="col-md-6">
                     <label for="taxCode" class="form-label">Codice Fiscale</label>
                     <input type="text" class="form-control border-0 bg-light" id="taxCode" name="taxCode" required>
+                    <div class="invalid-feedback" id="taxCodeFeedback"></div>
                   </div>
                 </div>
 
@@ -57,26 +63,31 @@
                   <div class="col-md-6">
                     <label for="streetAddress" class="form-label">Indirizzo di Residenza</label>
                     <input type="text" class="form-control border-0 bg-light" id="streetAddress" name="streetAddress" required>
+                    <div class="invalid-feedback" id="streetAddressFeedback"></div>
                   </div>
                   <div class="col-md-6">
                     <label for="houseNumber" class="form-label">Numero Civico</label>
-                    <input type="number" class="form-control border-0 bg-light" id="houseNumber" name="houseNumber" required>
+                    <input type="text" class="form-control border-0 bg-light" id="houseNumber" name="houseNumber" required>
+                    <div class="invalid-feedback" id="houseNumberFeedback"></div>
                   </div>
                 </div>
 
                 <div class="mb-4">
                   <label for="email" class="form-label">Indirizzo Email</label>
                   <input type="email" class="form-control border-0 bg-light" id="email" name="email" placeholder="mario.rossi@example.com" required>
+                  <div class="invalid-feedback" id="emailFeedback"></div>
                 </div>
 
                 <div class="row g-3 mb-4">
                   <div class="col-md-6">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control border-0 bg-light" id="password" name="password" minlength="8" required>
+                    <div class="invalid-feedback" id="passwordFeedback"></div>
                   </div>
                   <div class="col-md-6">
                     <label for="confirm" class="form-label">Conferma Password</label>
                     <input type="password" class="form-control border-0 bg-light" id="confirm" name="passwordConfirm" required>
+                    <div class="invalid-feedback" id="confirmFeedback"></div>
                   </div>
                 </div>
 
@@ -92,7 +103,7 @@
                     REGISTRATI ORA <i class="bi bi-person-plus-fill ms-2"></i>
                   </button>
                   <p class="mt-4 mb-0 small text-muted">
-                    Hai gi&agrave; un account? <a href="loginForm.html" class="text-warning fw-bold text-decoration-none">Accedi</a>
+                    Hai gi&agrave; un account? <a href="/auth/loginForm" class="text-warning fw-bold text-decoration-none">Accedi</a>
                   </p>
                 </div>
   
@@ -105,5 +116,5 @@
 {/block}
 
 {block name="script"}
-    <script src="{$js_path}/formFeedback.js"></script>
+    <script src="{$js_path}/registrationForm.js"></script>
 {/block}

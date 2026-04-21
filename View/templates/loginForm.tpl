@@ -45,7 +45,7 @@
                     ACCEDI <i class="bi bi-box-arrow-in-right ms-2"></i>
                   </button>
                   <p class="mt-4 mb-0 small text-muted">
-                    Non hai ancora un account? <a href="#" class="text-warning fw-bold text-decoration-none">Registrati ora</a>
+                    Non hai ancora un account? <a href="/auth/registrationForm" class="text-warning fw-bold text-decoration-none">Registrati ora</a>
                   </p>
                 </div>
   
