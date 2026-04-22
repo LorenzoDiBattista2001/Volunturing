@@ -39,7 +39,7 @@ class CManageEvents {
                     $event = new EEvent($title, $date . ' ' . $time, $place, $coordinator, $requestedVolunteerNumber,
                             $maxVolunteerNumber, $fieldOfAction, $candidateRequirements, $description);
                     if(!($event->isScheduled())) {
-                        throw new Exception('Choosen date for the event is not valid');
+                        throw new Exception('La data dell\'evento non può appartenere al passato');
                     }
                 } catch (Exception $e) {
                     USession::getInstance()->setSessionElement('eventCreationError', $e->getMessage());
@@ -47,11 +47,12 @@ class CManageEvents {
                     return;
                 }
 
-                if(FPersistentManager::getInstance()->storeObject($event)) {
-                    header('Location: /admin/confirmations/eventCreated');
-                } else {
+                if(!FPersistentManager::getInstance()->storeObject($event)) {
                     header('Location: /errors/500');
+                    return;
                 }
+
+                header('Location: /admin/confirmations/eventCreated');
             } else {
                 header('Location: /admin/events/add');
             }
@@ -80,7 +81,7 @@ class CManageEvents {
                     if($event->isScheduled()) {
                         $reasonForDeletion = UHTTPMethods::post('reasonForDeletion');
                         if(!isset($reasonForDeletion) || $reasonForDeletion === '') {
-                            throw new Exception('Reason is required when deleting scheluded events');
+                            throw new Exception('Per eliminare un evento programmato, è necessario inserire una motivazione');
                         } 
                     }
 
@@ -93,7 +94,7 @@ class CManageEvents {
                         $view = new VEmail();
                         $subject = 'Volontorino OdV - Avviso Cancellazione Evento';
                         $body = $view->generateEventCancellationEmail($event, $reasonForDeletion);
-                        $currentApplications = array_merge($event->getAcceptedApplications(), $event->getPendingApplications());
+                        $currentApplications = $event->getCurrentApplications();
                         foreach($currentApplications as $application) {
                             $candidate = $application->getCandidate();
                             if(!UEmail::sendEmail($candidate->getEmail(), $candidate->getFirstName(), $subject, $body)) {

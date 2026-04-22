@@ -176,6 +176,10 @@ class EEvent {
         return $acceptedApplications;
     }
 
+    public function getCurrentApplications() {
+        return array_merge($this->getAcceptedApplications(), $this->getPendingApplications());
+    }
+
     public function isFull() : bool {
         return ($this->maxVolunteerNumber === $this->getApprovedApplicationsNumber());
     }
