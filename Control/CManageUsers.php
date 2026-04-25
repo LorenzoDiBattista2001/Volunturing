@@ -28,11 +28,10 @@
     public static function blockUser(int $userId) : void {
       if(CUser::isLogged() && CUser::isAdmin()) {
         if(UServer::getRequestMethod() === 'POST') {
-
+          $pm = FPersistentManager::getInstance();
+          $volunteer = $pm->loadUserById($userId);
+          
           try {
-            $pm = FPersistentManager::getInstance();
-            $volunteer = $pm->loadUserById($userId);
-
             if(!($volunteer::class === 'EVolunteer')) {
               throw new Exception('Only users of type \'volunteer\' may be blocked');
             }
@@ -73,10 +72,10 @@
 
     public static function unlockUser(int $userId) : void {
       if(CUser::isLogged() && CUser::isAdmin()) {
-        try {
-          $pm = FPersistentManager::getInstance();
-          $volunteer = $pm->loadUserById($userId);
+        $pm = FPersistentManager::getInstance();
+        $volunteer = $pm->loadUserById($userId);
 
+        try {
           if(!($volunteer::class === 'EVolunteer')) {
             throw new Exception('Only users of type \'volunteer\' may be unlocked');
           }

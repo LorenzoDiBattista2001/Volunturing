@@ -64,6 +64,8 @@ class CProcessApplications {
 
                 header('Location: /admin/applications/process/' . $event->getEventId());
 
+            } catch(PDOException $pe) {
+                header('Location: /errors/500');
             } catch(Exception $e) {
                 $db->rollBack();
                 USession::getInstance()->setSessionElement('applicationProcessingError', $e->getMessage());

@@ -108,9 +108,11 @@ class EApplication {
             $this->markAsAccepted();
         } elseif($this->isWithdrawn()) {
             throw new Exception('This application has been withdrawn and cannot be approved');
+        } elseif($this->isRejected()) {
+            throw new Exception('This application was rejected and cannot be approved');
         }
         else {
-            throw new Exception('The application cannot be approved');
+            throw new Exception('This application cannot be approved');
         }
     }
 
@@ -129,9 +131,9 @@ class EApplication {
 
     public function withdraw() : void {
         if($this->isWithdrawn()) {
-            throw new Exception('This application has already been withdrawn');
+            throw new Exception('La presente candidatura risulta già ritirata');
         } elseif($this->isRejected()) {
-            throw new Exception('This application was rejected and cannot be withdrawn');
+            throw new Exception('La presente candidatura è stata rifiutata: impossibile ritirarla');
         } else {
             $this->setState(EApplicationState::WITHDRAWN);
         }

@@ -39,6 +39,8 @@ class CMakeDonation {
                     if(!$card->performPayment($donation)) {
                         throw new Exception('Al momento non siamo in grado di eseguire la transazione. Ti invitiamo a riprovare più tardi');
                     }
+                } catch(PDOException $pe) {
+                    header('Location: /errors/500');
                 } catch (Exception $e) {
                     USession::getInstance()->setSessionElement('donationError', $e->getMessage());
                     header('Location: /errors/donation');
@@ -78,7 +80,6 @@ class CMakeDonation {
 
         return $donation;
     }
-
 }
 
 ?>

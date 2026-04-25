@@ -25,8 +25,8 @@ class CWithdrawApplication {
                 header('Location: /errors/403');
                 return;
             }
+            $application = $pm->loadApplication($userId, $eventId);
             try {
-                $application = $pm->loadApplication($userId, $eventId);
                 $application->withdraw();
                 if(!$pm->updateApplication($application)) {
                     header('Location: /errors/500');

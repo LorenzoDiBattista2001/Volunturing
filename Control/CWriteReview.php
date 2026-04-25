@@ -3,7 +3,7 @@
 class CWriteReview {
 
     public static function writeReview() : void {
-        if(CUser::isLogged()) {
+        if(CUser::isLogged() && CUser::isVolunteer()) {
             $view = new VWriteReview();
             $view->displayReviewForm();
         } else {
@@ -12,7 +12,7 @@ class CWriteReview {
     }
 
     public static function publishReview() : void {
-        if(CUser::isLogged()) {
+        if(CUser::isLogged() && CUser::isVolunteer()) {
             if(UServer::getRequestMethod() === 'POST') {
                 $pm = FPersistentManager::getInstance();
                 $text = UHTTPMethods::post('reviewText');

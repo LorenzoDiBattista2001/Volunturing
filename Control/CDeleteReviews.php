@@ -16,8 +16,8 @@ class CDeleteReviews {
         if(CUser::isLogged() && CUser::isAdmin()) {
             if(UServer::getRequestMethod() === 'POST') {
                 $reviewId = UHTTPMethods::post('reviewId');
+                $pm = FPersistentManager::getInstance();
                 try {
-                    $pm = FPersistentManager::getInstance();
                     if(empty($reviewId) || $reviewId < 0) {
                         throw new Exception('Illegal value for review id');
                     }   
