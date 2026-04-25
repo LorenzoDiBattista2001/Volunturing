@@ -91,3 +91,7 @@
       </div>
     </main>
 {/block}
+
+{block name="script"}
+  <script src="formFeedback.js"></script>
+{/block}

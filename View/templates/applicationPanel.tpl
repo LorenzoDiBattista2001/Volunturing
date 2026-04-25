@@ -123,3 +123,7 @@
     </div>
     {/if}
 {/block}
+
+{block name="script"}
+  <script src="formFeedback.js"></script>
+{/block}

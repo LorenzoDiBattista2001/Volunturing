@@ -124,7 +124,7 @@
             </div>
 
             <div class="card-body p-4 p-md-5">
-              <form action="/account/update" method="POST" class="needs-validation" novalidate>
+              <form action="/account/update" method="POST" class="needs-validation" novalidate id="updateProfileForm">
                 
                 <div class="row g-3 mb-4">
                   <div class="col-md-6">
@@ -152,6 +152,7 @@
                   <div class="col-md-6">
                     <label for="telephoneNumber" class="form-label">Numero di Telefono</label>
                     <input type="tel" class="form-control border-0 bg-light" id="telephoneNumber" name="telephoneNumber" value="{$user->getTelephoneNumber()}" required>
+                    <div class="invalid-feedback" id="telephoneNumberFeedback"></div>
                   </div>
                   <div class="col-md-6">
                     <label for="taxCode" class="form-label">Codice Fiscale</label>
@@ -163,10 +164,12 @@
                   <div class="col-md-9">
                     <label for="streetAddress" class="form-label">Indirizzo di Residenza</label>
                     <input type="text" class="form-control border-0 bg-light" id="streetAddress" name="streetAddress" value="{$user->getStreetAddress()}" required>
+                    <div class="invalid-feedback" id="streetAddressFeedback"></div>
                   </div>
                   <div class="col-md-3">
                     <label for="houseNumber" class="form-label">Numero Civico</label>
                     <input type="number" class="form-control border-0 bg-light" id="houseNumber" name="houseNumber"  value="{$user->getHouseNumber()}" required>
+                    <div class="invalid-feedback" id="houseNumberFeedback"></div>
                   </div>
                 </div>
 
@@ -189,4 +192,8 @@
   
       </div>
     </main>
+{/block}
+
+{block name="script"}
+  <script src="formFeedback.js"></script>
 {/block}
