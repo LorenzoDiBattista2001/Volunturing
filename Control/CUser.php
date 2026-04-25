@@ -32,6 +32,9 @@ class CUser {
                 USession::getInstance()->setSessionElement('user', $user->getUserId());
                 USession::getInstance()->setSessionElement('role', 'volunteer');
                 header('Location: /account/personal');
+            } catch (PDOException $pe) {
+                header('Location: /errors/500');
+                return;
             } catch (Exception $e) {
                 USession::getInstance()->setSessionElement('registrationError', $e->getMessage());
                 header('Location: /errors/registration');
@@ -71,6 +74,8 @@ class CUser {
                         header('Location: /errors/500');
                         return;
                     }
+                } catch (PDOException $pe) {
+                    header('Location: /errors/500');
                 } catch (Exception $e) {
                     USession::getInstance()->setSessionElement('changePasswordError', $e->getMessage());
                     header('Location: /errors/changePassword');
@@ -107,6 +112,8 @@ class CUser {
                         header('Location: /errors/500');
                         return;
                     }
+                } catch (PDOException $pe) {
+                    header('Location: /errors/500');
                 } catch (Exception $e) {
                     USession::getInstance()->setSessionElement('changeEmailError', $e->getMessage());
                     header('Location: /errors/changeEmail');
@@ -175,6 +182,8 @@ class CUser {
                 } else {
                     throw new Exception('Password errata');
                 }
+            } catch (PDOException $pe) {
+                header('Location: /errors/500');
             } catch (Exception $e){
                 USession::getInstance()->setSessionElement('loginError', $e->getMessage());
                 header('Location: /errors/login');
