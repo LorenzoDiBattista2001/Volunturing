@@ -42,7 +42,7 @@ class ECreditCard {
 
     public function setNumber(string $number) {
         if(!$this->validateNumber($number)) {
-            throw new Exception('Card number is not in a valid format');
+            throw new Exception('Il numero di carta inserito non è in formato valido');
         }
         $this->number = $number;
     }
@@ -53,7 +53,7 @@ class ECreditCard {
 
     public function setExpirationDate(string $expirationDate) {
         if(!$this->validateExpirationDate($expirationDate)) {
-            throw new Exception('Credit card is expired or expiration date is not in a valid format');
+            throw new Exception('La carta di credito è scaduta, oppure la data inserita non è in un formato valido (MM//YY)');
         }
         $this->expirationDate = (DateTime::createFromFormat('d-m-y', str_replace('/', '-', '01-' . $expirationDate))->modify('last day of this month'));
     }
@@ -64,7 +64,7 @@ class ECreditCard {
 
     public function setCVV(string $cvv) {
         if(!$this->validateCVV($cvv)) {
-            throw new Exception('CVV is not in a valid format');
+            throw new Exception('Il CVV inserito non è in formato valido');
         }
         $this->cvv = $cvv;
     }
@@ -93,13 +93,11 @@ class ECreditCard {
     }
 
     public function validateNumber(string $number) : bool {
-        $pattern = '/^[0-9]{16}$/';
-        return preg_match($pattern, $number);
+        return (ctype_digit($number) && (strlen($number) === 16));
     }
 
     public function validateCVV(string $cvv) : bool {
-        $pattern = '/^[0-9]{3}$/';
-        return preg_match($pattern, $cvv);
+        return (ctype_digit($cvv) && (strlen($cvv) === 3));
     }
 
     // payment method

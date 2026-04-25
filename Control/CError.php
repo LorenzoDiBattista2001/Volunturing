@@ -105,40 +105,13 @@ class CError {
 
     // error messages for volunteers
 
-    public static function handleCreditCardErrors() : void {
-        if(CUser::isLogged() && CUser::isVolunteer() && USession::getInstance()->isElementSet('creditCardError')) {
-            $view = new VError();
-
-            $header = 'ERROR: INVALID CARD DATA';
-            $text = USession::getInstance()->getSessionElement('creditCardError');
-            USession::getInstance()->unsetSessionElement('creditCardError');
-
-            $view->displayErrorMessage($header, $text);
-        } else {
-            header('Location: /errors/403');
-        }
-    }
-
-    public static function handleDonationAmountError() : void {
+    public static function handleDonationErrors() : void {
         if(CUser::isLogged() && CUser::isVolunteer() && USession::getInstance()->isElementSet('donationError')) {
             $view = new VError();
 
-            $header = 'ERROR: INVALID DONATION AMOUNT';
+            $header = 'Donazione non riuscita';
             $text = USession::getInstance()->getSessionElement('donationError');
             USession::getInstance()->unsetSessionElement('donationError');
-
-            $view->displayErrorMessage($header, $text);
-        } else {
-            header('Location: /errors/403');
-        }
-    }
-
-    public static function handlePaymentError() : void {
-        if(CUser::isLogged() && CUser::isVolunteer()) {
-            $view = new VError();
-
-            $header = 'Transazione Fallita';
-            $text = 'Al momento non siamo in grado di eseguire la transazione. Ti invitiamo a riprovare più tardi';
 
             $view->displayErrorMessage($header, $text);
         } else {

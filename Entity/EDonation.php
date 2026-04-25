@@ -39,10 +39,9 @@ class EDonation {
 
     public function setAmount(int $amount) {
         if ($amount < 10) {
-            throw new Exception('Amount is too small');
-        } else {
-            $this->amount = $amount;
+            throw new Exception('L\'importo minimo per le donazioni è di 10 euro');
         }
+        $this->amount = $amount;
     }
 
     public function getAmount() : int {

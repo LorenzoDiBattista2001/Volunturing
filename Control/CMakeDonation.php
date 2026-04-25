@@ -3,16 +3,16 @@
 class CMakeDonation {
 
     public static function donate() : void {
-        if(CUser::isLogged()) {
+        if(CUser::isLogged() && CUser::isVolunteer()) {
             $view = new VMakeDonation();
             $view->displayDonationForm();
         } else {
-            // tell the user that they have to log in in order to donate
+            header('Location: /errors/loginRequired');
         }
     }
 
     public static function insertAmount() : void {
-        if(CUser::isLogged()) {
+        if(CUser::isLogged() && CUser::isVolunteer()) {
             if(UServer::getRequestMethod() === 'POST') {
                 $amount = UHTTPMethods::post('amount');
                 $reason = UHTTPMethods::post('reason');
@@ -26,43 +26,36 @@ class CMakeDonation {
                 header('Location: /donation/start');
             }
         } else {
-            header('Location: errors/403');
+            header('Location: /errors/403');
         }
     }
 
     public static function confirmDonation() : void {
-        if(CUser::isLogged()) {
+        if(CUser::isLogged() && CUser::isVolunteer() && USession::getInstance()->isElementSet('amount') && USession::getInstance()->isElementSet('reason')) {
             if(UServer::getRequestMethod() === 'POST') {
-                $card = self::createCreditCard();
-                if($card === null) {
-                    header('Location: /errors/invalidCardData');
+                try {
+                    $card = self::createCreditCard();
+                    $donation = self::createDonation();
+                    if(!$card->performPayment($donation)) {
+                        throw new Exception('Al momento non siamo in grado di eseguire la transazione. Ti invitiamo a riprovare più tardi');
+                    }
+                } catch (Exception $e) {
+                    USession::getInstance()->setSessionElement('donationError', $e->getMessage());
+                    header('Location: /errors/donation');
                     return;
                 }
 
-                if(USession::getInstance()->isElementSet('amount') && USession::getInstance()->isElementSet('reason')) {
-                    $donation = self::createDonation();
-                    if($donation === null) {
-                        header('Location: /errors/invalidDonationAmount');
-                        return;
-                    }
-                } else {
-                    header('Location: /');
+                if(!FPersistentManager::getInstance()->storeObject($donation)) {
+                    header('Location: /errors/500');
+                    return;
                 }
-
-                if($card->performPayment($donation)) {
-                    if(FPersistentManager::getInstance()->storeObject($donation)) {
-                        header('Location: /confirmations/donationPerformed');
-                    } else {
-                        header('Location: /errors/500');
-                    }
-                } else {
-                    header('Location: /errors/transactionFailed');
-                }
+        
+                header('Location: /confirmations/donationPerformed');
             } else {
                 header('Location: /donation/amount');
             }
         } else {
-            header('Location: /');
+            header('Location: /errors/403');
         }
     }
 
@@ -73,26 +66,16 @@ class CMakeDonation {
         $expirationDate = UHTTPMethods::post('expirationDate');
         $cvv = UHTTPMethods::post('cvv');
 
-        try {
-            $card = new ECreditCard($firstName, $lastName, $number, $expirationDate, $cvv);
-        } catch (Exception $e) {
-            USession::getInstance()->setSessionElement('creditCardError', $e->getMessage());
-            return null;
-        }
-        return $card;
+        return new ECreditCard($firstName, $lastName, $number, $expirationDate, $cvv);
     }
 
     private static function createDonation() : ?EDonation {
         $amount = USession::getInstance()->getSessionElement('amount');
         $reason = USession::getInstance()->getSessionElement('reason');
 
-        try {
-            $donation = new EDonation($amount, $reason, date('Y-m-d'));
-            $donation->setDonator(FPersistentManager::getInstance()->loadUserById(USession::getInstance()->getSessionElement('user')));
-        } catch (Exception $e) {
-            USession::getInstance()->setSessionElement('donationError', $e->getMessage());
-            return null;
-        }
+        $donation = new EDonation($amount, $reason, date('Y-m-d'));
+        $donation->setDonator(FPersistentManager::getInstance()->loadUserById(USession::getInstance()->getSessionElement('user')));
+
         return $donation;
     }
 
