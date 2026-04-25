@@ -2,6 +2,115 @@
 
 class CConfirmationMessage {
 
+    // generic confirmation messages, valid for all kinds of users
+
+    public static function confirmPasswordChange() : void {
+        if(CUser::isLogged()) {
+            $view = new VConfirmationMessage();
+
+            $header = 'Operazione Riuscita';
+            $text = 'La tua password è stata aggiornata correttamente';
+
+            $view->displayConfirmationMessage($header, $text, CUser::isAdmin());
+        } else {
+            header('Location: /errors/403');
+        }
+    }
+
+    public static function confirmEmailChange() : void {
+        if(CUser::isLogged()) {
+            $view = new VConfirmationMessage();
+
+            $header = 'Operazione Riuscita';
+            $text = 'La tua email è stata aggiornata correttamente';
+
+            $view->displayConfirmationMessage($header, $text, CUser::isAdmin());
+        } else {
+            header('Location: /errors/403');
+        }
+    }
+
+    public static function confirmLogout() : void {
+        if(!CUser::isLogged()) {
+            $view = new VConfirmationMessage();
+
+            $header = 'LOGOUT COMPLETATO';
+            $text = 'A presto!';
+
+            $view->displayLogoutMessage($header, $text);
+        } else {
+            header('Location: /errors/403');
+        }
+    }
+
+    // confirmation messages for volunteers
+
+    public static function confirmApplicationSubmission() : void {
+        if(CUser::isLogged() && CUser::isVolunteer()) {
+            $view = new VConfirmationMessage();
+
+            $header = 'Candidatura inviata con successo!';
+            $text = 'Monitora lo stato della tua candidatura dalla tua area personale';
+
+            $view->displayConfirmationMessage($header, $text);
+        } else {
+            header('Location: /errors/403');
+        }
+    }
+
+    public static function confirmApplicationWithdrawal(int $eventId) : void {
+        if(CUser::isLogged() && CUser::isVolunteer()) {
+            $view = new VConfirmationMessage();
+            $event = FPersistentManager::getInstance()->loadEvent($eventId);
+
+            $header = 'Candidatura ritirata';
+            $text = 'La tua candidatura per l\'evento ' . $event->getTitle() . ' è stata ritirata';
+
+            $view->displayConfirmationMessage($header, $text);
+        } else {
+            header('Location: /errors/403');
+        }
+    }
+
+    public static function confirmDonationReception() : void {
+        if(CUser::isLogged() && CUser::isVolunteer()) {
+            $view = new VConfirmationMessage();
+
+            $header = 'Transazione Riuscita';
+            $text = 'Grazie infinite per la tua generosità!';
+
+            $view->displayConfirmationMessage($header, $text);
+        } else {
+            header('Location: /errors/403');
+        }
+    }
+
+    public static function confirmReviewPublishing() : void {
+        if(CUser::isLogged() && CUser::isVolunteer()) {
+            $view = new VConfirmationMessage();
+
+            $header = 'Recensione pubblicata';
+            $text = 'Grazie per aver espresso il tuo parere!';
+
+            $view->displayConfirmationMessage($header, $text);
+        } else {
+            header('Location: /errors/403');
+        }
+    }
+
+    public static function confirmProfileUpdate() : void {
+        if(CUser::isLogged() && CUser::isVolunteer()) {
+            $view = new VConfirmationMessage();
+
+            $header = 'Profilo Aggiornato Correttamente';
+            $text = 'Le tue informazioni personali sono state correttamente aggiornate';
+
+            $view->displayConfirmationMessage($header, $text);
+        } else {
+            header('Location: /errors/403');
+        }
+    }
+
     // confirmation messages for admins
 
     public static function confirmEventCreation() : void {
@@ -57,92 +166,6 @@ class CConfirmationMessage {
         }
     }
 
-    // confirmation messages for volunteers
-
-    public static function confirmApplicationSubmission() : void {
-        $view = new VConfirmationMessage();
-
-        $header = 'Candidatura inviata con successo!';
-        $text = 'Monitora lo stato della tua candidatura dalla tua area personale';
-
-        $view->displayConfirmationMessage($header, $text);
-    }
-
-    public static function confirmApplicationWithdrawal(int $eventId) : void {
-        $view = new VConfirmationMessage();
-        $event = FPersistentManager::getInstance()->loadEvent($eventId);
-
-        $header = 'Candidatura ritirata';
-        $text = 'La tua candidatura per l\'evento ' . $event->getTitle() . ' è stata ritirata';
-
-        $view->displayConfirmationMessage($header, $text);
-    }
-
-    public static function confirmDonationReception() : void {
-        $view = new VConfirmationMessage();
-
-        $header = 'Transazione Riuscita';
-        $text = 'Grazie infinite per la tua generosità!';
-
-        $view->displayConfirmationMessage($header, $text);
-    }
-
-    public static function confirmReviewPublishing() : void {
-        $view = new VConfirmationMessage();
-
-        $header = 'Recensione pubblicata';
-        $text = 'Grazie per aver espresso il tuo parere!';
-
-        $view->displayConfirmationMessage($header, $text);
-    }
-
-    public static function confirmProfileUpdate() : void {
-        if(CUser::isLogged() && CUser::isVolunteer()) {
-            $view = new VConfirmationMessage();
-
-            $header = 'Profilo Aggiornato Correttamente';
-            $text = 'Le tue informazioni personali sono state correttamente aggiornate';
-
-            $view->displayConfirmationMessage($header, $text);
-        } else {
-            header('Location: /errors/403');
-        }
-    }
-
-    public static function confirmPasswordChange() : void {
-        if(CUser::isLogged()) {
-            $view = new VConfirmationMessage();
-
-            $header = 'Operazione Riuscita';
-            $text = 'La tua password è stata aggiornata correttamente';
-
-            $view->displayConfirmationMessage($header, $text, CUser::isAdmin());
-        } else {
-            header('Location: /errors/403');
-        }
-    }
-
-    public static function confirmEmailChange() : void {
-        if(CUser::isLogged()) {
-            $view = new VConfirmationMessage();
-
-            $header = 'Operazione Riuscita';
-            $text = 'La tua email è stata aggiornata correttamente';
-
-            $view->displayConfirmationMessage($header, $text, CUser::isAdmin());
-        } else {
-            header('Location: /errors/403');
-        }
-    }
-
-    public static function confirmLogout() : void {
-        $view = new VConfirmationMessage();
-
-        $header = 'LOGOUT COMPLETATO';
-        $text = 'A presto!';
-
-        $view->displayLogoutMessage($header, $text);
-    }
 }
 
 ?>

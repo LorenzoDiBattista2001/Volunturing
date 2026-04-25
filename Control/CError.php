@@ -89,6 +89,8 @@ class CError {
             USession::getInstance()->unsetSessionElement('loginError');
 
             $view->displayErrorMessage($header, $text);
+        } else {
+            header('Location: /errors/403');
         }
     }
 
@@ -132,12 +134,16 @@ class CError {
     }
 
     public static function handlePaymentError() : void {
-        $view = new VError();
+        if(CUser::isLogged() && CUser::isVolunteer()) {
+            $view = new VError();
 
-        $header = 'Transazione Fallita';
-        $text = 'Al momento non siamo in grado di eseguire la transazione. Ti invitiamo a riprovare più tardi';
+            $header = 'Transazione Fallita';
+            $text = 'Al momento non siamo in grado di eseguire la transazione. Ti invitiamo a riprovare più tardi';
 
-        $view->displayErrorMessage($header, $text);
+            $view->displayErrorMessage($header, $text);
+        } else {
+            header('Location: /errors/403');
+        }
     }
 
     public static function handleApplicationWithdrawalErrors() : void {
@@ -149,6 +155,8 @@ class CError {
             USession::getInstance()->unsetSessionElement('applicationWithdrawalError');
 
             $view->displayErrorMessage($header, $text);
+        } else {
+            header('Location: /errors/403');
         }
     }
 
@@ -161,6 +169,8 @@ class CError {
             USession::getInstance()->unsetSessionElement('reviewPublishingError');
 
             $view->displayErrorMessage($header, $text);
+        } else {
+            header('Location: /errors/403');
         }
     }
 
