@@ -114,30 +114,43 @@ class CConfirmationMessage {
     // confirmation messages for admins
 
     public static function confirmEventCreation() : void {
-        $view = new VConfirmationMessage();
+        if(CUser::isLogged() && CUser::isAdmin()) {
+            $view = new VConfirmationMessage();
         
-        $header = 'Nuovo evento creato con successo!';
-        $text = 'I dettagli dell\'evento sono ora visibili a tutti gli utenti';
+            $header = 'Nuovo evento creato con successo!';
+            $text = 'I dettagli dell\'evento sono ora visibili a tutti gli utenti';
 
-        $view->displayConfirmationMessage($header, $text, isAdmin: true);
+            $view->displayConfirmationMessage($header, $text, isAdmin: true);
+        } else {
+            header('Location: /errors/403');
+        }
     }
 
     public static function confirmEventDeletion() : void {
-        $view = new VConfirmationMessage();
+        if(CUser::isLogged() && CUser::isAdmin()) {
+            $view = new VConfirmationMessage();
 
-        $header = 'Eliminazione evento completata';
-        $text = 'L\'evento è stato eliminato correttamente';
+            $header = 'Eliminazione evento completata';
+            $text = 'L\'evento è stato eliminato correttamente';
 
-        $view->displayConfirmationMessage($header, $text, isAdmin: true);
+            $view->displayConfirmationMessage($header, $text, isAdmin: true);
+        } else {
+            header('Location: /errors/403');
+        }
+        
     }
 
     public static function confirmScheduledEventDeletion() : void {
-        $view = new VConfirmationMessage();
+        if(CUser::isLogged() && CUser::isAdmin()) {
+            $view = new VConfirmationMessage();
 
-        $header = 'Eliminazione evento completata';
-        $text = 'L\'evento è stato eliminato correttamente. A tutti i volontari interessati è stata recapitata una email di notifica';
+            $header = 'Eliminazione evento completata';
+            $text = 'L\'evento è stato eliminato correttamente. A tutti i volontari interessati è stata recapitata una email di notifica';
 
-        $view->displayConfirmationMessage($header, $text, isAdmin: true);
+            $view->displayConfirmationMessage($header, $text, isAdmin: true);
+        } else {
+            header('Location: /errors/403');
+        }
     }
 
     public static function confirmUserBlocking() : void {
