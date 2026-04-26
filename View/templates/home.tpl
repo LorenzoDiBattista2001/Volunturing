@@ -80,7 +80,7 @@
               </div>
               <h4 class="card-title fw-bold">Contatti</h4>
               <p class="card-text text-muted small">Hai domande? Scrivici o vieni a trovarci nella nostra sede per parlare dei tuoi progetti.</p>
-              <a href="#" class="btn btn-link text-warning fw-bold text-decoration-none">Approfondisci &rarr;</a>
+              <a href="/about/contacts" class="btn btn-link text-warning fw-bold text-decoration-none">Approfondisci &rarr;</a>
             </div>
           </div>
         </div>

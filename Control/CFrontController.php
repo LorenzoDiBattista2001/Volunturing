@@ -91,7 +91,8 @@ class CFrontController {
             'loginRequired' => 'handleLoginRequiredError'
         )],
         'about' => ['CAbout', array(
-            'reviews' => 'showReviews'
+            'reviews' => 'showReviews',
+            'contacts' => 'showContacts'
         )]
     );
 

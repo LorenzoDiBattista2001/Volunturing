@@ -14,6 +14,10 @@ class VAbout {
         $this->smarty->assign('reviewsNumber', count($reviews));
         $this->smarty->display('reviews.tpl');
     }
+
+    public function displayContactsPage() {
+        $this->smarty->display('contacts.tpl');
+    }
 }
 
 ?>

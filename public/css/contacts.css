@@ -1,0 +1,24 @@
+:root {
+  --brand-orange: #ff9411;
+  --brand-orange-light: #fff9f2;
+}
+
+.text-brand { color: var(--brand-orange); }
+.bg-brand { background-color: var(--brand-orange); }
+      
+.contact-card {
+  border: none;
+  border-radius: 15px;
+}
+
+.icon-box {
+  width: 50px;
+  height: 50px;
+  background-color: var(--brand-orange-light);
+  color: var(--brand-orange);            
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: 1.5rem;
+}

@@ -9,6 +9,11 @@ class CAbout {
         $view = new VAbout();
         $view->displayReviewsList($reviews, $rating);
     }
+
+    public static function showContacts() : void {
+        $view = new VAbout();
+        $view->displayContactsPage();
+    }
 }
 
 ?>
