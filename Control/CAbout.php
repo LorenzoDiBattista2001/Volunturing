@@ -14,6 +14,11 @@ class CAbout {
         $view = new VAbout();
         $view->displayContactsPage();
     }
+
+    public static function showAssociationInfo() : void {
+        $view = new VAbout();
+        $view->displayAssociationInfo();
+    }
 }
 
 ?>

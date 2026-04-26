@@ -1,0 +1,58 @@
+:root {
+        --brand-orange: #ff9411;
+        --brand-orange-light: #fff9f2;
+      }
+
+      .text-brand { color: var(--brand-orange); }
+      .bg-brand { background-color: var(--brand-orange); }
+      .bg-brand-light { background-color: var(--brand-orange-light); }
+
+      .section-padding { padding: 80px 0; }
+
+      .mission-icon {
+        font-size: 3rem;
+        color: var(--brand-orange);
+        margin-bottom: 1.5rem;
+      }
+
+      .founder-card {
+        border: none;
+        transition: transform 0.3s ease;
+      }
+
+      .founder-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .founder-avatar {
+        width: 120px;
+        height: 120px;
+        background-color: var(--brand-orange);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin: 0 auto 1.5rem;
+        font-size: 2.5rem;
+        font-weight: bold;
+        box-shadow: 0 4px 15px rgba(255, 148, 17, 0.2);
+      }
+
+      .timeline-step {
+        border-left: 3px solid var(--brand-orange);
+        padding-left: 2rem;
+        position: relative;
+        margin-bottom: 2rem;
+      }
+
+      .timeline-step::before {
+        content: '';
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        background-color: var(--brand-orange);
+        border-radius: 50%;
+        left: -9px;
+        top: 5px;
+      }

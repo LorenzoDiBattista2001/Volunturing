@@ -18,6 +18,10 @@ class VAbout {
     public function displayContactsPage() {
         $this->smarty->display('contacts.tpl');
     }
+
+    public function displayAssociationInfo() {
+        $this->smarty->display('associationInfo.tpl');
+    }
 }
 
 ?>

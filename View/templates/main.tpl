@@ -29,7 +29,7 @@
             <li class="nav-item"><a class="nav-link" href="/donation/start">DONA ORA</a></li>
             {else}
             <li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">ABOUT</a></li>
+            <li class="nav-item"><a class="nav-link" href="/about/association">ABOUT</a></li>
             <li class="nav-item"><a class="nav-link" href="/about/contacts">CONTATTI</a></li>
             {/if}
           </ul>

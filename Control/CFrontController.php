@@ -92,7 +92,8 @@ class CFrontController {
         )],
         'about' => ['CAbout', array(
             'reviews' => 'showReviews',
-            'contacts' => 'showContacts'
+            'contacts' => 'showContacts',
+            'association' => 'showAssociationInfo'
         )]
     );
 

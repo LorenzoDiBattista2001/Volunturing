@@ -52,7 +52,7 @@
               </div>
               <h4 class="card-title fw-bold">Chi Siamo</h4>
               <p class="card-text text-muted small">Conosci la nostra missione, la nostra storia e il team che lavora ogni giorno sul territorio.</p>
-              <a href="#" class="btn btn-link text-warning fw-bold text-decoration-none">Scopri di più &rarr;</a>
+              <a href="/about/association" class="btn btn-link text-warning fw-bold text-decoration-none">Scopri di più &rarr;</a>
             </div>
           </div>
         </div>
