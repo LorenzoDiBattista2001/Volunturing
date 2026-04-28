@@ -2,6 +2,11 @@
 
 class CUser {
 
+    /**
+     * Performs a user's account registration
+     * 
+     * @return void
+     */
     public static function register() : void {
         if(UServer::getRequestMethod() === 'POST') {
             $firstName = UHTTPMethods::post('firstName');
@@ -45,6 +50,11 @@ class CUser {
         }
     }
 
+    /**
+     * Displays the form for registering as a volunteer
+     * 
+     * @return void
+     */
     public static function startRegistration() : void {
         if(!self::isLogged()) {
             $view = new VUser();
@@ -54,6 +64,11 @@ class CUser {
         }
     }
 
+    /**
+     * Changes the user's password
+     * 
+     * @return void
+     */
     public static function changePassword() : void {
         if(UServer::getRequestMethod() === 'POST') {
             if(CUser::isLogged()) {
@@ -61,6 +76,7 @@ class CUser {
                 $currentPassword = UHTTPMethods::post('currentPassword');
                 $newPassword = UHTTPMethods::post('newPassword');
                 $confirmPassword = UHTTPMethods::post('confirmPassword');
+                $pm = FPersistentManager::getInstance();
                 try {
                     if(!password_verify($currentPassword, $user->getPassword())) {
                         throw new Exception('La password corrente è errata');
@@ -70,12 +86,10 @@ class CUser {
                     }
 
                     $user->setPassword($newPassword);
-                    if(!FPersistentManager::getInstance()->updateUserPassword($user->getUserId(), $user->getPassword())) {
+                    if(!$pm->updateUserPassword($user->getUserId(), $user->getPassword())) {
                         header('Location: /errors/500');
                         return;
                     }
-                } catch (PDOException $pe) {
-                    header('Location: /errors/500');
                 } catch (Exception $e) {
                     USession::getInstance()->setSessionElement('changePasswordError', $e->getMessage());
                     header('Location: /errors/changePassword');
@@ -91,6 +105,11 @@ class CUser {
         }
     }
 
+    /**
+     * Changes the email address associated with the user's account
+     * 
+     * @return void
+     */
     public static function changeEmail() : void {
         if(CUser::isLogged()) {
             if(UServer::getRequestMethod() === 'POST') {
@@ -114,6 +133,7 @@ class CUser {
                     }
                 } catch (PDOException $pe) {
                     header('Location: /errors/500');
+                    return;
                 } catch (Exception $e) {
                     USession::getInstance()->setSessionElement('changeEmailError', $e->getMessage());
                     header('Location: /errors/changeEmail');
@@ -128,6 +148,11 @@ class CUser {
         }
     }
 
+    /**
+     * Updates the information associated with the volunteer's account
+     * 
+     * @return void
+     */
     public static function updateProfile() : void {
         if(self::isLogged() && self::isVolunteer()) {
             if(UServer::getRequestMethod() === 'POST') {
@@ -148,6 +173,7 @@ class CUser {
                 }
                 if(!FPersistentManager::getInstance()->updateUserProfile($volunteer)) {
                     header('Location: /errors/500');
+                    return;
                 }
                 header('Location: /confirmations/profileUpdated');
             } else {
@@ -158,6 +184,11 @@ class CUser {
         }
     }
 
+    /**
+     * Authenticates the user
+     * 
+     * @return void
+     */
     public static function performLogin() : void {
         if(UServer::getRequestMethod() === 'POST') {
             $email = UHTTPMethods::post('email');
@@ -168,7 +199,7 @@ class CUser {
                 if(!$pm->emailExist($email)) {
                     throw new Exception('L\'email inserita non appartiene a nessun utente');
                 }
-                $user = FPersistentManager::getInstance()->loadUserByEmail($email);
+                $user = $pm->loadUserByEmail($email);
                 if(password_verify($password, $user->getPassword())) {
                     $role = ($user::class === 'EAdmin') ? 'admin' : 'volunteer';
 
@@ -184,6 +215,7 @@ class CUser {
                 }
             } catch (PDOException $pe) {
                 header('Location: /errors/500');
+                return;
             } catch (Exception $e){
                 USession::getInstance()->setSessionElement('loginError', $e->getMessage());
                 header('Location: /errors/login');
@@ -194,6 +226,11 @@ class CUser {
         }
     }
 
+    /**
+     * Displays the form for logging in
+     * 
+     * @return void
+     */
     public static function authenticate() : void {
         if(!self::isLogged()) {
             $view = new VUser();
@@ -203,6 +240,11 @@ class CUser {
         }
     }
 
+    /**
+     * Destroys the user's current session
+     * 
+     * @return void
+     */
     public static function performLogout() : void {
         if(self::isLogged()) {
             USession::getInstance()->unsetSessionVariables();
@@ -216,18 +258,38 @@ class CUser {
         }
     }
 
+    /**
+     * Checks whether a user is logged in
+     * 
+     * @return bool
+     */
     public static function isLogged() : bool {
         return USession::getInstance()->isElementSet('user');
     }
 
+    /**
+     * Checks whether a user is an admin
+     * 
+     * @return bool
+     */
     public static function isAdmin() : bool {
         return (USession::getInstance()->getSessionElement('role') === 'admin');
     }
 
+    /**
+     * Checks whether a user is a volunteer
+     * 
+     * @return bool
+     */
     public static function isVolunteer() : bool {
         return (USession::getInstance()->getSessionElement('role') === 'volunteer');
     }
 
+    /**
+     * Displays a volunteer's personal area or an admin's dashboard
+     * 
+     * @return void
+     */
     public static function accessPersonalArea() : void {
         if(self::isLogged()) {
             $user = FPersistentManager::getInstance()->loadUserById(USession::getInstance()->getSessionElement('user'));
@@ -243,6 +305,11 @@ class CUser {
         }
     }
 
+    /**
+     * Displays a volunteer's account management area
+     * 
+     * @return void
+     */
     public static function manageAccount() : void {
         if(self::isLogged() && self::isVolunteer()) {
             $view = new VUser();
@@ -253,6 +320,11 @@ class CUser {
         }
     }
 
+    /**
+     * Displays the web application's general home page
+     * 
+     * @return void
+     */
     public static function showHome() : void {
         $view = new VUser();
         $view->displayHomePage();

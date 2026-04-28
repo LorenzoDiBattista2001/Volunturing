@@ -2,6 +2,11 @@
 
 class CMakeDonation {
 
+    /**
+     * Displays the form for making a donation
+     * 
+     * @return void
+     */
     public static function donate() : void {
         if(CUser::isLogged() && CUser::isVolunteer()) {
             $view = new VMakeDonation();
@@ -11,6 +16,15 @@ class CMakeDonation {
         }
     }
 
+    /**
+     * Displays the form for inserting the credit card details
+     * 
+     * Retrieves the donation's amount and reason (if any) and
+     * launches the form for the user to insert the details
+     * of the credit card whereby to perform the donation.
+     * 
+     * @return void
+     */
     public static function insertAmount() : void {
         if(CUser::isLogged() && CUser::isVolunteer()) {
             if(UServer::getRequestMethod() === 'POST') {
@@ -30,6 +44,16 @@ class CMakeDonation {
         }
     }
 
+    /**
+     * Performes (simulates) the bank transaction for the user's donation
+     * 
+     * This method retrieves the credit card details from the HTML form fields and
+     * the donation's amount and reason from the session variables, tries to instantiate
+     * both the credit card and the donation, performs (simulates) the payment, and
+     * eventually stores the donation on the database.
+     * 
+     * @return void
+     */
     public static function confirmDonation() : void {
         if(CUser::isLogged() && CUser::isVolunteer() && USession::getInstance()->isElementSet('amount') && USession::getInstance()->isElementSet('reason')) {
             if(UServer::getRequestMethod() === 'POST') {
@@ -61,6 +85,12 @@ class CMakeDonation {
         }
     }
 
+    /**
+     * Attempts at instantiating the credit card with the data
+     * provided by the user
+     * 
+     * @return \ECreditCard|null
+     */
     private static function createCreditCard() : ?ECreditCard {
         $firstName = UHTTPMethods::post('firstName');
         $lastName = UHTTPMethods::post('lastName');
@@ -71,6 +101,12 @@ class CMakeDonation {
         return new ECreditCard($firstName, $lastName, $number, $expirationDate, $cvv);
     }
 
+    /**
+     * Attempts at instantiating a donation object with the
+     * amount and reason provided by the user
+     * 
+     * @return \EDonation|null
+     */
     private static function createDonation() : ?EDonation {
         $amount = USession::getInstance()->getSessionElement('amount');
         $reason = USession::getInstance()->getSessionElement('reason');

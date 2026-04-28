@@ -2,6 +2,11 @@
 
 class CProcessApplications {
 
+    /**
+     * Displays the admin's applications processing area
+     * 
+     * @return void
+     */
     public static function accessApplicationManagement() : void {
         if(CUser::isLogged() && CUser::isAdmin()) {
             $events = FPersistentManager::getInstance()->retrieveScheduledEventsWithApplications();
@@ -12,6 +17,12 @@ class CProcessApplications {
         }
     }
 
+    /**
+     * Displays the event's details and associated list of pending applications
+     * 
+     * @param int $eventId The id of the event whose pending applications are to be listed
+     * @return void
+     */
     public static function inspectEvent(int $eventId) : void {
         if(CUser::isLogged() && CUser::isAdmin()) {
             $pm = FPersistentManager::getInstance();
@@ -26,6 +37,13 @@ class CProcessApplications {
         }
     }
 
+    /**
+     * Displays a specific application's details and management options
+     * 
+     * @param int $eventId The id of the event the application was submitted for
+     * @param int $userId The id of the user who submitted the application
+     * @return void
+     */
     public static function selectApplication(int $eventId, int $userId) : void {
         if(CUser::isLogged() && CUser::isAdmin()) {
             $application = FPersistentManager::getInstance()->loadApplication($userId, $eventId);
@@ -37,6 +55,23 @@ class CProcessApplications {
 
     }
 
+    /**
+     * Approves a user's application to a given event
+     * 
+     * This method operates as follows: first, it grants the admin exclusive
+     * access to the database row where the event is stored; this is in order
+     * to prevent race conditions if two or more admins are processing different
+     * applications for the same event while there is only one slot available.
+     * Second, it tries to set the application's state to 'approved' and, if
+     * successful, checks whether the event is now full (after reloading it
+     * from the database to avoid any risks of inconsistency). If it is, then
+     * all pending applications left are automatically rejected within the
+     * transaction.
+     * 
+     * @param int $eventId The id of the event the application was submitted for
+     * @param int $userId The id of the user who submitted the application
+     * @return void
+     */
     public static function approveApplication(int $eventId, int $userId) : void {
         if(CUser::isLogged() && CUser::isAdmin()) {
             $pm = FPersistentManager::getInstance();
@@ -65,6 +100,7 @@ class CProcessApplications {
                 header('Location: /admin/applications/process/' . $event->getEventId());
 
             } catch(PDOException $pe) {
+                $db->rollBack();
                 header('Location: /errors/500');
             } catch(Exception $e) {
                 $db->rollBack();
@@ -77,6 +113,19 @@ class CProcessApplications {
         }
     }
 
+    /**
+     * Rejects a user's application to a given event
+     * 
+     * This method ensures a reason for rejecting the application
+     * has been provided, tries to set the application's state to
+     * 'rejected' and to update its state on the database. If successful,
+     * it redirects the admin to the pending applications page for the
+     * same event.
+     * 
+     * @param int $eventId The id of the event the application was submitted for
+     * @param int $userId The id of the user who submitted the application
+     * @return void
+     */
     public static function rejectApplication(int $eventId, int $userId) : void {
         if(CUser::isLogged() && CUser::isAdmin()) {
             if(UServer::getRequestMethod() === 'POST') {
@@ -109,6 +158,12 @@ class CProcessApplications {
         }
     }
 
+    /**
+     * Rejects all pending applications left after the maximum volunteers number is reached
+     * 
+     * @param \EEvent $event The event which the applications to be rejected had been submitted for
+     * @return void
+     */
     private static function rejectAllApplications(EEvent $event) : void {
         $pm = FPersistentManager::getInstance();
         $pendingApplications = $event->getPendingApplications();

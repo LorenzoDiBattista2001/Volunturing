@@ -2,22 +2,46 @@
 
 class CSubmitApplication {
 
+    /**
+     * Shows the currently scheduled events
+     * 
+     * @return void
+     */
     public static function showEvents() : void {
         $scheduledEvents = FPersistentManager::getInstance()->retrieveScheduledEvents();
         $view = new VSubmitApplication();
         $view->displayEventsList($scheduledEvents);
     }
 
+    /**
+     * Shows the details of the selected event
+     * 
+     * This method retrieves the data associated with the event chosen by the user
+     * and displays it, after verifying the event is currently scheduled.
+     * 
+     * @param int $eventId The id of the event whose details are to be displayed
+     * @return void
+     */
     public static function selectEvent(int $eventId) : void {
         $event = FPersistentManager::getInstance()->loadEvent($eventId);
         if(!$event->isScheduled()) {
             header('Location: /errors/403');
             return;
         }
-        $view = new VSubmitApplication(CUser::isLogged());
+        $view = new VSubmitApplication();
         $view->displayEventDetails($event);
     }
 
+    /**
+     * Displays the form for submitting an application
+     * 
+     * This method checks whether the user actually can submit an application
+     * to a given event (i.e. he has not already applied to that event and
+     * the event is not full) and launches the form for submitting the application. 
+     * 
+     * @param int $eventId The id of the event the user wants to participate in
+     * @return void
+     */
     public static function startApplicationProcess(int $eventId) : void {
         if(CUser::isLogged() && CUser::isVolunteer()) {
             $view = new VSubmitApplication();
@@ -43,6 +67,12 @@ class CSubmitApplication {
         }
     }
 
+    /**
+     * Creates and stores the application submitted by the user
+     * 
+     * @param int $eventId The id of the event for which the application was submitted
+     * @return void
+     */
     public static function createApplication(int $eventId) : void {
         if(CUser::isLogged() && CUser::isVolunteer()) {
             if(UServer::getRequestMethod() === 'POST') {

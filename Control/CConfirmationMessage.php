@@ -4,6 +4,11 @@ class CConfirmationMessage {
 
     // generic confirmation messages, valid for all kinds of users
 
+    /**
+     * Confirms that the user's password has been changed
+     * 
+     * @return void
+     */
     public static function confirmPasswordChange() : void {
         if(CUser::isLogged()) {
             $view = new VConfirmationMessage();
@@ -17,6 +22,11 @@ class CConfirmationMessage {
         }
     }
 
+    /**
+     * Confirms that the user's email has been changed
+     * 
+     * @return void
+     */
     public static function confirmEmailChange() : void {
         if(CUser::isLogged()) {
             $view = new VConfirmationMessage();
@@ -30,6 +40,11 @@ class CConfirmationMessage {
         }
     }
 
+    /**
+     * Confirms that the user has successfully been logged out
+     * 
+     * @return void
+     */
     public static function confirmLogout() : void {
         if(!CUser::isLogged()) {
             $view = new VConfirmationMessage();
@@ -45,6 +60,11 @@ class CConfirmationMessage {
 
     // confirmation messages for volunteers
 
+    /**
+     * Confirms that the user has successfully submitted an application to an event
+     * 
+     * @return void
+     */
     public static function confirmApplicationSubmission() : void {
         if(CUser::isLogged() && CUser::isVolunteer()) {
             $view = new VConfirmationMessage();
@@ -58,6 +78,11 @@ class CConfirmationMessage {
         }
     }
 
+    /**
+     * Confirms that the user has successfully withdrawn an application of theirs
+     * 
+     * @return void
+     */
     public static function confirmApplicationWithdrawal(int $eventId) : void {
         if(CUser::isLogged() && CUser::isVolunteer()) {
             $view = new VConfirmationMessage();
@@ -72,6 +97,11 @@ class CConfirmationMessage {
         }
     }
 
+    /**
+     * Confirms that the user's donation has been received and correctly processed
+     * 
+     * @return void
+     */
     public static function confirmDonationReception() : void {
         if(CUser::isLogged() && CUser::isVolunteer()) {
             $view = new VConfirmationMessage();
@@ -85,6 +115,11 @@ class CConfirmationMessage {
         }
     }
 
+    /**
+     * Confirms that the user's review has been published
+     * 
+     * @return void
+     */
     public static function confirmReviewPublishing() : void {
         if(CUser::isLogged() && CUser::isVolunteer()) {
             $view = new VConfirmationMessage();
@@ -98,6 +133,11 @@ class CConfirmationMessage {
         }
     }
 
+    /**
+     * Confirms that the user's profile information has been correctly updated
+     * 
+     * @return void
+     */
     public static function confirmProfileUpdate() : void {
         if(CUser::isLogged() && CUser::isVolunteer()) {
             $view = new VConfirmationMessage();
@@ -113,6 +153,11 @@ class CConfirmationMessage {
 
     // confirmation messages for admins
 
+    /**
+     * Confirms that the new event has been created
+     * 
+     * @return void
+     */
     public static function confirmEventCreation() : void {
         if(CUser::isLogged() && CUser::isAdmin()) {
             $view = new VConfirmationMessage();
@@ -126,6 +171,11 @@ class CConfirmationMessage {
         }
     }
 
+    /**
+     * Confirms that the event has been deleted
+     * 
+     * @return void
+     */
     public static function confirmEventDeletion() : void {
         if(CUser::isLogged() && CUser::isAdmin()) {
             $view = new VConfirmationMessage();
@@ -140,6 +190,11 @@ class CConfirmationMessage {
         
     }
 
+    /**
+     * Confirms that a scheduled event has been deleted and all volunteers involved have been notified
+     * 
+     * @return void
+     */
     public static function confirmScheduledEventDeletion() : void {
         if(CUser::isLogged() && CUser::isAdmin()) {
             $view = new VConfirmationMessage();
@@ -153,6 +208,11 @@ class CConfirmationMessage {
         }
     }
 
+    /**
+     * Confirms that the profile of a given user has been blocked
+     * 
+     * @return void
+     */
     public static function confirmUserBlocking() : void {
         if(CUser::isLogged() && CUser::isAdmin()) {
             $view = new VConfirmationMessage();
@@ -166,6 +226,11 @@ class CConfirmationMessage {
         }
     }
 
+    /**
+     * Confirms that the profile of a given user has been unlocked
+     * 
+     * @return void
+     */
     public static function confirmUserUnlocking() : void {
         if(CUser::isLogged() && CUser::isAdmin()) {
             $view = new VConfirmationMessage();
