@@ -102,6 +102,15 @@ class EApplication {
 
     // application management methods
 
+    /**
+     * Sets the application's state to 'approved'
+     * 
+     * @throws Exception If the application cannot be approved owing to
+     * it having already been approved, having been withdrawn by the user,
+     * having been rejected by an admin or to the event having reached the
+     * maximum number of approved applications.
+     * @return void
+     */
     public function approve() : void {
         if($this->isPending() && !$this->getEvent()->isFull()) {
             $this->setState(EApplicationState::APPROVED);
@@ -116,6 +125,15 @@ class EApplication {
         }
     }
 
+    /**
+     * Sets the application's state to 'rejected'
+     * 
+     * @param string $reason The reason for rejection provided by the admin
+     * @throws Exception If the application cannot be rejected owing to
+     * it having already been rejected, having been withdrawn by the user or
+     * having been approved by an admin.
+     * @return void
+     */
     public function reject(string $reason) : void {
         if($this->isPending()) {
             $this->setState(EApplicationState::REJECTED);
@@ -129,6 +147,14 @@ class EApplication {
         }
     }
 
+    /**
+     * Sets the application's state to 'withdrawn'
+     * 
+     * @throws Exception If the application cannot be withdrawn owing to
+     * it having already been withdrawn by the candidate or having been 
+     * rejected by an admin.
+     * @return void
+     */
     public function withdraw() : void {
         if($this->isWithdrawn()) {
             throw new Exception('La presente candidatura risulta già ritirata');
@@ -139,18 +165,38 @@ class EApplication {
         }
     }
 
+    /**
+     * Checks whether the application is still to be processed by an admin
+     * 
+     * @return bool
+     */
     public function isPending() : bool {
         return ($this->getState() === EApplicationState::WAITING);
     }
 
+    /**
+     * Checks whether the application was approved by an admin and has not been withdrawn thereafter
+     * 
+     * @return bool
+     */
     public function isApproved() : bool {
         return ($this->getState() === EApplicationState::APPROVED);
     }
 
+    /**
+     * Checks whether the application has been withdrawn by the candidate
+     * 
+     * @return bool
+     */
     public function isWithdrawn() : bool {
         return ($this->getState() === EApplicationState::WITHDRAWN);
     }
 
+    /**
+     * Checks whether the application was rejected by an admin
+     * 
+     * @return bool
+     */
     public function isRejected() : bool {
         return ($this->getState() === EApplicationState::REJECTED);
     }

@@ -37,6 +37,12 @@ class EReview {
         return $this->userId;
     }
 
+    /**
+     * Sets the review text written by the user, ensuring
+     * it is not null or an empty string
+     * 
+     * @param string $text The text content of the review
+     */
     public function setText(string $text) {
         if(empty($text) || $text === '') {
             throw new Exception('Per pubblicare una recensione, si richiede un commento testuale');
@@ -48,8 +54,14 @@ class EReview {
         return $this->text;
     }
 
+    /**
+     * Sets the review rating choosen by the user, ensuring it
+     * is not null and that it is within the allowed range
+     * 
+     * @param int $rating A 1-to-5 value expressing the user's general opinion about the volunteering association
+     */
     public function setRating(int $rating) {
-        if(empty($rating)) {
+        if(!isset($rating)) {
             throw new Exception('Per pubblicare una recensione, si richiede una valutazione numerica');
         }
         if($rating < 1 || $rating > 5) {

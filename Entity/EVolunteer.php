@@ -42,6 +42,21 @@ class EVolunteer extends EUser {
 
     // 'set' and 'get' methods
 
+    /**
+     * Validates and sets a user's birth date
+     * 
+     * This method ensures that the birth date entered by the user is in
+     * a valid format, that is it logically correct, it does not belong
+     * in the future, and that the user trying to register as a volunteer
+     * is at least 18 years old.
+     * 
+     * @param string $birthDate The birth date string formatted as 'YYYY-mm-dd'
+     * @throws Exception If the birth date is not in a valid format, if it is
+     * logically wrong (e.g. February 30), if it belongs in the future, or
+     * if the user is found to be less than 18 years old (with 18 years being
+     * the minimum age in order to be able to register as a volunteer)
+     * @return bool
+     */
     public function setBirthDate(string $birthDate) {
         if(!$this->validateBirthDate($birthDate)) {
             throw new Exception('La data inserita non è in un formato valido');
@@ -195,27 +210,73 @@ class EVolunteer extends EUser {
 
     // user data validation methods
 
+    /**
+     * Validates the format of the birth date entered by the user
+     * 
+     * Returns true if the birth date provided by the user is
+     * in the format 'YYYY-mm-dd', false otherwise.
+     * 
+     * @param string $birthDate The string to be validated
+     * @return bool
+     */
     public function validateBirthDate(string $birthDate) : bool {
         $pattern = '/^(19|20)[0-9]{2}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/';
         return preg_match($pattern, $birthDate);
     }
 
+    /**
+     * Validates the user's birth place name
+     * 
+     * Returns true if the string provided by the user is
+     * compatible with an Italian city name, false otherwise
+     * 
+     * @param string $birthPlace The string to be validated
+     * @return bool
+     */
     public function validateBirthPlace(string $birthPlace) : bool {
         // Italian city names don't contain any digits
         // No Italian city has a name made up of only one character
         return ((strlen($birthPlace) >= 2) && (!preg_match('/[0-9]/', $birthPlace)));
     }
 
+    /**
+     * Validates the user's telephone number
+     * 
+     * Returns true if the string provided by the user is
+     * compatible with an Italian telephone number, false otherwise
+     * 
+     * @param string $telephoneNumber The string to be validated
+     * @return bool
+     */
     public function validateTelephoneNumber(string $telephoneNumber) : bool {
         // Italian telephone numbers are made up of exactly ten digits
         return ((strlen($telephoneNumber) === 10) && (ctype_digit($telephoneNumber)));
     }
 
+    /**
+     * Validates the user's tax code
+     * 
+     * Returns true if the string provided by the user is
+     * compatible with an Italian tax code, false otherwise.
+     * 
+     * @param string $taxCode The string to be validated
+     * @return bool
+     */
     public function validateTaxCode(string $taxCode) : bool {
         $pattern = '/^[A-Z]{6}([0-2][0-9]|[0-9]{2})[ABCDEHLMPRST]([04][1-9]|[1256][0-9]|[37][01])[A-Z][0-9]{3}[A-Z]$/';
         return preg_match($pattern, $taxCode);
     }
 
+    /**
+     * Validates the user's street address
+     * 
+     * An address is considered valid (that is, it may exist) if
+     * it is at least six characters in length, it contains at least
+     * one space character and it is not made up of only numbers.
+     * 
+     * @param string $streetAddress The string to be validated
+     * @return bool
+     */
     public function validateStreetAddress(string $streetAddress) : bool {
         $streetAddress = trim($streetAddress);
         // Italian street addresses cannot be shorter than six characters
@@ -233,6 +294,15 @@ class EVolunteer extends EUser {
         return true;
     }
 
+    /**
+     * Validates the user's house number
+     * 
+     * Examples of Italian house numbers considered to
+     * be valid include '1234', '20', '123/b', '75A'.
+     * 
+     * @param string $houseNumber The string to be validated
+     * @return bool
+     */
     public function validateHouseNumber(string $houseNumber) : bool {
         $pattern = '/^[0-9]{1,4}(\/?[a-zA-Z])?$/';
         return preg_match($pattern, $houseNumber);
@@ -240,6 +310,13 @@ class EVolunteer extends EUser {
     
     // additional methods
 
+    /**
+     * Calculates the volunteer's age
+     * 
+     * This is a 'utility method' for HTML presentation purposes.
+     * 
+     * @return int The volunteer's age in years
+     */
     public function calculateAge() : int {
         $now = new DateTime('now');
         $interval = $this->birthDate->diff($now);
@@ -247,6 +324,14 @@ class EVolunteer extends EUser {
         return $interval->format('%Y');
     }
 
+    /**
+     * Retrieves the volunteer's name initials
+     * 
+     * This is a 'utility method' for HTML presentation purposes.
+     * 
+     * @return string The concatenation of the volunteer's first name and last
+     * name first characters
+     */
     public function getInitials() : string {
         return strtoupper($this->getFirstName()[0] . $this->getLastName()[0]);
     }

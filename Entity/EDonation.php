@@ -37,6 +37,13 @@ class EDonation {
         return $this->userId;
     }
 
+    /**
+     * Sets the amount of money the user is donating, ensuring it
+     * is not less than 10 euros (minimum amount for a donation to
+     * the volunteering association)
+     * 
+     * @param int $amount The amount of money choosen by the user
+     */
     public function setAmount(int $amount) {
         if ($amount < 10) {
             throw new Exception('L\'importo minimo per le donazioni è di 10 euro');

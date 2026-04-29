@@ -140,6 +140,16 @@ class EEvent {
         $this->applications[] = $application;
     }
 
+    /**
+     * Fetches the number of historically approved applications
+     * 
+     * This method calculates the number of 'historically approved
+     * applications' in that it considers every application ever
+     * approved by an admin, regardless of it having been withdrawn
+     * by the candidate at a later time.
+     * 
+     * @return int $count The number of historically approved applications
+     */
     public function getApprovedApplicationsNumber() : int {
         $count = 0;
         if(count($this->applications) === 0) return $count;
@@ -152,6 +162,12 @@ class EEvent {
         return $count;
     }
 
+    /**
+     * Fetches the event's pending applications, i.e. the applications whose
+     * state is 'waiting'
+     * 
+     * @return array $pendingApplications The event's pending applications
+     */
     public function getPendingApplications() {
         $pendingApplications = array();
 
@@ -164,6 +180,13 @@ class EEvent {
         return $pendingApplications;
     }
 
+    /**
+     * Fetches the event's 'accepted' (or 'currently approved') applications, 
+     * i.e. the applications which have been approved by an admin and have not 
+     * been withdrawn by the candidate thereafter
+     * 
+     * @return array $acceptedApplications The event's 'currently approved' applications
+     */
     public function getAcceptedApplications() {
         $acceptedApplications = array();
 
@@ -176,20 +199,44 @@ class EEvent {
         return $acceptedApplications;
     }
 
+    /**
+     * Fetches the event's 'active' applications, i.e. the applications which have neither been
+     * rejected by an admin nor withdrawn by the candidate
+     * 
+     * @return array The event's 'active' applications
+     */
     public function getCurrentApplications() {
         return array_merge($this->getAcceptedApplications(), $this->getPendingApplications());
     }
 
+    /**
+     * Determines whether the event has reached the maximum number of historically 
+     * approved applications
+     * 
+     * @return bool 
+     */
     public function isFull() : bool {
         return ($this->maxVolunteerNumber === $this->getApprovedApplicationsNumber());
     }
 
     // additional methods
 
+    /**
+     * Determines whether the event is currently scheduled (i.e. does not belong 
+     * in the past) or not
+     * 
+     * @return bool 
+     */
     public function isScheduled() : bool {
         return $this->getDateAndTime() > new DateTime('now');
     }
 
+    /**
+     * Fetches the event's 'participants', i.e. the candidates whose applications have
+     * been approved and not withdrawn thereafter
+     * 
+     * @return array $participants The event's participants
+     */
     public function getParticipants() {
         $participants = array();
         $approvedApplications = $this->getAcceptedApplications();
@@ -201,18 +248,48 @@ class EEvent {
         return $participants;
     }
 
+    /**
+     * Fetches the number of pending applications
+     * 
+     * @return int The number of pending applications
+     */
     public function getPendingApplicationsNumber() : int {
         return count($this->getPendingApplications());
     }
 
+    /**
+     * Fetches the number of 'currently approved' applications
+     * 
+     * This method calculates the number of 'accepted' (or 'currently approved')
+     * applications, i.e. the number of the event's applications which have been approved by 
+     * an admin and have not been withdrawn by the candidate thereafter.
+     * 
+     * @return int The number of 'currently approved' applications
+     */
     public function getAcceptedApplicationsNumber() : int {
         return count($this->getAcceptedApplications());
     }
 
+    /**
+     * Determines how many 'empty slots' are left until the
+     * maximum number of volunteers is reached
+     * 
+     * This is a 'utility method' for HTML presentation purposes
+     * 
+     * @return int The number of applications which may still be approved
+     */
     public function getEmptySlotsNumber() : int {
         return ($this->getMaxVolunteerNumber() - $this->getAcceptedApplicationsNumber());
     }
 
+    /**
+     * Determines the ratio (as a percentage) of the 'currently approved' 
+     * applications to the maximum volunteers number
+     * 
+     * This is a 'utility method' for HTML presentation purposes
+     * 
+     * @return int
+     */
     public function getProgress() : int {
         $n = $this->getAcceptedApplicationsNumber();
         $d = $this->getMaxVolunteerNumber();
