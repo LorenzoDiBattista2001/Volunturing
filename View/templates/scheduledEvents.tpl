@@ -8,60 +8,44 @@
 
 {block name="body"}
   <div class="container my-5 flex-grow-1">
-    <div class="row g-4">
-      <aside class="col-lg-3">
-        <div class="card border-0 shadow-sm p-3">
-          <h5 class="fw-bold mb-3"><i class="bi bi-filter-left me-2"></i>Filtri</h5>
-          <div class="mb-3">
-            <label class="form-label small fw-bold text-muted">Area di Intervento</label>
-            <select class="form-select form-select-sm">
-              <option>Tutte le aree</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label class="form-label small fw-bold text-muted">Periodo</label>
-            <input type="date" class="form-control form-control-sm mb-2">
-            <input type="date" class="form-control form-control-sm">
-          </div>
-          <button class="btn btn-warning btn-sm w-100 fw-bold">Applica</button>
-        </div>
-      </aside>
+    <div class="row justify-content-center">
 
-      <section class="col-lg-6">
-        <div class="row row-cols-1 g-4">
-        {foreach $scheduledEvents as $event}
-          <div class="col">
-            <div class="card h-100 border shadow-sm hover-lift">
-              <div class="card-header d-flex justify-content-center">
-                <span class="badge border {if $event->getFieldOfAction()->value == 'Tutela ambientale'} 
-                                            bg-success text-white border-success-subtle
-                                          {elseif $event->getFieldOfAction()->value == 'Supporto logistico'} 
-                                            bg-info text-dark border-info-subtle
-                                          {elseif $event->getFieldOfAction()->value == 'Raccolta fondi'} 
-                                            bg-danger text-white border-danger-subtle
-                                          {elseif $event->getFieldOfAction()->value == 'Colletta alimentare'} 
-                                            bg-warning text-dark border-warning-subtle
-                                          {/if}
-                                          rounded-pill">
-                  {$event->getFieldOfAction()->value}</span>
-              </div>
-              <div class="card-body">
-                <div class="d-flex mb-3 justify-content-between align-items-center">
-                  <h5 class="card-title fw-bold text-dark">{$event->getTitle()}</h5>
-                  <small class="text-muted fw-semibold">
-                    <i class="bi bi-calendar3 me-1"></i>{$event->getDateAndTime()->format('Y-m-d')}</small> 
-                </div>
-                <div class="d-flex align-items-end mb-2">
-                  <a href="/events/detail/{$event->getEventId()}" class="btn me-auto btn-outline-warning btn-sm fw-bold stretched-link">
-                    Dettagli &rarr;
-                  </a>
+      <section class="col-lg-8">
+
+        <h1 class="h1 fw-bold mb-1 text-dark text-center">I nostri Eventi Programmati</h1>
+        <p class="text-muted text-center mb-3">Seleziona un evento per scoprirne i dettagli e inviare la tua candidatura</p>
+
+        <div class="row row-cols-1 g-3">
+          {foreach $scheduledEvents as $event}
+            <div class="col">
+              <div class="card h-100 border-0 shadow-sm hover-lift">
+                <div class="card-body p-4">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="badge border {if $event->getFieldOfAction()->value == 'Tutela ambientale'} 
+                                                bg-success text-white border-success-subtle
+                                              {elseif $event->getFieldOfAction()->value == 'Supporto logistico'} 
+                                                bg-info text-dark border-info-subtle
+                                              {elseif $event->getFieldOfAction()->value == 'Raccolta fondi'} 
+                                                bg-danger text-white border-danger-subtle
+                                              {elseif $event->getFieldOfAction()->value == 'Colletta alimentare'} 
+                                                bg-warning text-dark border-warning-subtle
+                                              {/if}
+                                              rounded-pill">
+                          {$event->getFieldOfAction()->value}</span>
+                    <small class="text-muted"><i class="bi bi-calendar3 me-1"></i> {$event->getDateAndTime()->format('d-m-Y')}</small>
+                  </div>
+                  <h5 class="card-title fw-bold">{$event->getTitle()}</h5>
+                  <p class="card-text text-muted small mb-3">{$event->getPlace()}</p>
+                  <div class="d-flex align-items-center">
+                        <span class="text-warning fw-bold small">Dettagli &rarr;</span>
+                        <a href="/events/detail/{$event->getEventId()}" class="stretched-link"></a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        {/foreach}   
+          {/foreach}     
         </div>
       </section>
+    </div>
   </div>
-</div>
 {/block}
