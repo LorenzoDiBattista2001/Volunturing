@@ -77,7 +77,7 @@
                       </td>
                       <td class="text-center small text-muted">{$participant->getTaxCode()}</td>
                       <td class="pe-4 text-end no-print">
-                        <a href="#" class="btn btn-light btn-sm border">
+                        <a href="/admin/users/select/{$participant->getUserId()}" class="btn btn-light btn-sm border">
                           <i class="bi bi-eye"></i>
                         </a>
                       </td>

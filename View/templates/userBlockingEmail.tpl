@@ -57,7 +57,7 @@
                         <td style="background-color: #212529; padding: 30px; color: #adb5bd; font-size: 12px; text-align: center; line-height: 1.5;">
                             <p style="margin: 0 0 10px 0;">
                                 <strong>Volontorino OdV</strong><br/>
-                                Via dei Volontari, 123 - Torino (TO)
+                                Via dei Volontari, 123 - Torino 10121 (TO)
                             </p>
                             <p style="margin: 0;">
                                 Ricevi questa email perch&eacute; sei un utente registrato su Volunturing.<br/>
