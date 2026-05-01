@@ -67,7 +67,7 @@
                   <div class="row flex-column">
                     <div class="col-sm-6 mb-3">
                     <div class="info-label">Data</div>
-                    <div class="info-value"><i class="bi bi-calendar-event me-2"></i>{$event->getDateAndTime()->format('Y-m-d')}</div>
+                    <div class="info-value"><i class="bi bi-calendar-event me-2"></i>{$event->getDateAndTime()->format('d-m-Y')}</div>
                   </div>
                   <div class="col-sm-6 mb-3">
                     <div class="info-label">Ora</div>

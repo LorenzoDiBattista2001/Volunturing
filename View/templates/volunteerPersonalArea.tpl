@@ -127,7 +127,7 @@
                     {foreach $donations as $donation}
                     <tr>
                       <td class="ps-4">
-                        {$donation->getDate()->format('Y-m-d')}
+                        {$donation->getDate()->format('d-m-Y')}
                       </td>
                       <td>
                         <p>
@@ -166,7 +166,7 @@
                     {foreach $reviews as $review}
                     <tr>
                       <td class="ps-4">
-                        {$review->getDate()->format('Y-m-d')}
+                        {$review->getDate()->format('d-m-Y')}
                       </td>
                       <td>
                         <p>

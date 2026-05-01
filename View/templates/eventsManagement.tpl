@@ -54,7 +54,7 @@
                       <div class="d-flex mb-3 justify-content-between align-items-center">
                         <h5 class="card-title fw-bold text-dark">{$event->getTitle()}</h5>
                           <small class="text-muted fw-semibold">
-                            <i class="bi bi-calendar3 me-1"></i>{$event->getDateAndTime()->format('Y-m-d')}</small>
+                            <i class="bi bi-calendar3 me-1"></i>{$event->getDateAndTime()->format('d-m-Y')}</small>
                 
                       </div>
                       <div class="d-flex align-items-end mb-2">

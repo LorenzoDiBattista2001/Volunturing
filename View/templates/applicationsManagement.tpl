@@ -35,7 +35,7 @@
                                           {/if}
                                           rounded-pill me-2">
                           {$event->getFieldOfAction()->value}</span>
-                    <small class="text-muted fw-bold"><i class="bi bi-calendar3 me-1"></i> {$event->getDateAndTime()->format('Y-m-d')}</small>
+                    <small class="text-muted fw-bold"><i class="bi bi-calendar3 me-1"></i> {$event->getDateAndTime()->format('d-m-Y')}</small>
                   </div>
                   <h5 class="fw-bold mb-1">{$event->getTitle()}</h5>
                   <p class="small text-muted mb-0"><i class="bi bi-geo-alt me-1"></i> {$event->getPlace()}</p>
