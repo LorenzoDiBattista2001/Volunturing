@@ -3,8 +3,24 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+/**
+ * Class for configuring and using the PHPMailer library
+ */
 class UEmail {
 
+    /**
+     * Sends an email to the specified address using SMTP
+     * 
+     * This method sets the SMTP host, username, password and port to the relevant
+     * values globally defined in the configuration file, creates an HTML email with
+     * a given subject and body and tries to send it to the specified address
+     * 
+     * @param string $recipientEmail The email address to send the email message to
+     * @param string $recipientName The name associated with the email address of the recipient
+     * @param string $subject The subject of the email to be sent
+     * @param string $body The HTML body of the email to be sent
+     * @return bool true if the email was successfully sent (i.e. accepted by the SMPT server), false otherwise
+     */
     public static function sendEmail(string $recipientEmail, string $recipientName, string $subject, string $body) : bool {
         $mail = new PHPMailer(true);
 
