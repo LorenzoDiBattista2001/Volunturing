@@ -6,6 +6,12 @@ class FEvent {
                     :maxVolunteerNumber, :fieldOfAction, :candidateRequirements, :description)';
     const TABLE = 'event';
 
+    /**
+     * Stores an event object on the database
+     * 
+     * @param \EEvent $event The event object to be stored
+     * @return bool true on success, false otherwise
+     */
     public static function store(EEvent $event) : bool {
         $query = 'INSERT INTO ' . self::TABLE . ' VALUES' . self::VALUES;
         $params = array(':event_id' => null, 
@@ -28,6 +34,12 @@ class FEvent {
         }
     }
 
+    /**
+     * Fetches an event from the database based on its id
+     * 
+     * @param int $eventId The id of the event to be fetched
+     * @return \EEvent The event object to be instantiated
+     */
     public static function load(int $eventId) : EEvent {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE event_id = :event_id';
         $params = array(':event_id' => $eventId);
@@ -43,6 +55,12 @@ class FEvent {
         return $event;
     }
 
+    /**
+     * Fetches an event from the database and locks access to its row within a transaction
+     * 
+     * @param int $eventId The id of the event to be fetched and whose row to lock the access to
+     * @return \EEvent The event object to be instantiated
+     */
     public static function loadForUpdate(int $eventId) : EEvent {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE event_id = :event_id FOR UPDATE';
         $params = array(':event_id' => $eventId);
@@ -58,6 +76,9 @@ class FEvent {
         return $event;
     }
 
+    /**
+     * Retrieves all the events stored on the database
+     */
     public static function loadAllEvents() {
         $query = 'SELECT * FROM ' . self::TABLE . ' ORDER BY date ASC';
 
@@ -76,6 +97,11 @@ class FEvent {
         return $events;
     }
 
+    /**
+     * Retrieves all the events whose date is greater than a given date
+     * 
+     * @param string $date The date to be compared with the events dates
+     */
     public static function loadEventsByDate(string $date) {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE date >= :date ORDER BY date ASC';
         $params = array(':date' => $date);
@@ -95,6 +121,11 @@ class FEvent {
         return $events;
     }
 
+    /**
+     * Fetches the total number of scheduled events
+     * 
+     * @return int The number of scheduled events (i.e. events that do not belong in the past)
+     */
     public static function getScheduledEventsNumber() : int {
         $query = 'SELECT COUNT(event_id) FROM ' . self::TABLE . ' WHERE date >= :date';
         $params = array(':date' => date('Y-m-d'));
@@ -104,6 +135,12 @@ class FEvent {
         return $stmt->fetch(PDO::FETCH_COLUMN);
     }
 
+    /**
+     * Removes the event with the specified id from the database
+     * 
+     * @param int $eventId The id of the event to be removed from the database
+     * @return bool true on success, false otherwise
+     */
     public static function delete(int $eventId) : bool {
         $query = 'DELETE FROM ' . self::TABLE . ' WHERE event_id = :event_id';
         $params = array(':event_id' => $eventId);
@@ -116,6 +153,12 @@ class FEvent {
         }
     }
 
+    /**
+     * Checks whether an event exists based on an id
+     * 
+     * @param int $eventId The id of the event to check the existence of
+     * @return bool true if the event exists, false otherwise
+     */
     public static function exist(int $eventId) : bool {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE event_id = :event_id';
         $params = array(':event_id' => $eventId);
@@ -124,7 +167,6 @@ class FEvent {
 
         return ($stmt->rowCount() > 0);
     }
-    
 }
 
 ?>

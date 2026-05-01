@@ -5,6 +5,12 @@ class FDonation {
     const VALUES = '(:donation_id, :user_id, :amount, :date, :reason)';
     const TABLE = 'donation';
 
+    /**
+     * Stores a donation object on the database
+     * 
+     * @param \EDonation $donation The donation object to be stored
+     * @return bool true on success, false otherwise
+     */
     public static function store(EDonation $donation) : bool {
         $query = 'INSERT INTO ' . self::TABLE . ' VALUES' . self::VALUES;
         $params = array(':donation_id' => null,
@@ -20,6 +26,12 @@ class FDonation {
         }
     }
 
+    /**
+     * Retrieves a donation object based on its id
+     * 
+     * @param int $donationId The id of the donation to be fetched
+     * @return \EDonation The donation object to be instantiated
+     */
     public static function load(int $donationId) : EDonation {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE donation_id = :donation_id';
         $params = array(':donation_id' => $donationId);
@@ -34,6 +46,11 @@ class FDonation {
         return $donation;
     }
 
+    /**
+     * Retrieves all the donations made by a given user
+     * 
+     * @param int $userId The id of the user who made the donations
+     */
     public static function loadByUser(int $userId) {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE user_id = :user_id';
         $params = array(':user_id' => $userId);
@@ -51,6 +68,12 @@ class FDonation {
         return $donations;
     }
 
+    /**
+     * Checks whether a donation exists based on an id
+     * 
+     * @param int $donationId The id of the donation to check the existence of
+     * @return bool true if the donation exists, false otherwise
+     */
     public static function exist(int $donationId) : bool {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE donation_id = :donation_id';
         $params = array(':donation_id' => $donationId);
@@ -59,7 +82,6 @@ class FDonation {
 
         return ($stmt->rowCount() > 0);
     }
-    
 }
 
 ?>

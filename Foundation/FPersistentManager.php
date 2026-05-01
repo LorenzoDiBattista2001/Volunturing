@@ -15,6 +15,12 @@ class FPersistentManager {
         return self::$instance;
     }
 
+    /**
+     * Stores an object on the database
+     * 
+     * @param object $obj The entity object to be stored
+     * @return bool true on success, false otherwise
+     */
     public function storeObject(object $obj) : bool {
 
         $class = get_class($obj);
@@ -28,6 +34,13 @@ class FPersistentManager {
         return $fclass::store($obj);
     }
 
+    /**
+     * Removes an object from the database
+     * 
+     * @param string $className The class name of the entity object to be removed
+     * @param int $objectId The id of the object
+     * @return bool true on success, false otherwise
+     */
     public function deleteObject(string $className, int $objectId) : bool {
 
         if($className === 'EVolunteer' || $className === 'EAdmin') {
@@ -113,6 +126,11 @@ class FPersistentManager {
         return $donation;
     }
 
+    /**
+     * Retrieves an array of application objects based on the id of the event they were submitted for
+     * 
+     * @param \EEvent $event The event the applications were submitted for
+     */
     public function retrieveApplicationsByEvent(EEvent $event) {
 
         $applications = FApplication::loadByEvent($event->getEventId());
@@ -125,6 +143,11 @@ class FPersistentManager {
         return $applications;
     }
 
+    /**
+     * Retrieves an array of application objects based on the id of the candidate
+     * 
+     * @param \EVolunteer $candidate The volunteer who submitted the applications
+     */
     public function retrieveApplicationsByUser(EVolunteer $candidate) {
 
         $applications = FApplication::loadByUser($candidate->getUserId());
@@ -137,6 +160,9 @@ class FPersistentManager {
         return $applications;
     }
 
+    /**
+     * Retrieves all the reviews stored on the database along with their authors
+     */
     public function retrieveAllReviews() {
         $reviews = FReview::loadAllReviews();
 
@@ -147,6 +173,11 @@ class FPersistentManager {
         return $reviews;
     }
 
+    /**
+     * Retrieves all the reviews written by a given user
+     * 
+     * @param \EVolunteer $author The volunteer who wrote the reviews to be fetched
+     */
     public function retrieveReviewsByUser(EVolunteer $author) {
 
         $reviews = FReview::loadByUser($author->getUserId());
@@ -158,6 +189,11 @@ class FPersistentManager {
         return $reviews;
     }
 
+    /**
+     * Retrieves all the donations made by a given user
+     * 
+     * @param \EVolunteer $donator The volunteer whose donations are to be fetched
+     */
     public function retrieveDonationsByUser(EVolunteer $donator) {
 
         $donations = FDonation::loadByUser($donator->getUserId());
@@ -181,24 +217,53 @@ class FPersistentManager {
         return FUser::updateEmail($userId, $email);
     }
 
+    /**
+     * Updates a volunteer's account information
+     * 
+     * @param \EVolunteer $volunteer The volunteer whose account information is to be updated
+     * @return bool true on success, false otherwise
+     */
     public function updateUserProfile(EVolunteer $volunteer) : bool {
         return FUser::updateProfile($volunteer);
     }
 
+    /**
+     * Updates the state of a volunteer's profile
+     * 
+     * @param \EVolunteer $volunteer The volunteer whose state is to be updated
+     * @return bool true on success, false otherwise
+     */
     public function updateVolunteerState(EVolunteer $volunteer) : bool {
         return FUser::updateVolunteerState($volunteer);
     }
 
+    /**
+     * Checks for the existence of an object of a given class based on ad id
+     * 
+     * @param string $class The class name of the object to check the existence of
+     * @param int $objectId The id of the object to check the existence of
+     * @return bool true if the object exists, false otherwise
+     */
     public function existObject(string $class, int $objectId) : bool {
 
         $fclass = 'F' . substr($class, 1);
         return $fclass::exist($objectId);
     }
 
+    /**
+     * Checks for the existence of an application based on the IDs of a user and of an event
+     * 
+     * @param int $userId The id of the user whose application to check the existence of
+     * @param int $eventId The id of the event which the application whose existence is to be checked belongs to
+     * @return bool true if the application exists, false otherwise
+     */
     public function existApplication(int $userId, int $eventId) : bool {
         return FApplication::exist($userId, $eventId);
     }
 
+    /**
+     * Retrieves statistics for the admin's dashboard
+     */
     public function loadDashboardData() {
         $data = array();
 
@@ -209,14 +274,30 @@ class FPersistentManager {
         return $data;
     }
 
+    /**
+     * Retrieves the mean of the ratings of all the reviews stored on the database
+     * 
+     * @return int The average rating expressed by the volunteers
+     */
     public function retrieveAverageRating() : int {
         return FReview::getAverageRating();
     }
 
+    /**
+     * Retrieves the number of reviews stored on the database
+     * 
+     * @return int The total number of reviews stored on the database
+     */
     public function retrieveReviewsNumber() : int {
         return FReview::getReviewsNumber();
     }
 
+    /**
+     * Checks whether a given email address belongs to a registered user
+     * 
+     * @param string $email The email address to check the existence of
+     * @return bool true if the email address belongs to a registered user, false otherwise
+     */
     public function emailExist(string $email) : bool {
         return FUser::emailExist($email);
     }
