@@ -71,7 +71,7 @@
             <p class="small text-light mb-0">&copy; 2025 Volontorino - Tutti i diritti riservati.</p>
           </div>
           <div class="col-md-6 text-center text-md-end">
-            <p class="mb-2"><i class="bi bi-geo-alt-fill text-warning me-2"></i> Via dei Volontari, 123 - Torino</p>
+            <p class="mb-2"><i class="bi bi-geo-alt-fill text-warning me-2"></i> Via dei Volontari, 123 - 10121 Torino (TO)</p>
             <div class="d-flex justify-content-center justify-content-md-end gap-3 mt-3">
               <a href="#" class="text-white fs-4"><i class="bi bi-facebook"></i></a>
               <a href="#" class="text-white fs-4"><i class="bi bi-instagram"></i></a>

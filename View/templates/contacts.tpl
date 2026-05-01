@@ -24,7 +24,7 @@
               </div>
               <div>
                 <h6 class="fw-bold mb-1">Dove trovarci</h6>
-                <p class="text-muted small mb-0">Via dei Volontari, 123<br>10100 Torino (TO)</p>
+                <p class="text-muted small mb-0">Via dei Volontari, 123<br>10121 Torino (TO)</p>
               </div>
             </div>
 
@@ -53,19 +53,19 @@
             <h6 class="fw-bold mb-3 border-bottom pb-2">I nostri riferimenti</h6>
             <ul class="list-unstyled mb-0">
               <li class="mb-3">
-                <div class="fw-bold small">Mario Rossi</div>
+                <div class="fw-bold small">Norberto Novelli</div>
                 <div class="text-muted x-small">Presidente</div>
-                <a href="mailto:mario.admin@volunturing.it" class="text-brand text-decoration-none small">mario.admin@volunturing.it</a>
+                <a href="mailto:novelli.norberto@example.com" class="text-brand text-decoration-none small">novelli.norberto@example.com</a>
               </li>
               <li class="mb-3">
-                <div class="fw-bold small">Luca Bianchi</div>
-                <div class="text-muted x-small">Logistica Eventi</div>
-                <a href="mailto:l.bianchi@volunturing.it" class="text-brand text-decoration-none small">l.bianchi@volunturing.it</a>
+                <div class="fw-bold small">Chiara Sartirana</div>
+                <div class="text-muted x-small">Responsabile dei servizi informatici</div>
+                <a href="mailto:sartirana.chiara@example.com" class="text-brand text-decoration-none small">sartirana.chiara@example.com</a>
               </li>
               <li>
-                <div class="fw-bold small">Sara Verdi</div>
-                <div class="text-muted x-small">Ufficio Stampa</div>
-                <a href="mailto:s.verdi@volunturing.it" class="text-brand text-decoration-none small">s.verdi@volunturing.it</a>
+                <div class="fw-bold small">Amedeo Chiamparino</div>
+                <div class="text-muted x-small">Supervisore d'ufficio</div>
+                <a href="mailto:chiamparino.amedeo@example.com" class="text-brand text-decoration-none small">chiamparino.amedeo@example.com</a>
               </li>
             </ul>
           </div>
