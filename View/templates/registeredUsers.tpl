@@ -27,7 +27,7 @@
                   </thead>
                   <tbody>
                   {foreach $registeredUsers as $user}
-                    <tr class="app-row">
+                    <tr class="user-row">
                       <td class="ps-4 py-3">
                         <div class="d-flex align-items-center">
                           <div class="avatar-circle">{$user->getInitials()}</div>

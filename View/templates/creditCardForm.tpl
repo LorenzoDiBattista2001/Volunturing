@@ -58,14 +58,14 @@
                 </div>
 
                 <div class="row g-3 mb-4">
-                  <div class="col-6">
+                  <div class="col-12 col-sm-6">
                     <label for="expirationDate" class="form-label">Scadenza (MM/AA)</label>
                     <div class="input-group">
                       <input type="text" class="form-control border-0 bg-light" id="expirationDate" name="expirationDate" placeholder="MM/AA" maxlength="5" required>
                       <div class="invalid-feedback" id="expirationDateFeedback"></div>
                     </div>
                   </div>
-                  <div class="col-6">
+                  <div class="col-12 col-sm-6">
                     <label for="cvv" class="form-label">CVV / CVC</label>
                     <div class="input-group">
                       <input type="password" class="form-control border-0 bg-light" id="cvv" name="cvv" placeholder="123" maxlength="3" required>

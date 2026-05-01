@@ -64,7 +64,7 @@
                   </thead>
                   <tbody>
                   {foreach $participants as $participant}
-                    <tr class="app-row">
+                    <tr class="user-row">
                       <td class="ps-4 py-3">
                         <div>
                           <div class="fw-bold">{$participant->getFirstName()} {$participant->getLastName()}</div>

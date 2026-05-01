@@ -1,34 +1,35 @@
 :root {
-        --brand-orange: #ff9411;
-      }
+  --brand-orange: #ff9411;
+}
 
-      .bg-brand { background-color: var(--brand-orange) !important; }
-      .text-brand { color: var(--brand-orange) !important; }
+.bg-brand { background-color: var(--brand-orange) !important; }
+.text-brand { color: var(--brand-orange) !important; }
       
-      .stat-card {
-        border-left: 4px solid var(--brand-orange);
-      }
+.stat-card {
+  border-left: 4px solid var(--brand-orange);
+}
 
-      .app-row {
-        transition: all 0.2s ease;
-      }
-      .app-row:hover {
-        background-color: #f8f9fa;
-      }
+.app-row {
+  transition: all 0.2s ease;
+}
 
-      .avatar-circle {
-        width: 45px;
-        height: 45px;
-        background-color: #e9ecef;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        font-weight: bold;
-        color: #495057;
-      }
+.app-row:hover {
+  background-color: #f8f9fa;
+}
 
-      .progress {
-        height: 10px;
-        border-radius: 5px;
-      }
+.avatar-circle {
+  width: 45px;
+  height: 45px;
+  background-color: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: bold;
+  color: #495057;
+}
+
+.progress {
+  height: 10px;
+  border-radius: 5px;
+}

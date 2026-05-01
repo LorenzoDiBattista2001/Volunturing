@@ -92,7 +92,11 @@
 
             <h5 class="fw-bold mb-4 mt-4 border-bottom pb-2 text-brand">Auto-descrizione</h5>
             <div class="bg-light p-3 rounded-3 text-secondary italic">
-              "{$volunteer->getDescription()}"
+              {if $volunteer->getDescription() == null}
+                L'utente non ha condiviso informazioni su di s&egrave;
+              {else}
+                "{$volunteer->getDescription()}"
+              {/if}
             </div>
           </div>
         </div>
