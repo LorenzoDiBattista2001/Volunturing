@@ -2,6 +2,9 @@
 
 class VStartSmarty {
     
+    /**
+     * Instantiates Smarty object and configures Smarty directories
+     */
     public static function configuration() {
         $smarty = new \Smarty\Smarty();
 

@@ -2,6 +2,11 @@
 
 class CWriteReview {
 
+    /**
+     * Displays the form for writing a review
+     * 
+     * @return void
+     */
     public static function writeReview() : void {
         if(CUser::isLogged() && CUser::isVolunteer()) {
             $view = new VWriteReview();
@@ -11,6 +16,11 @@ class CWriteReview {
         }
     }
 
+    /**
+     * Creates the review written by the user and stores it on the database
+     * 
+     * @return void
+     */
     public static function publishReview() : void {
         if(CUser::isLogged() && CUser::isVolunteer()) {
             if(UServer::getRequestMethod() === 'POST') {

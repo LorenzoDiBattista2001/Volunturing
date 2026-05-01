@@ -2,6 +2,14 @@
 
 class CManageEvents {
 
+    /**
+     * Displays the admin's events management area
+     * 
+     * Retrieves all the events stored on the database (including past 
+     * events waiting to be removed) for the admin to act upon.
+     * 
+     * @return void
+     */
     public static function accessEventManagement() : void {
         if(CUser::isLogged() && CUser::isAdmin()) {
             $events = FPersistentManager::getInstance()->retrieveAllEvents();
@@ -12,6 +20,11 @@ class CManageEvents {
         }
     }
 
+    /**
+     * Displays the form for creating an event
+     * 
+     * @return void
+     */
     public static function addEvent() : void {
         if(CUser::isLogged() && CUser::isAdmin()) {
             $view = new VManageEvents();
@@ -21,6 +34,14 @@ class CManageEvents {
         }
     }
 
+    /**
+     * Creates the event and stores it on the database
+     * 
+     * Extracts the event's details specified by the admin from the form fields, 
+     * tries to instantiate an event object and saves it on the database
+     * 
+     * @return void
+     */
     public static function createEvent() : void {
         if(CUser::isLogged() && CUser::isAdmin()) {
             if(UServer::getRequestMethod() === 'POST') {
@@ -61,6 +82,12 @@ class CManageEvents {
         }
     }
 
+    /**
+     * Displays an event's details and management options
+     * 
+     * @param int $eventId The id of the event the admin wants to act upon
+     * @return void
+     */
     public static function selectEvent(int $eventId) : void {
         if(CUser::isLogged() && CUser::isAdmin()) {
             $event = FPersistentManager::getInstance()->loadEvent($eventId);
@@ -71,6 +98,17 @@ class CManageEvents {
         }
     }
 
+    /**
+     * Removes the specified event from the database
+     * 
+     * This method checks whether the event the admin means to delete is currently scheduled
+     * or not. If it is, an email is automatically created and sent to all users currently having
+     * an application, either pending or already approved, to that event, and only then is the
+     * event removed; otherwise, the event is simply removed from the database.
+     * 
+     * @param int $eventId The id of the event the admin is deleting
+     * @return void
+     */
     public static function deleteEvent(int $eventId) {
         if(CUser::isLogged() && CUser::isAdmin()) {
             if(UServer::getRequestMethod() === 'POST') {
@@ -118,6 +156,13 @@ class CManageEvents {
         }
     }
 
+    /**
+     * Displays the list of volunteers whose applications to the event have
+     * been approved (and not withdrawn thereafter).
+     *
+     * @param int $eventId The id of the event whose participants are to be displayed
+     * @return void
+     */
     public static function showVolunteersList(int $eventId) : void {
         if(CUser::isLogged() && CUser::isAdmin()) {
             $view = new VManageEvents();

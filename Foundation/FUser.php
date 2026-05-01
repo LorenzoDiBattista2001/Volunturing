@@ -7,6 +7,12 @@ class FUser {
                     :isBlocked, :isAdmin)';
     const TABLE = 'user';
     
+    /**
+     * Identifies the type of user to be stored and calls the relevant private method
+     * 
+     * @param \EUser $user The user object to be stored on the database
+     * @return bool true on success, false otherwise
+     */
     public static function store(EUser $user) : bool {
         $class = get_class($user);
         if ($class === 'EVolunteer') {
@@ -16,6 +22,12 @@ class FUser {
         }
     }
 
+    /**
+     * Stores a volunteer object on the database
+     * 
+     * @param \EVolunteer $volunteer The volunteer object to be stored on the database
+     * @return bool true on success, false otherwise
+     */
     private static function storeVolunteer(EVolunteer $volunteer) : bool {
         $query = 'INSERT INTO ' . self::TABLE . ' VALUES' . self::VALUES;
         $params = array(':user_id' => null,
@@ -42,6 +54,12 @@ class FUser {
         }
     }
 
+    /**
+     * Stores an admin object on the database
+     * 
+     * @param \EAdmin $admin The admin object to be stored on the database
+     * @return bool true on success, false otherwise
+     */
     private static function storeAdmin(EAdmin $admin) : bool {
         $query = 'INSERT INTO ' . self::TABLE . ' VALUES' . self::VALUES;
         $params = array(':user_id' => null,
@@ -67,6 +85,13 @@ class FUser {
         }
     }
 
+    /**
+     * Updates a volunteer's password on the database
+     * 
+     * @param int $userId The id of the volunteer whose password is to be updated
+     * @param string $password The hashed string of the new password
+     * @return bool true on success, false otherwise
+     */
     public static function updatePassword(int $userId, string $password) : bool {
         $query = 'UPDATE ' . self::TABLE . ' SET password = :password WHERE user_id = :user_id';
         $params = array(':user_id' => $userId, ':password' => $password);
@@ -79,6 +104,13 @@ class FUser {
         }
     }
 
+    /**
+     * Updates a volunteer's email on the database
+     * 
+     * @param int $userId The id of the volunteer whose email is to be updated
+     * @param string $password The new email
+     * @return bool true on success, false otherwise
+     */
     public static function updateEmail(int $userId, string $email) : bool {
         $query = 'UPDATE ' . self::TABLE . ' SET email = :email WHERE user_id = :user_id';
         $params = array(':user_id' => $userId, ':email' => $email);
@@ -91,6 +123,12 @@ class FUser {
         }
     }
 
+    /**
+     * Updates a volunteer's account information
+     * 
+     * @param \EVolunteer $volunteer The volunteer whose account information is to be updated
+     * @return bool true on success, false otherwise
+     */
     public static function updateProfile(EVolunteer $volunteer) : bool {
         $query = 'UPDATE ' . self::TABLE . ' SET telephoneNumber = :telephoneNumber, streetAddress = :streetAddress,
                     houseNumber = :houseNumber, description = :description WHERE user_id = :user_id';
@@ -106,6 +144,12 @@ class FUser {
         }
     }
 
+    /**
+     * Updates the state of a volunteer's profile
+     * 
+     * @param \EVolunteer $volunteer The volunteer whose state is to be updated
+     * @return bool true on success, false otherwise
+     */
     public static function updateVolunteerState(EVolunteer $volunteer) : bool {
         $query = 'UPDATE ' . self::TABLE . ' SET isBlocked = :isBlocked WHERE user_id = :user_id';
         $params = array(':user_id' => $volunteer->getUserId(), ':isBlocked' => (int) $volunteer->isBlocked());
@@ -118,6 +162,12 @@ class FUser {
         }
     }
     
+    /**
+     * Fetches a user based on their database id and instantiates it
+     * 
+     * @param int $userId The id of the user to be fetched
+     * @return \EUser The user object to be instantiated
+     */
     public static function loadById(int $userId) : EUser {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE user_id = :user_id';
         $params = array(':user_id' => $userId);
@@ -157,6 +207,12 @@ class FUser {
 
     }
 
+    /**
+     * Fetches a user based on their email address and instantiates it
+     * 
+     * @param string $email The email address of the user to be fetched
+     * @return \EUser The user object to be instantiated
+     */
     public static function loadByEmail(string $email) : EUser {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE email = :email';
         $params = array(':email' => $email);
@@ -196,6 +252,11 @@ class FUser {
 
     }
 
+    /**
+     * Fetches all volunteer users
+     * 
+     * @return array Volunteer objects
+     */
     public static function loadAllVolunteers() {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE isAdmin = :isAdmin';
         $params = array(':isAdmin' => false);
@@ -223,6 +284,11 @@ class FUser {
         return $volunteers;
     }
 
+    /**
+     * Fetches the number of volunteer users
+     * 
+     * @return int The total number of volunteer registered users
+     */
     public static function getVolunteersCount() : int {
         $query = 'SELECT COUNT(*) FROM ' . self::TABLE . ' WHERE isAdmin = :isAdmin';
         $params = array(':isAdmin' => false);
@@ -232,6 +298,12 @@ class FUser {
         return $stmt->fetch(PDO::FETCH_COLUMN);
     }
 
+    /**
+     * Checks whether a user exists with a given id
+     * 
+     * @param int $userId The id of the user to check the existence of
+     * @return bool true if the user exists, false otherwise
+     */
     public static function exist(int $userId) : bool {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE user_id = :user_id';
         $params = array(':user_id' => $userId);
@@ -241,6 +313,12 @@ class FUser {
         return ($stmt->rowCount() > 0);
     }
 
+    /**
+     * Checks whether a given email address belongs to a registered user
+     * 
+     * @param string $email The email address to check the existence of
+     * @return bool true if the email address belongs to a registered user, false otherwise
+     */
     public static function emailExist(string $email) : bool {
         $query = 'SELECT * FROM ' . self::TABLE . ' WHERE email = :email';
         $params = array(':email' => $email);

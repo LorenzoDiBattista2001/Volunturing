@@ -8,6 +8,9 @@ class VWriteReview {
         $this->smarty = VStartSmarty::configuration();
     }
 
+    /**
+     * Displays the form for writing a review
+     */
     public function displayReviewForm() {
         $this->smarty->display('reviewForm.tpl');
     }

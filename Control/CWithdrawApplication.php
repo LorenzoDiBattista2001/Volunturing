@@ -2,6 +2,13 @@
 
 class CWithdrawApplication {
 
+    /**
+     * Displays the details of an application submitted by the user
+     * 
+     * @param int $userId The id of the candidate
+     * @param int $eventId The id of the event the application was submitted for
+     * @return void
+     */
     public static function selectApplication(int $userId, int $eventId) : void {
         if(CUser::isLogged() && USession::getInstance()->getSessionElement('user') === $userId) {
             $pm = FPersistentManager::getInstance();
@@ -18,6 +25,13 @@ class CWithdrawApplication {
         }
     }
 
+    /**
+     * Withdraws an application of the user's
+     * 
+     * @param int $userId The id of the candidate who the application belongs to
+     * @param int $eventId The id of the event the application was submitted for
+     * @return void
+     */
     public static function withdrawApplication(int $userId, int $eventId) : void {
         if(CUser::isLogged() && USession::getInstance()->getSessionElement('user') === $userId) {
             $pm = FPersistentManager::getInstance();
