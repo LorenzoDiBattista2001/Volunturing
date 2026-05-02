@@ -8,31 +8,17 @@
 
 {block name="body"}
     <div class="container my-5 flex-grow-1">
-        <div class="row g-4">
-            <aside class="col-lg-3">
-                <div class="card border-0 shadow-sm p-3">
-                    <h5 class="fw-bold mb-3"><i class="bi bi-filter-left me-2"></i>Filtri</h5>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold text-muted">Area di Intervento</label>
-                        <select class="form-select form-select-sm">
-                            <option>Tutte le aree</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold text-muted">Periodo</label>
-                        <input type="date" class="form-control form-control-sm mb-2">
-                        <input type="date" class="form-control form-control-sm">
-                    </div>
-                    <button class="btn btn-warning btn-sm w-100 fw-bold">Applica</button>
-                </div>
-            </aside>
-
+        <div class="row justify-content-center">
+  
             <section class="col-lg-6">
+
+              <h1 class="h1 fw-bold mb-1 text-dark text-center">GESTIONE EVENTI</h1>
+              <p class="text-muted text-center mb-5">Seleziona un evento dalla lista, oppure clicca su 'Aggiungi Evento' per crearne uno nuovo</p>
 
               <div class="d-flex justify-content-center mb-4">
                 <a href="/admin/events/add" class="d-flex align-items-center justify-content-center btn btn-primary w-50" id="add"><span class="fw-bold">AGGIUNGI EVENTO</span><i class="bi bi-plus-circle ms-2"></i></a>
               </div>
-
+              
               <div class="row row-cols-1 g-4">
               {foreach $events as $event}
                   <div class="col">
