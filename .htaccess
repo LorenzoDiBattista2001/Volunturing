@@ -1,17 +1,13 @@
 # Redirect any URL that doesn't match an existing file or directory to "index.php"
 
-# line 4: start the rewrite engine
+# Start the rewrite engine
 RewriteEngine on 
-RewriteBase /
 
-RewriteCond %{HTTPS} off
-RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+#RewriteCond %{HTTPS} off
+#RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# the rewrite rule at line 12 is subject to the following condition: 
-# if the requested file does not exist, redirects to the script "index.php"
+# Redirect to index.php if the requested file or directory does not exist
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule .* index.php
-
-AddHandler av-php84 .php

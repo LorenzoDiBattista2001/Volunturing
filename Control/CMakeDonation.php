@@ -45,7 +45,7 @@ class CMakeDonation {
     }
 
     /**
-     * Performes (simulates) the bank transaction for the user's donation
+     * Performs (simulates) the bank transaction for the user's donation
      * 
      * This method retrieves the credit card details from the HTML form fields and
      * the donation's amount and reason from the session variables, tries to instantiate
