@@ -1,5 +1,8 @@
 test.php
 config.test.php
-var/
+var/templates_c/*
+var/cache/*
+!var/templates_c/.gitkeep
+!var/cache/.gitkeep
 vendor/
 composer.lock
