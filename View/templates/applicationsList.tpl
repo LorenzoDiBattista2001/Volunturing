@@ -104,7 +104,7 @@
                           <td class="small text-muted">{$application->getSubmittedDateTime()->format('d-m-Y')}, {$application->getSubmittedDateTime()->format('H:i')}</td>
                   
                           <td class="pe-4 text-end">
-                            <a href="/admin/applications/select/{$application->getEventId()}/{$application->getUserId()}" class="btn btn-warning btn-sm fw-bold px-3">
+                            <a href="{$root}/admin/applications/select/{$application->getEventId()}/{$application->getUserId()}" class="btn btn-warning btn-sm fw-bold px-3">
                               VALUTA <i class="bi bi-arrow-right ms-1"></i>
                             </a>
                           </td>

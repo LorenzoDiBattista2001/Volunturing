@@ -13,7 +13,7 @@ class CDeleteReviews {
             $view = new VDeleteReviews();
             $view->displayReviewsList($reviews);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -41,23 +41,23 @@ class CDeleteReviews {
                         throw new Exception('No review found with id ' . $reviewId);
                     }
                 } catch (PDOException $e) {
-                    header('Location: /errors/500');
+                    header('Location: ' . ROOT . '/errors/500');
                     return;
                 } catch (Exception $e) {
                     USession::getInstance()->setSessionElement('reviewDeletionError', $e->getMessage());
-                    header('Location: /admin/errors/reviewDeletion');
+                    header('Location: ' . ROOT . '/admin/errors/reviewDeletion');
                     return;
                 }
                 if(!$pm->deleteObject(EReview::class, $reviewId)) {
-                    header('Location: /errors/500');
+                    header('Location: ' . ROOT . '/errors/500');
                     return;
                 }
-                header('Location: /admin/reviews/manage');
+                header('Location: ' . ROOT . '/admin/reviews/manage');
             } else {
-                header('Location: /admin/reviews/manage');
+                header('Location: ' . ROOT . '/admin/reviews/manage');
             }
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 }

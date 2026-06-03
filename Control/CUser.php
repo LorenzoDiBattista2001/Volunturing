@@ -31,22 +31,22 @@ class CUser {
                 $user = new EVolunteer($firstName, $lastName, $email, $password, $birthDate,
                     $birthPlace, $taxCode, $telephoneNumber, $streetAddress, $houseNumber, isBlocked: false);
                 if(!FPersistentManager::getInstance()->storeObject($user)) {
-                    header('Location: /errors/500');
+                    header('Location: ' . ROOT . '/errors/500');
                     return;
                 }
                 USession::getInstance()->setSessionElement('user', $user->getUserId());
                 USession::getInstance()->setSessionElement('role', 'volunteer');
-                header('Location: /account/personal');
+                header('Location: ' . ROOT . '/account/personal');
             } catch (PDOException $pe) {
-                header('Location: /errors/500');
+                header('Location: ' . ROOT . '/errors/500');
                 return;
             } catch (Exception $e) {
                 USession::getInstance()->setSessionElement('registrationError', $e->getMessage());
-                header('Location: /errors/registration');
+                header('Location: ' . ROOT . '/errors/registration');
                 return;
             }
         } else {
-            header('Location: /auth/registrationForm');
+            header('Location: ' . ROOT . '/auth/registrationForm');
         }
     }
 
@@ -60,7 +60,7 @@ class CUser {
             $view = new VUser();
             $view->displayRegistrationForm();
         } else {
-            header('Location: /');
+            header('Location: ' . ROOT . '/');
         }
     }
 
@@ -87,21 +87,21 @@ class CUser {
 
                     $user->setPassword($newPassword);
                     if(!$pm->updateUserPassword($user->getUserId(), $user->getPassword())) {
-                        header('Location: /errors/500');
+                        header('Location: ' . ROOT . '/errors/500');
                         return;
                     }
                 } catch (Exception $e) {
                     USession::getInstance()->setSessionElement('changePasswordError', $e->getMessage());
-                    header('Location: /errors/changePassword');
+                    header('Location: ' . ROOT . '/errors/changePassword');
                     return;
                 }
-                header('Location: /confirmations/passwordChanged');
+                header('Location: ' . ROOT . '/confirmations/passwordChanged');
 
             } else {
-                header('Location: /errors/403');
+                header('Location: ' . ROOT . '/errors/403');
             }
         } else {
-            header('Location: /account/personal');
+            header('Location: ' . ROOT . '/account/personal');
         }
     }
 
@@ -128,23 +128,23 @@ class CUser {
 
                     $user->setEmail($email);
                     if(!FPersistentManager::getInstance()->updateUserEmail($user->getUserId(), $email)) {
-                        header('Location: /errors/500');
+                        header('Location: ' . ROOT . '/errors/500');
                         return;
                     }
                 } catch (PDOException $pe) {
-                    header('Location: /errors/500');
+                    header('Location: ' . ROOT . '/errors/500');
                     return;
                 } catch (Exception $e) {
                     USession::getInstance()->setSessionElement('changeEmailError', $e->getMessage());
-                    header('Location: /errors/changeEmail');
+                    header('Location: ' . ROOT . '/errors/changeEmail');
                     return;
                 }
-                header('Location: /confirmations/emailChanged');
+                header('Location: ' . ROOT . '/confirmations/emailChanged');
             } else {
-                header('Location: /account/personal');
+                header('Location: ' . ROOT . '/account/personal');
             }
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -168,19 +168,19 @@ class CUser {
                     $volunteer->setDescription($description);
                 } catch (Exception $e) {
                     USession::getInstance()->setSessionElement('profileUpdateError', $e->getMessage());
-                    header('Location: /errors/profileUpdate');
+                    header('Location: ' . ROOT . '/errors/profileUpdate');
                     return;
                 }
                 if(!FPersistentManager::getInstance()->updateUserProfile($volunteer)) {
-                    header('Location: /errors/500');
+                    header('Location: ' . ROOT . '/errors/500');
                     return;
                 }
-                header('Location: /confirmations/profileUpdated');
+                header('Location: ' . ROOT . '/confirmations/profileUpdated');
             } else {
-                header('Location: /account/manage');
+                header('Location: ' . ROOT . '/account/manage');
             }
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -209,20 +209,20 @@ class CUser {
 
                     USession::getInstance()->setSessionElement('user', $user->getUserId());
                     USession::getInstance()->setSessionElement('role', $role);
-                    header('Location: /account/personal');
+                    header('Location: ' . ROOT . '/account/personal');
                 } else {
                     throw new Exception('Password errata');
                 }
             } catch (PDOException $pe) {
-                header('Location: /errors/500');
+                header('Location: ' . ROOT . '/errors/500');
                 return;
             } catch (Exception $e){
                 USession::getInstance()->setSessionElement('loginError', $e->getMessage());
-                header('Location: /errors/login');
+                header('Location: ' . ROOT . '/errors/login');
                 return;
             }
         } else {
-            header('Location: /auth/loginForm');
+            header('Location: ' . ROOT . '/auth/loginForm');
         }
     }
 
@@ -236,7 +236,7 @@ class CUser {
             $view = new VUser();
             $view->displayLoginForm();
         } else {
-            header('Location: /account/personal');
+            header('Location: ' . ROOT . '/account/personal');
         }
     }
 
@@ -252,9 +252,9 @@ class CUser {
 
             $params = session_get_cookie_params();
             setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
-            header('Location: /confirmations/logout');
+            header('Location: ' . ROOT . '/confirmations/logout');
         } else {
-            header('Location: /');
+            header('Location: ' . ROOT . '/');
         }
     }
 
@@ -301,7 +301,7 @@ class CUser {
                 $view->displayVolunteerPersonalArea($user);
             }
         } else {
-            header('Location: /auth/loginForm');
+            header('Location: ' . ROOT . '/auth/loginForm');
         }
     }
 
@@ -316,7 +316,7 @@ class CUser {
             $volunteer = FPersistentManager::getInstance()->loadUserById(USession::getInstance()->getSessionElement('user'));
             $view->displayVolunteerAccountManagement($volunteer);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 

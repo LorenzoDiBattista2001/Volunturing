@@ -17,8 +17,8 @@
               Volontorino nasce dal desiderio di rendere il volontariato accessibile, moderno e trasparente. Crediamo che ogni piccolo gesto, se coordinato, possa generare un impatto straordinario sul nostro territorio.
             </p>
             <div class="d-flex gap-3">
-              <a href="/events/explore" class="btn btn-warning text-dark fw-bold px-4 py-2 rounded-pill">SCOPRI GLI EVENTI</a>
-              <a href="/about/contacts" class="btn btn-outline-dark fw-bold px-4 py-2 rounded-pill">CONTATTACI</a>
+              <a href="{$root}/events/explore" class="btn btn-warning text-dark fw-bold px-4 py-2 rounded-pill">SCOPRI GLI EVENTI</a>
+              <a href="{$root}/about/contacts" class="btn btn-outline-dark fw-bold px-4 py-2 rounded-pill">CONTATTACI</a>
             </div>
           </div>
           <div class="col-lg-5 offset-lg-1 d-none d-lg-block">

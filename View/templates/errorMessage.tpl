@@ -21,7 +21,7 @@
             
             <div class="d-grid gap-2 col-md-10 mx-auto">
               {if $isLogged}
-                <a href="/account/personal/" class="btn btn-home fw-bold py-3 shadow-sm">
+                <a href="{$root}/account/personal/" class="btn btn-home fw-bold py-3 shadow-sm">
                   {if $isAdmin}
                     TORNA ALLA DASHBOARD
                   {else}
@@ -29,7 +29,7 @@
                   {/if}
                 </a>
               {else}
-                <a href="/" class="btn btn-home fw-bold py-3 shadow-sm">
+                <a href="{$root}/" class="btn btn-home fw-bold py-3 shadow-sm">
                   TORNA ALLA HOME
                 </a>
               {/if}

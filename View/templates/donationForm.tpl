@@ -26,7 +26,7 @@
             </div>
 
             <div class="card-body p-4 p-md-5">
-              <form action="/donation/amount" method="POST" class="needs-validation" novalidate>
+              <form action="{$root}/donation/amount" method="POST" class="needs-validation" novalidate>
                 
                 <div class="mb-4">
                   <label class="form-label mb-3">Scegli un importo rapido</label>

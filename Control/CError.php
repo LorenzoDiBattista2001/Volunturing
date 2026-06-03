@@ -135,7 +135,7 @@ class CError {
 
             $view->displayErrorMessage($header, $text);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -152,7 +152,7 @@ class CError {
             $view = new VError();
             $view->displayLoginWarning();
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -173,7 +173,7 @@ class CError {
 
             $view->displayErrorMessage($header, $text);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -192,7 +192,7 @@ class CError {
 
             $view->displayErrorMessage($header, $text);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -211,7 +211,7 @@ class CError {
 
             $view->displayErrorMessage($header, $text);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -230,7 +230,7 @@ class CError {
 
             $view->displayErrorMessage($header, $text);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -251,7 +251,7 @@ class CError {
 
             $view->displayErrorMessage($header, $text, isAdmin: true);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -270,7 +270,7 @@ class CError {
 
             $view->displayErrorMessage($header, $text, isAdmin: true);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -289,7 +289,7 @@ class CError {
 
             $view->displayErrorMessage($header, $text, isAdmin: true);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -308,7 +308,7 @@ class CError {
 
             $view->displayErrorMessage($header, $text, isAdmin: true);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -327,7 +327,7 @@ class CError {
 
             $view->displayErrorMessage($header, $text, isAdmin: true);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -346,7 +346,7 @@ class CError {
 
             $view->displayErrorMessage($header, $text, isAdmin: true);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 }

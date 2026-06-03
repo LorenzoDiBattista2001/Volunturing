@@ -18,7 +18,7 @@
             </div>
 
             <div class="card-body p-4 p-md-5">
-              <form action="/auth/login" method="POST" class="needs-validation" novalidate>
+              <form action="{$root}/auth/login" method="POST" class="needs-validation" novalidate>
                 
                 <div class="mb-4">
                   <label for="email" class="form-label">Indirizzo Email</label>
@@ -45,7 +45,7 @@
                     ACCEDI <i class="bi bi-box-arrow-in-right ms-2"></i>
                   </button>
                   <p class="mt-4 mb-0 small text-muted">
-                    Non hai ancora un account? <a href="/auth/registrationForm" class="text-warning fw-bold text-decoration-none">Registrati ora</a>
+                    Non hai ancora un account? <a href="{$root}/auth/registrationForm" class="text-warning fw-bold text-decoration-none">Registrati ora</a>
                   </p>
                 </div>
   

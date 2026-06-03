@@ -18,7 +18,7 @@
             </div>
 
             <div class="card-body p-4 p-md-5">
-              <form action="/auth/register" method="POST" class="needs-validation" novalidate id="registrationForm">
+              <form action="{$root}/auth/register" method="POST" class="needs-validation" novalidate id="registrationForm">
                 
                 <div class="row g-3 mb-4">
                   <div class="col-md-6">
@@ -103,7 +103,7 @@
                     REGISTRATI ORA <i class="bi bi-person-plus-fill ms-2"></i>
                   </button>
                   <p class="mt-4 mb-0 small text-muted">
-                    Hai gi&agrave; un account? <a href="/auth/loginForm" class="text-warning fw-bold text-decoration-none">Accedi</a>
+                    Hai gi&agrave; un account? <a href="{$root}/auth/loginForm" class="text-warning fw-bold text-decoration-none">Accedi</a>
                   </p>
                 </div>
   

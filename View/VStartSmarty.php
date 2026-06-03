@@ -15,6 +15,7 @@ class VStartSmarty {
 
         $smarty->assign('css_path', CSS_PATH);
         $smarty->assign('js_path', JS_PATH);
+        $smarty->assign('root', ROOT);
 
         $smarty->assign('isLogged', CUser::isLogged());
 

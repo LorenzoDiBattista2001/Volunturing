@@ -35,7 +35,7 @@
             </div>
 
             <div class="card-body p-4 p-md-5">
-              <form action="/donation/confirm" method="POST" class="needs-validation" novalidate id="form">
+              <form action="{$root}/donation/confirm" method="POST" class="needs-validation" novalidate id="form">
                 
                 <div class="row g-3 mb-4">
                   <div class="col-md-6">

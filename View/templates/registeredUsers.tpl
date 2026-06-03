@@ -43,7 +43,7 @@
                       </td>
                       <td class="text-center">{if $user->isBlocked()}Bloccato{else}Attivo{/if}</td>
                       <td class="pe-4 text-end no-print">
-                        <a href="/admin/users/select/{$user->getUserId()}" class="btn btn-light btn-sm border">
+                        <a href="{$root}/admin/users/select/{$user->getUserId()}" class="btn btn-light btn-sm border">
                           <i class="bi bi-eye"></i>
                         </a>
                       </td>

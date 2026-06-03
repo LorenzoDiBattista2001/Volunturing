@@ -24,12 +24,12 @@
                   <!-- Call to Action -->
                   <div class="row g-3 justify-content-center">
                     <div class="col-sm-5 col-md-4">
-                      <a href="/events/explore" class="btn btn-warning w-100 py-3 fw-bold shadow">
+                      <a href="{$root}/events/explore" class="btn btn-warning w-100 py-3 fw-bold shadow">
                         <i class="bi bi-calendar-event me-2"></i> ESPLORA EVENTI
                       </a>
                     </div>
                     <div class="col-sm-5 col-md-4">
-                      <a href="/donation/start" class="btn btn-outline-success w-100 py-3 fw-bold">
+                      <a href="{$root}/donation/start" class="btn btn-outline-success w-100 py-3 fw-bold">
                         <i class="bi bi-heart-fill me-2"></i> DONA ORA
                       </a>
                     </div>
@@ -52,7 +52,7 @@
               </div>
               <h4 class="card-title fw-bold">Chi Siamo</h4>
               <p class="card-text text-muted small">Conosci la nostra missione, la nostra storia e il team che lavora ogni giorno sul territorio.</p>
-              <a href="/about/association" class="btn btn-link text-warning fw-bold text-decoration-none">Scopri di più &rarr;</a>
+              <a href="{$root}/about/association" class="btn btn-link text-warning fw-bold text-decoration-none">Scopri di più &rarr;</a>
             </div>
           </div>
         </div>
@@ -66,7 +66,7 @@
               </div>
               <h4 class="card-title fw-bold">Dicono di Noi</h4>
               <p class="card-text text-muted small">Leggi le storie e le testimonianze dei volontari che hanno già partecipato ai nostri eventi.</p>
-              <a href="/about/reviews" class="btn btn-link text-warning fw-bold text-decoration-none">Leggi recensioni &rarr;</a>
+              <a href="{$root}/about/reviews" class="btn btn-link text-warning fw-bold text-decoration-none">Leggi recensioni &rarr;</a>
             </div>
           </div>
         </div>
@@ -80,7 +80,7 @@
               </div>
               <h4 class="card-title fw-bold">Contatti</h4>
               <p class="card-text text-muted small">Hai domande? Scrivici o vieni a trovarci nella nostra sede per parlare dei tuoi progetti.</p>
-              <a href="/about/contacts" class="btn btn-link text-warning fw-bold text-decoration-none">Approfondisci &rarr;</a>
+              <a href="{$root}/about/contacts" class="btn btn-link text-warning fw-bold text-decoration-none">Approfondisci &rarr;</a>
             </div>
           </div>
         </div>

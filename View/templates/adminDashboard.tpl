@@ -44,7 +44,7 @@
                   <h5 class="fw-bold mb-0">Gestione Eventi</h5>
                 </div>
                 <p class="small text-muted">Aggiungi nuovi eventi di volontariato, o eliminane di precedenti</p>
-                <a href="/admin/events/manage" class="stretched-link"></a>
+                <a href="{$root}/admin/events/manage" class="stretched-link"></a>
               </div>
             </div>
             <div class="col-md-6">
@@ -56,7 +56,7 @@
                   <h5 class="fw-bold mb-0">Valuta Candidature</h5>
                 </div>
                 <p class="small text-muted">Esamina le candidature dei volontari e decidi se approvarle o meno</p>
-                <a href="/admin/applications/manage" class="stretched-link"></a>
+                <a href="{$root}/admin/applications/manage" class="stretched-link"></a>
               </div>
             </div>
             <div class="col-md-6">
@@ -68,7 +68,7 @@
                   <h5 class="fw-bold mb-0">Anagrafica Utenti</h5>
                 </div>
                 <p class="small text-muted">Gestisci i profili dei volontari, blocca o riabilita gli accessi.</p>
-                <a href="/admin/users/manage" class="stretched-link"></a>
+                <a href="{$root}/admin/users/manage" class="stretched-link"></a>
               </div>
             </div>
             <div class="col-md-6">
@@ -80,7 +80,7 @@
                   <h5 class="fw-bold mb-0">Modera Recensioni</h5>
                 </div>
                 <p class="small text-muted">Monitora i feedback degli utenti e rimuovi contenuti inappropriati.</p>
-                <a href="/admin/reviews/manage" class="stretched-link"></a>
+                <a href="{$root}/admin/reviews/manage" class="stretched-link"></a>
               </div>
             </div>
           </div>
@@ -129,7 +129,7 @@
             <h5 class="modal-title fw-bold" id="passwordModalLabel">Cambia Password</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <form class="needs-validation" novalidate action="/account/changePassword" method="POST">
+          <form class="needs-validation" novalidate action="{$root}/account/changePassword" method="POST">
             <div class="modal-body p-4">
               <div class="mb-3">
                 <label class="form-label small fw-bold">Password Attuale</label>
@@ -160,7 +160,7 @@
             <h5 class="modal-title fw-bold" id="emailModalLabel">Modifica Email</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <form class="needs-validation" novalidate action="/account/changeEmail" method="POST">
+          <form class="needs-validation" novalidate action="{$root}/account/changeEmail" method="POST">
             <div class="modal-body p-4">
               <div class="mb-3">
                 <label class="form-label small fw-bold">Nuovo Indirizzo Email</label>

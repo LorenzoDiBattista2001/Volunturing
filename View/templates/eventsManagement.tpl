@@ -16,7 +16,7 @@
               <p class="text-muted text-center mb-5">Seleziona un evento dalla lista, oppure clicca su 'Aggiungi Evento' per crearne uno nuovo</p>
 
               <div class="d-flex justify-content-center mb-4">
-                <a href="/admin/events/add" class="d-flex align-items-center justify-content-center btn btn-primary w-50" id="add"><span class="fw-bold">AGGIUNGI EVENTO</span><i class="bi bi-plus-circle ms-2"></i></a>
+                <a href="{$root}/admin/events/add" class="d-flex align-items-center justify-content-center btn btn-primary w-50" id="add"><span class="fw-bold">AGGIUNGI EVENTO</span><i class="bi bi-plus-circle ms-2"></i></a>
               </div>
               
               <div class="row row-cols-1 g-4">
@@ -44,7 +44,7 @@
                 
                       </div>
                       <div class="d-flex align-items-end mb-2">
-                        <a href="/admin/events/select/{$event->getEventId()}" class="btn btn-outline-primary px-3 me-auto btn-sm fw-bold stretched-link"><i class="bi bi-pencil-square me-1"></i>
+                        <a href="{$root}/admin/events/select/{$event->getEventId()}" class="btn btn-outline-primary px-3 me-auto btn-sm fw-bold stretched-link"><i class="bi bi-pencil-square me-1"></i>
                           Ispeziona
                         </a>
                       </div>

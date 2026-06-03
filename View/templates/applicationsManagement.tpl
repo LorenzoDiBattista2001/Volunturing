@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="col-md-2 d-flex align-items-center justify-content-center p-3">
-                  <a href="/admin/applications/process/{$event->getEventId()}" class="btn btn-warning fw-bold w-100 py-3 shadow-sm">
+                  <a href="{$root}/admin/applications/process/{$event->getEventId()}" class="btn btn-warning fw-bold w-100 py-3 shadow-sm">
                     VALUTA <i class="bi bi-chevron-right ms-1"></i>
                   </a>
                 </div>

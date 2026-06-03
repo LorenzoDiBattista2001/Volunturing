@@ -21,12 +21,12 @@
             
             <div class="row g-3 justify-content-center">
                 <div class="col-md-6">
-                    <a href="/auth/registrationForm" class="btn btn-home w-100 fw-bold py-3 shadow-sm">
+                    <a href="{$root}/auth/registrationForm" class="btn btn-home w-100 fw-bold py-3 shadow-sm">
                         REGISTRATI
                     </a>
                 </div>
                 <div class="col-md-6">
-                    <a href="/auth/loginForm" class="btn btn-home w-100 fw-bold py-3 shadow-sm">
+                    <a href="{$root}/auth/loginForm" class="btn btn-home w-100 fw-bold py-3 shadow-sm">
                         LOGIN
                     </a>
                 </div>

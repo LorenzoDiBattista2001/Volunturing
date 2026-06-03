@@ -18,7 +18,7 @@
             <p class="text-muted fs-5 mb-4">{$text}</p>
             
             <div class="d-grid gap-2 col-md-8 mx-auto">
-              <a href="/" class="btn btn-warning fw-bold py-3 shadow-sm">
+              <a href="{$root}/" class="btn btn-warning fw-bold py-3 shadow-sm">
                 VAI ALLA HOME
               </a>
             </div>

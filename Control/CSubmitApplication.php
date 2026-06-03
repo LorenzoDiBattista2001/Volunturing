@@ -25,7 +25,7 @@ class CSubmitApplication {
     public static function selectEvent(int $eventId) : void {
         $event = FPersistentManager::getInstance()->loadEvent($eventId);
         if(!$event->isScheduled()) {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
             return;
         }
         $view = new VSubmitApplication();
@@ -48,7 +48,7 @@ class CSubmitApplication {
             $pm = FPersistentManager::getInstance();
             $event = $pm->loadEvent($eventId);
             if(!$event->isScheduled()) {
-                header('Location: /errors/403');
+                header('Location: ' . ROOT . '/errors/403');
                 return;
             }
 
@@ -63,7 +63,7 @@ class CSubmitApplication {
              }
             $view->displayApplicationForm($event);
         } else {
-            header('Location: /errors/loginRequired');
+            header('Location: ' . ROOT . '/errors/loginRequired');
         }
     }
 
@@ -80,7 +80,7 @@ class CSubmitApplication {
                 $pm = FPersistentManager::getInstance();
                 $event = $pm->loadEvent($eventId);
                 if(!$event->isScheduled()) {
-                    header('Location: /errors/403');
+                    header('Location: ' . ROOT . '/errors/403');
                     return;
                 }
 
@@ -90,16 +90,16 @@ class CSubmitApplication {
                 $application->setEventId($eventId);
 
                 if(!$pm->storeObject($application)) {
-                    header('Location: /errors/500');
+                    header('Location: ' . ROOT . '/errors/500');
                     return;
                 }
 
-                header('Location: /confirmations/applicationSubmitted');
+                header('Location: ' . ROOT . '/confirmations/applicationSubmitted');
             } else {
-                header('Location: /events/apply/' . $eventId);
+                header('Location: ' . ROOT . '/events/apply/' . $eventId);
             }
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 

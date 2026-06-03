@@ -65,14 +65,14 @@
           <div class="card border-0 shadow-sm p-4 sticky-top" style="top: 100px;">
             <h5 class="fw-bold mb-4">Azione Richiesta</h5>
             
-            <form action="/admin/applications/reject/{$event->getEventId()}/{$candidate->getUserId()}" method="POST">
+            <form action="{$root}/admin/applications/reject/{$event->getEventId()}/{$candidate->getUserId()}" method="POST">
               <div class="mb-4">
                 <label for="reasonForRejection" class="form-label small fw-bold text-muted">Motivazione Rifiuto (Opzionale)</label>
                 <textarea class="form-control bg-light border-0" id="reasonForRejection" name="reasonForRejection" rows="3" placeholder="Inserisci qui il motivo se decidi di rifiutare..." required></textarea>
               </div>
 
               <div class="d-grid gap-3">
-                <a href="/admin/applications/approve/{$event->getEventId()}/{$candidate->getUserId()}" class="btn btn-success py-3 fw-bold shadow-sm">
+                <a href="{$root}/admin/applications/approve/{$event->getEventId()}/{$candidate->getUserId()}" class="btn btn-success py-3 fw-bold shadow-sm">
                   <i class="bi bi-check-circle me-2"></i>APPROVA CANDIDATURA
                 </a>
                 <button type="submit" class="btn btn-outline-danger py-2 fw-bold">

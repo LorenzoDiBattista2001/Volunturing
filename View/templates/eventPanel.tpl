@@ -71,7 +71,7 @@
 
             <div class="d-grid gap-3">
 
-              <a href="/admin/events/participants/{$event->getEventId()}" class="btn btn-outline-primary btn-admin-action">
+              <a href="{$root}/admin/events/participants/{$event->getEventId()}" class="btn btn-outline-primary btn-admin-action">
                 <i class="bi bi-people-fill me-2"></i> Visualizza Utenti Iscritti
               </a>
 
@@ -99,7 +99,7 @@
             <h5 class="modal-title fw-bold" id="deleteModalLabel">Conferma Eliminazione</h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <form action="/admin/events/delete/{$event->getEventId()}" method="POST" class="needs-validation" novalidate>
+          <form action="{$root}/admin/events/delete/{$event->getEventId()}" method="POST" class="needs-validation" novalidate>
             <div class="modal-body p-4">
               <p>Stai per eliminare l'evento {if $isScheduled}programmato{else}concluso{/if} <strong>{$event->getTitle()}</strong>.</p>
               

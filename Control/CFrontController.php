@@ -114,6 +114,7 @@ class CFrontController {
         set_exception_handler([self::class, 'globalExceptionHandler']);
 
         $requestURI = UServer::getRequestURI();
+        $requestURI = str_replace(ROOT, '', $requestURI);
         $this->checkHTTPS($requestURI);
 
         $URIElements = explode('/', trim($requestURI, '/'));
@@ -131,12 +132,12 @@ class CFrontController {
 
     private function handleAdminRequests(array $elements) : void {
         if(!CUser::isLogged() || !CUser::isAdmin()) {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
             return;
         }
 
         if(count($elements) < 2) {
-            header('Location: /errors/404');
+            header('Location: ' . ROOT . '/errors/404');
             return;
         }
 
@@ -151,16 +152,16 @@ class CFrontController {
             if(class_exists($controller) && method_exists($controller, $method)) {
                 call_user_func_array([$controller, $method], $params);
             } else {
-                header('Location: /errors/404');
+                header('Location: ' . ROOT . '/errors/404');
             }
         } else {
-            header('Location: /errors/404');
+            header('Location: ' . ROOT . '/errors/404');
         }
     }
 
     private function handleVolunteersRequests(array $elements) : void {
         if(count($elements) < 2) {
-            header('Location: /errors/404');
+            header('Location: ' . ROOT . '/errors/404');
             return;
         }
 
@@ -175,16 +176,16 @@ class CFrontController {
             if(class_exists($controller) && method_exists($controller, $method)) {
                 call_user_func_array([$controller, $method], $params);
             } else {
-                header('Location: /errors/404');
+                header('Location: ' . ROOT . '/errors/404');
             }
         } else {
-            header('Location: /errors/404');
+            header('Location: ' . ROOT . '/errors/404');
         }
     }
 
     private function handleSystemOperations(array $elements) : void {
         if(count($elements) < 1) {
-            header('Location: /errors/404');
+            header('Location: ' . ROOT . '/errors/404');
             return;
         }
 
@@ -197,10 +198,10 @@ class CFrontController {
             if(method_exists(CUser::class, $method)) {
                 call_user_func_array([CUser::class, $method], $params);
             } else {
-                header('Location: /errors/404');
+                header('Location: ' . ROOT . '/errors/404');
             }
         } else {
-            header('Location: /errors/404');
+            header('Location: ' . ROOT . '/errors/404');
         }
     }
 
@@ -220,7 +221,7 @@ class CFrontController {
 
     public static function globalExceptionHandler(Throwable $exception) : void {
         error_log("Uncaught exception: " . $exception->getMessage() . " in " . $exception->getFile() . " at row " . $exception->getLine());
-        header('Location: /errors/500');
+        header('Location: ' . ROOT . '/errors/500');
         exit();
     }
 }

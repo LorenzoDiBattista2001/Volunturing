@@ -38,7 +38,7 @@
                   <p class="card-text text-muted small mb-3">{$event->getPlace()}</p>
                   <div class="d-flex align-items-center">
                         <span class="text-warning fw-bold small">Dettagli &rarr;</span>
-                        <a href="/events/detail/{$event->getEventId()}" class="stretched-link"></a>
+                        <a href="{$root}/events/detail/{$event->getEventId()}" class="stretched-link"></a>
                   </div>
                 </div>
               </div>

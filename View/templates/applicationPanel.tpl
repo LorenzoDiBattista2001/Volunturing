@@ -77,7 +77,7 @@
                 <i class="bi bi-x-circle me-2"></i>RITIRA CANDIDATURA
               </button>
               {/if}
-              <a href="/account/personal" class="btn btn-light py-2 small border text-muted">
+              <a href="{$root}/account/personal" class="btn btn-light py-2 small border text-muted">
                 Torna all'area personale
               </a>
             </div>
@@ -114,7 +114,7 @@
           </div>
           <div class="modal-footer border-0 bg-light">
             <button type="button" class="btn btn-secondary fw-bold px-4" data-bs-dismiss="modal">Annulla</button>
-            <form action="/applications/withdraw/{$application->getUserId()}/{$application->getEventId()}" method="POST">
+            <form action="{$root}/applications/withdraw/{$application->getUserId()}/{$application->getEventId()}" method="POST">
                 <button type="submit" class="btn btn-danger fw-bold px-4">Conferma Ritiro</button>
             </form>
           </div>

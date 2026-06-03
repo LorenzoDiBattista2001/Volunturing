@@ -12,7 +12,7 @@ class CMakeDonation {
             $view = new VMakeDonation();
             $view->displayDonationForm();
         } else {
-            header('Location: /errors/loginRequired');
+            header('Location: ' . ROOT . '/errors/loginRequired');
         }
     }
 
@@ -37,10 +37,10 @@ class CMakeDonation {
                 $view = new VMakeDonation();
                 $view->displayPaymentForm($amount);
             } else {
-                header('Location: /donation/start');
+                header('Location: ' . ROOT . '/donation/start');
             }
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -64,24 +64,24 @@ class CMakeDonation {
                         throw new Exception('Al momento non siamo in grado di eseguire la transazione. Ti invitiamo a riprovare più tardi');
                     }
                 } catch(PDOException $pe) {
-                    header('Location: /errors/500');
+                    header('Location: ' . ROOT . '/errors/500');
                 } catch (Exception $e) {
                     USession::getInstance()->setSessionElement('donationError', $e->getMessage());
-                    header('Location: /errors/donation');
+                    header('Location: ' . ROOT . '/errors/donation');
                     return;
                 }
 
                 if(!FPersistentManager::getInstance()->storeObject($donation)) {
-                    header('Location: /errors/500');
+                    header('Location: ' . ROOT . '/errors/500');
                     return;
                 }
         
-                header('Location: /confirmations/donationPerformed');
+                header('Location: ' . ROOT . '/confirmations/donationPerformed');
             } else {
-                header('Location: /donation/amount');
+                header('Location: ' . ROOT . '/donation/amount');
             }
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 

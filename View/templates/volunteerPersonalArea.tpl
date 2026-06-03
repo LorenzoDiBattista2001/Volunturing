@@ -20,7 +20,7 @@
                   <i class="bi bi-search text-warning fs-4"></i>
                 </div>
                 <h6 class="fw-bold small mb-0">ESPLORA EVENTI</h6>
-                <a href="/events/explore" class="stretched-link"></a>
+                <a href="{$root}/events/explore" class="stretched-link"></a>
               </div>
             </div>
             <div class="col-sm-6 col-md-3">
@@ -29,7 +29,7 @@
                   <i class="bi bi-heart-fill text-danger fs-4"></i>
                 </div>
                 <h6 class="fw-bold small mb-0">DONA ORA</h6>
-                <a href="/donation/start" class="stretched-link"></a>
+                <a href="{$root}/donation/start" class="stretched-link"></a>
               </div>
             </div>
             <div class="col-sm-6 col-md-3">
@@ -38,7 +38,7 @@
                   <i class="bi bi-chat-left-dots-fill text-success fs-4"></i>
                 </div>
                 <h6 class="fw-bold small mb-0">RECENSISCI</h6>
-                <a href="/review/write" class="stretched-link"></a>
+                <a href="{$root}/review/write" class="stretched-link"></a>
               </div>
             </div>
             <div class="col-sm-6 col-md-3">
@@ -47,7 +47,7 @@
                   <i class="bi bi-person-circle text-info fs-4"></i>
                 </div>
                 <h6 class="fw-bold small mb-0">GESTISCI ACCOUNT</h6>
-                <a href="/account/manage" class="stretched-link"></a>
+                <a href="{$root}/account/manage" class="stretched-link"></a>
               </div>
             </div>
           </div>
@@ -97,7 +97,7 @@
                       {/if}
                       </td>
                       <td class="pe-4 text-end">
-                        <a href="/applications/select/{$volunteer->getUserId()}/{$application->getEventId()}" class="btn btn-light btn-sm rounded-circle"><i class="bi bi-hand-index"></i></a>
+                        <a href="{$root}/applications/select/{$volunteer->getUserId()}/{$application->getEventId()}" class="btn btn-light btn-sm rounded-circle"><i class="bi bi-hand-index"></i></a>
                       </td>
                     </tr>
                     {/foreach}

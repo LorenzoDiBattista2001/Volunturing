@@ -18,7 +18,7 @@
             </div>
 
             <div class="card-body p-4 p-md-5">
-              <form action="/admin/events/create" method="POST" class="needs-validation" novalidate id="eventForm">
+              <form action="{$root}/admin/events/create" method="POST" class="needs-validation" novalidate id="eventForm">
                 
                 <div class="row row-cols-1 mb-4">
                   <div>

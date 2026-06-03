@@ -18,7 +18,7 @@ class CConfirmationMessage {
 
             $view->displayConfirmationMessage($header, $text, CUser::isAdmin());
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -36,7 +36,7 @@ class CConfirmationMessage {
 
             $view->displayConfirmationMessage($header, $text, CUser::isAdmin());
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -54,7 +54,7 @@ class CConfirmationMessage {
 
             $view->displayLogoutMessage($header, $text);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -74,7 +74,7 @@ class CConfirmationMessage {
 
             $view->displayConfirmationMessage($header, $text);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -93,7 +93,7 @@ class CConfirmationMessage {
 
             $view->displayConfirmationMessage($header, $text);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -111,7 +111,7 @@ class CConfirmationMessage {
 
             $view->displayConfirmationMessage($header, $text);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -129,7 +129,7 @@ class CConfirmationMessage {
 
             $view->displayConfirmationMessage($header, $text);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -147,7 +147,7 @@ class CConfirmationMessage {
 
             $view->displayConfirmationMessage($header, $text);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -167,7 +167,7 @@ class CConfirmationMessage {
 
             $view->displayConfirmationMessage($header, $text, isAdmin: true);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -185,7 +185,7 @@ class CConfirmationMessage {
 
             $view->displayConfirmationMessage($header, $text, isAdmin: true);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
         
     }
@@ -204,7 +204,7 @@ class CConfirmationMessage {
 
             $view->displayConfirmationMessage($header, $text, isAdmin: true);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -222,7 +222,7 @@ class CConfirmationMessage {
 
             $view->displayConfirmationMessage($header, $text, isAdmin: true);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -240,7 +240,7 @@ class CConfirmationMessage {
 
             $view->displayConfirmationMessage($header, $text, isAdmin: true);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 

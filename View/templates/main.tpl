@@ -23,23 +23,23 @@
         <div class="collapse navbar-collapse" id="mainNav">
           <ul class="navbar-nav mx-auto gap-2 fw-semibold">
             {if $isLogged}
-            <li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
-            <li class="nav-item"><a class="nav-link" href="/events/explore">EVENTI</a></li>
-            <li class="nav-item"><a class="nav-link" href="/about/contacts">CONTATTI</a></li>
-            <li class="nav-item"><a class="nav-link" href="/donation/start">DONA ORA</a></li>
+            <li class="nav-item"><a class="nav-link" href="{$root}/">HOME</a></li>
+            <li class="nav-item"><a class="nav-link" href="{$root}/events/explore">EVENTI</a></li>
+            <li class="nav-item"><a class="nav-link" href="{$root}/about/contacts">CONTATTI</a></li>
+            <li class="nav-item"><a class="nav-link" href="{$root}/donation/start">DONA ORA</a></li>
             {else}
-            <li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
-            <li class="nav-item"><a class="nav-link" href="/about/association">ABOUT</a></li>
-            <li class="nav-item"><a class="nav-link" href="/about/contacts">CONTATTI</a></li>
+            <li class="nav-item"><a class="nav-link" href="{$root}/">HOME</a></li>
+            <li class="nav-item"><a class="nav-link" href="{$root}/about/association">ABOUT</a></li>
+            <li class="nav-item"><a class="nav-link" href="{$root}/about/contacts">CONTATTI</a></li>
             {/if}
           </ul>
           <div class="d-flex gap-2">
             {if $isLogged}
-            <a href="/account/personal" class="btn btn-outline-light btn-sm">PROFILO</a>
-            <a href="/auth/logout" class="btn btn-light btn-sm fw-bold">LOGOUT</a>
+            <a href="{$root}/account/personal" class="btn btn-outline-light btn-sm">PROFILO</a>
+            <a href="{$root}/auth/logout" class="btn btn-light btn-sm fw-bold">LOGOUT</a>
             {else}
-            <a href="/auth/registrationForm" class="btn btn-outline-light btn-sm">REGISTRATI</a>
-            <a href="/auth/loginForm" class="btn btn-light btn-sm fw-bold">LOGIN</a>
+            <a href="{$root}/auth/registrationForm" class="btn btn-outline-light btn-sm">REGISTRATI</a>
+            <a href="{$root}/auth/loginForm" class="btn btn-light btn-sm fw-bold">LOGIN</a>
             {/if}
           </div>
         </div>

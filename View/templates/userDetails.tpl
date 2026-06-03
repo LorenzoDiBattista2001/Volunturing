@@ -31,7 +31,7 @@
 
             <div class="d-grid gap-2">
               {if $volunteer->isBlocked()}
-              <a href="/admin/users/unlock/{$volunteer->getUserId()}" class="btn btn-admin btn-rehab">
+              <a href="{$root}/admin/users/unlock/{$volunteer->getUserId()}" class="btn btn-admin btn-rehab">
                 <i class="bi bi-person-check-fill me-2"></i>RIABILITA PROFILO
               </a> 
               {else}
@@ -39,7 +39,7 @@
                 <i class="bi bi-slash-circle me-2"></i>BLOCCA PROFILO
               </button>
               {/if}
-              <a href="/admin/users/manage" class="btn btn-outline-secondary btn-admin mt-2">
+              <a href="{$root}/admin/users/manage" class="btn btn-outline-secondary btn-admin mt-2">
                 <i class="bi bi-arrow-left me-2"></i>Torna alla lista
               </a>
             </div>
@@ -110,7 +110,7 @@
             <h5 class="modal-title fw-bold" id="blockModalLabel">Stai bloccando {$volunteer->getFirstName()} {$volunteer->getLastName()}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <form action="/admin/users/block/{$volunteer->getUserId()}" method="POST" novalidate class="needs-validation">
+          <form action="{$root}/admin/users/block/{$volunteer->getUserId()}" method="POST" novalidate class="needs-validation">
             <div class="modal-body p-4">
               <p class="text-muted small mb-4">Per favore, inserisci una motivazione per il blocco del profilo. Questa spiegazione sarà inclusa nella mail automatica di notifica inviata all'utente.</p>
               

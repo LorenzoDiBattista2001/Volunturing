@@ -12,7 +12,7 @@ class CWriteReview {
             $view = new VWriteReview();
             $view->displayReviewForm();
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -31,20 +31,20 @@ class CWriteReview {
                     $review = new EReview($text, $rating, date('Y-m-d'));
                     $review->setUserId(USession::getInstance()->getSessionElement('user'));
                     if(!$pm->storeObject($review)) {
-                        header('Location: /errors/500');
+                        header('Location: ' . ROOT . '/errors/500');
                         return;
                     }
-                    header('Location: /confirmations/reviewPublished');
+                    header('Location: ' . ROOT . '/confirmations/reviewPublished');
                 } catch (Exception $e) {
                     USession::getInstance()->setSessionElement('reviewPublishingError', $e->getMessage());
-                    header('Location: /errors/reviewPublishing');
+                    header('Location: ' . ROOT . '/errors/reviewPublishing');
                     return;
                 }
             } else {
-                header('Location: /review/write');
+                header('Location: ' . ROOT . '/review/write');
             }
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 }

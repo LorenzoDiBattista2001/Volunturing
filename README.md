@@ -62,7 +62,8 @@ composer install
 2. Set the `DB_NAME` constant value to 'volunturing' (or whatever you have called the schema).
 3. Update the `DB_HOST`, `DB_USER` and `DB_PASSWORD` constants values with your MySQL/MariaDB credentials.
 4. Update the `CSS_PATH` and `JS_PATH` constants values with the URL relative paths of the `public/css/` and `public/js/` directories on your machine, making sure to leave out the trailing forward-slash (e.g., `/Volunturing/public/css` if your project is located in a subdirectory, or simply `/public/css` if it runs directly on the server document root).
-5. Update the `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD` constants values with your SMTP server (e.g., Mailtrap.io, Gmail SMTP) parameters to test out the automatic emails system functionalities.
+5. Update the `ROOT` constant value with the URL relative path of your project, making sure to leave out the trailing forward-slash (e.g., if your document root is `htdocs/` and you have extracted all the project files into the subdirectory `htdocs/Volunturing/`, set the `ROOT` constant value to `/Volunturing`). If you have extracted all the project files directly into the document root, leave the constant value as it is (empty string).
+6. Update the `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD` constants values with your SMTP server (e.g., Mailtrap.io, Gmail SMTP) parameters to test out the automatic emails system functionalities.
 
 ### 4. Start using the application
 Once your local Apache server is properly configured and running, you can access the application's main homepage through your browser by typing your local server's address in the URL bar (e.g., http://localhost/ or http://localhost/Volunturing/)

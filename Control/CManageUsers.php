@@ -13,7 +13,7 @@
         $registeredUsers = FPersistentManager::getInstance()->retrieveRegisteredUsers();
         $view->displayRegisteredUsers($registeredUsers);
       } else {
-        header('Location: /errors/403');
+        header('Location: ' . ROOT . '/errors/403');
       }
 
     }
@@ -29,7 +29,7 @@
         $view = new VManageUsers();
         $volunteer = FPersistentManager::getInstance()->loadUserById($userId);
         if(!($volunteer::class === 'EVolunteer')) {
-          header('Location: /errors/403');
+          header('Location: ' . ROOT . '/errors/403');
           return;
         }
         $view->displayUserDetails($volunteer);
@@ -66,7 +66,7 @@
             $volunteer->block();
 
             if(!$pm->updateVolunteerState($volunteer)) {
-              header('Location: /errors/500');
+              header('Location: ' . ROOT . '/errors/500');
               return;
             }
 
@@ -77,18 +77,18 @@
               throw new Exception('Failed to send notification email to blocked user: ' . $volunteer->getEmail());
             }
 
-            header('Location: /admin/confirmations/userBlocked');
+            header('Location: ' . ROOT . '/admin/confirmations/userBlocked');
             return;
           } catch (Exception $e) {
             USession::getInstance()->setSessionElement('userBlockingError', $e->getMessage());
-            header('Location: /admin/errors/userBlocking');
+            header('Location: ' . ROOT . '/admin/errors/userBlocking');
             return;
           }
         } else {
-          header('Location: /admin/users/select/' . $userId);
+          header('Location: ' . ROOT . '/admin/users/select/' . $userId);
         }
       } else {
-        header('Location: /errors/403');
+        header('Location: ' . ROOT . '/errors/403');
       }
     }
 
@@ -111,19 +111,19 @@
           $volunteer->unlock();
 
           if(!$pm->updateVolunteerState($volunteer)) {
-            header('Location: /errors/500');
+            header('Location: ' . ROOT . '/errors/500');
             return;
           }
 
-          header('Location: /admin/confirmations/userUnlocked');
+          header('Location: ' . ROOT . '/admin/confirmations/userUnlocked');
           return;
         } catch (Exception $e) {
           USession::getInstance()->setSessionElement('userUnlockingError', $e->getMessage());
-          header('Location: /admin/errors/userUnlocking');
+          header('Location: ' . ROOT . '/admin/errors/userUnlocking');
           return;
         }
       } else {
-        header('Location: /errors/403');
+        header('Location: ' . ROOT . '/errors/403');
       }
     }
  }

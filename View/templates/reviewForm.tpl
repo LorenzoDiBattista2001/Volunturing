@@ -18,7 +18,7 @@
               <p class="text-muted">Condividi la tua esperienza con la nostra organizzazione.</p>
             </div>
 
-            <form action="/review/publish" method="POST" id="reviewForm" class="needs-validation" novalidate>
+            <form action="{$root}/review/publish" method="POST" id="reviewForm" class="needs-validation" novalidate>
               
               <div class="mb-4">
                 <label for="reviewText" class="form-label fw-bold small text-uppercase text-muted">La tua recensione</label>

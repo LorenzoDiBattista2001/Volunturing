@@ -21,7 +21,7 @@
             </div>
 
             <div class="card-body p-4 p-md-5">
-              <form action="/account/changePassword" method="POST" class="needs-validation" novalidate>
+              <form action="{$root}/account/changePassword" method="POST" class="needs-validation" novalidate>
                 
                 <div class="mb-4">
                   <label for="currentPassword" class="form-label">Password Attuale</label>
@@ -78,7 +78,7 @@
             </div>
 
             <div class="card-body p-4 p-md-5">
-              <form action="/account/changeEmail" method="POST" class="needs-validation" novalidate>
+              <form action="{$root}/account/changeEmail" method="POST" class="needs-validation" novalidate>
                 
                 <div class="mb-4">
                   <label for="newEmail" class="form-label">Nuovo Indirizzo Email</label>
@@ -124,7 +124,7 @@
             </div>
 
             <div class="card-body p-4 p-md-5">
-              <form action="/account/update" method="POST" class="needs-validation" novalidate id="updateProfileForm">
+              <form action="{$root}/account/update" method="POST" class="needs-validation" novalidate id="updateProfileForm">
                 
                 <div class="row g-3 mb-4">
                   <div class="col-md-6">

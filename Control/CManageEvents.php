@@ -16,7 +16,7 @@ class CManageEvents {
             $view = new VManageEvents();
             $view->displayEventsList($events);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -30,7 +30,7 @@ class CManageEvents {
             $view = new VManageEvents();
             $view->displayEventForm();   
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -64,21 +64,21 @@ class CManageEvents {
                     }
                 } catch (Exception $e) {
                     USession::getInstance()->setSessionElement('eventCreationError', $e->getMessage());
-                    header('Location: /admin/errors/eventCreation');
+                    header('Location: ' . ROOT . '/admin/errors/eventCreation');
                     return;
                 }
 
                 if(!FPersistentManager::getInstance()->storeObject($event)) {
-                    header('Location: /errors/500');
+                    header('Location: ' . ROOT . '/errors/500');
                     return;
                 }
 
-                header('Location: /admin/confirmations/eventCreated');
+                header('Location: ' . ROOT . '/admin/confirmations/eventCreated');
             } else {
-                header('Location: /admin/events/add');
+                header('Location: ' . ROOT . '/admin/events/add');
             }
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -94,7 +94,7 @@ class CManageEvents {
             $view = new VManageEvents();
             $view->displayEventPanel($event);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -124,7 +124,7 @@ class CManageEvents {
                     }
 
                     if(!$pm->deleteObject(EEvent::class, $eventId)) {
-                        header('Location: /errors/500');
+                        header('Location: ' . ROOT . '/errors/500');
                         return;
                     }
                     
@@ -139,20 +139,20 @@ class CManageEvents {
                                 throw new Exception('Failed to send emails to all volunteers involved');
                             }
                         }
-                        header('Location: /admin/confirmations/scheduledEventDeleted');
+                        header('Location: ' . ROOT . '/admin/confirmations/scheduledEventDeleted');
                         return;
                     }
-                    header('Location: /admin/confirmations/eventDeleted');
+                    header('Location: ' . ROOT . '/admin/confirmations/eventDeleted');
                 } catch (Exception $e) {
                     USession::getInstance()->setSessionElement('eventDeletionError', $e->getMessage());
-                    header('Location: /admin/errors/eventDeletion');
+                    header('Location: ' . ROOT . '/admin/errors/eventDeletion');
                     return;
                 }
             } else {
-                header('Location: /admin/events/select/' . $eventId);
+                header('Location: ' . ROOT . '/admin/events/select/' . $eventId);
             }
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -170,7 +170,7 @@ class CManageEvents {
             $participants = $event->getParticipants();
             $view->displayVolunteersList($event, $participants);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 }

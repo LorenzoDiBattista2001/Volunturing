@@ -13,7 +13,7 @@ class CProcessApplications {
             $view = new VProcessApplications();
             $view->displayEventsList($events);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -33,7 +33,7 @@ class CProcessApplications {
             
             $view->displayApplicationsList($event, $applications);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -50,7 +50,7 @@ class CProcessApplications {
             $view = new VProcessApplications();
             $view->displayApplicationDetails($application);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
 
     }
@@ -97,19 +97,19 @@ class CProcessApplications {
                 }
                 $db->commit();
 
-                header('Location: /admin/applications/process/' . $event->getEventId());
+                header('Location: ' . ROOT . '/admin/applications/process/' . $event->getEventId());
 
             } catch(PDOException $pe) {
                 $db->rollBack();
-                header('Location: /errors/500');
+                header('Location: ' . ROOT . '/errors/500');
             } catch(Exception $e) {
                 $db->rollBack();
                 USession::getInstance()->setSessionElement('applicationProcessingError', $e->getMessage());
-                header('Location: /admin/errors/applicationProcessing');
+                header('Location: ' . ROOT . '/admin/errors/applicationProcessing');
                 return;
             }
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -140,21 +140,21 @@ class CProcessApplications {
                     $application->reject($reason);
                 } catch(Exception $e) {
                     USession::getInstance()->setSessionElement('applicationProcessingError', $e->getMessage());
-                    header('Location: /admin/errors/applicationProcessing');
+                    header('Location: ' . ROOT . '/admin/errors/applicationProcessing');
                     return;
                 }
                 
                 if(!$pm->updateApplication($application)) {
-                    header('Location: /errors/500');
+                    header('Location: ' . ROOT . '/errors/500');
                     return;
                 }
 
-                header('Location: /admin/applications/process/' . $application->getEventId());
+                header('Location: ' . ROOT . '/admin/applications/process/' . $application->getEventId());
             } else {
-                header('Location: /admin/applications/select/' . $eventId . '/' . $userId);
+                header('Location: ' . ROOT . '/admin/applications/select/' . $eventId . '/' . $userId);
             }
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 

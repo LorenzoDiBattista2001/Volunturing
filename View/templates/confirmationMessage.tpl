@@ -18,7 +18,7 @@
             <p class="text-muted fs-5 mb-4">{$text}</p>
             
             <div class="d-grid gap-2 col-md-8 mx-auto">
-              <a href="/account/personal/" class="btn btn-warning fw-bold py-3 shadow-sm">
+              <a href="{$root}/account/personal/" class="btn btn-warning fw-bold py-3 shadow-sm">
                 {if $isAdmin}
                   TORNA ALLA DASHBOARD
                 {else}

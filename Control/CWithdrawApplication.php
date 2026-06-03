@@ -13,7 +13,7 @@ class CWithdrawApplication {
         if(CUser::isLogged() && USession::getInstance()->getSessionElement('user') === $userId) {
             $pm = FPersistentManager::getInstance();
             if(!$pm->existApplication($userId, $eventId)) {
-                header('Location: /errors/403');
+                header('Location: ' . ROOT . '/errors/403');
                 return;
             }
             $application = $pm->loadApplication($userId, $eventId);
@@ -21,7 +21,7 @@ class CWithdrawApplication {
             $view = new VWithdrawApplication();
             $view->displayApplicationPanel($application, $event);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 
@@ -36,24 +36,24 @@ class CWithdrawApplication {
         if(CUser::isLogged() && USession::getInstance()->getSessionElement('user') === $userId) {
             $pm = FPersistentManager::getInstance();
             if(!$pm->existApplication($userId, $eventId)) {
-                header('Location: /errors/403');
+                header('Location: ' . ROOT . '/errors/403');
                 return;
             }
             $application = $pm->loadApplication($userId, $eventId);
             try {
                 $application->withdraw();
                 if(!$pm->updateApplication($application)) {
-                    header('Location: /errors/500');
+                    header('Location: ' . ROOT . '/errors/500');
                     return;
                 }
             } catch (Exception $e) {
                 USession::getInstance()->setSessionElement('applicationWithdrawalError', $e->getMessage());
-                header('Location: /errors/applicationWithdrawal');
+                header('Location: ' . ROOT . '/errors/applicationWithdrawal');
                 return;
             }
-            header('Location: /confirmations/applicationWithdrawn/' . $eventId);
+            header('Location: ' . ROOT . '/confirmations/applicationWithdrawn/' . $eventId);
         } else {
-            header('Location: /errors/403');
+            header('Location: ' . ROOT . '/errors/403');
         }
     }
 }

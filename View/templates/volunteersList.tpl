@@ -19,7 +19,7 @@
           <button onclick="window.print()" class="btn btn-outline-dark fw-bold btn-print-action">
             <i class="bi bi-printer me-2"></i>STAMPA LISTA
           </button>
-          <a href="/admin/events/select/{$event->getEventId()}" class="btn btn-warning fw-bold text-white">
+          <a href="{$root}/admin/events/select/{$event->getEventId()}" class="btn btn-warning fw-bold text-white">
             <i class="bi bi-arrow-left me-2"></i>TORNA AL DETTAGLIO
           </a>
         </div>
@@ -77,7 +77,7 @@
                       </td>
                       <td class="text-center small text-muted">{$participant->getTaxCode()}</td>
                       <td class="pe-4 text-end no-print">
-                        <a href="/admin/users/select/{$participant->getUserId()}" class="btn btn-light btn-sm border">
+                        <a href="{$root}/admin/users/select/{$participant->getUserId()}" class="btn btn-light btn-sm border">
                           <i class="bi bi-eye"></i>
                         </a>
                       </td>

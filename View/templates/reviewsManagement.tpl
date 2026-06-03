@@ -64,7 +64,7 @@
             <h5 class="modal-title fw-bold" id="deleteReviewModalLabel">Conferma Eliminazione</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <form action="/admin/reviews/delete" method="POST" id="deleteReviewForm">
+          <form action="{$root}/admin/reviews/delete" method="POST" id="deleteReviewForm">
             <div class="modal-body p-4 text-center">
               <i class="bi bi-exclamation-triangle text-danger display-4 mb-3"></i>
               <p class="mb-0">Sei sicuro di voler eliminare definitivamente la recensione di <strong id="modalUserName"></strong>?</p>
