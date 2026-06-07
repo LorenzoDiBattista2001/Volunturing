@@ -195,5 +195,5 @@
 {/block}
 
 {block name="script"}
-  <script src="formFeedback.js"></script>
+  <script src="{$js_path}/formFeedback.js"></script>
 {/block}
